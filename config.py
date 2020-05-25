@@ -7,7 +7,7 @@ class BaseConfig(object):
     MYSQL = {
         'user': 'root',
         'pw': '',
-        'db': 'harvart',
+        'db': 'np2',
         'host': 'localhost',
         'port': '3306',
     }

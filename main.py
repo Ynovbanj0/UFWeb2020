@@ -10,12 +10,13 @@ from models import *
 import urllib3
 import json
 import pymysql
+import config
 
 http = urllib3.PoolManager()
 db.init_app(app)
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/")
 def homepage():
     
     return render_template("index.html")

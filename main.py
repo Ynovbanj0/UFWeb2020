@@ -11,11 +11,14 @@ import urllib3
 import json
 import pymysql
 
+import config
+
 http = urllib3.PoolManager()
 db.init_app(app)
 
-
 @app.route("/", methods=["POST", "GET"])
 def homepage():
-    
     return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)

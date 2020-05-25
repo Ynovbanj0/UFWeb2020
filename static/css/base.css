@@ -1,0 +1,161 @@
+body {
+    height: 100vh;
+    background: url(../img/backGrd.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@font-face {
+    font-family: pacman;
+    src: url(../font/crackman.ttf);
+}
+
+
+/* NavBar */
+
+.navContainer {
+    position: fixed;
+    top: 0;
+    z-index: 9997;
+    height: 100px;
+    width: 100vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 3px 3px black;
+    background-color: white;
+    overflow: hidden;
+}
+
+.navElements {
+    height: 100px;
+    z-index: 9999;
+    grid-column: 1 / 5;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    list-style: none;
+    font-family: pacman;
+    font-size: 2em;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+.navItem1 {
+    padding-left: 40%;
+    grid-column: 1;
+    z-index: 9999;
+}
+
+.navItem2 {
+    grid-column: 2;
+    z-index: 9999;
+}
+
+.navItem3 {
+    grid-column: 3;
+    z-index: 9999;
+}
+
+.navSearch {
+    grid-column: 6 / 9;
+}
+
+.colorNav1 {
+    position: absolute;
+    height: 25vh;
+    width: 1vw;
+    left: 19.5%;
+    background-color: #4DD119;
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav11 {
+    position: absolute;
+    height: 25vh;
+    width: 0.2vw;
+    left: 20.5%;
+    background-color: rgb(35, 94, 12);
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav2 {
+    position: absolute;
+    height: 25vh;
+    width: 1vw;
+    left: 35%;
+    background-color: #D1140F;
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav22 {
+    position: absolute;
+    height: 25vh;
+    width: 0.2vw;
+    left: 36.1%;
+    background-color: rgb(63, 7, 5);
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav3 {
+    position: absolute;
+    height: 25vh;
+    width: 1vw;
+    left: 50%;
+    background-color: #7B24D1;
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav33 {
+    position: absolute;
+    height: 25vh;
+    width: 0.2vw;
+    left: 51%;
+    background-color: rgb(50, 15, 85);
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+
+/* Searchbar */
+
+.formSearch {
+    height: 100%;
+    display: grid;
+}
+
+.btnSearch {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    grid-column: 2;
+    align-items: center;
+    font-family: pacman;
+    font-size: 1.5em;
+    justify-content: center;
+}
+
+.inputSearch {
+    display: flex;
+    grid-column: 1;
+}

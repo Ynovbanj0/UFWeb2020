@@ -7,7 +7,6 @@ from application import app
 from models import *
 
 import pymysql
-import config
 
 http = urllib3.PoolManager()
 db.init_app(app)

@@ -24,7 +24,7 @@ body {
     padding-left: 5vw;
     padding-right: 5vw;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     align-items: center;
     text-align: center;
     border-bottom: 1px solid black;
@@ -73,7 +73,7 @@ a:hover {
 }
 
 .navSearch {
-    grid-column: 6 / 9;
+    grid-column: 6 / 8;
 }
 
 .colorNav1 {
@@ -147,12 +147,27 @@ a:hover {
 .btnSearch {
     margin-left: 10px;
     margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    padding: 10px;
     display: flex;
     grid-column: 2;
     align-items: center;
     font-family: pacman;
     font-size: 1.5em;
     justify-content: center;
+}
+
+.searchIcon {
+    height: 100%;
+    width: 100%;
+    background-image: url(../img/searchG.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.btnSearch:hover>.searchIcon {
+    background-image: url(../img/searchW.png);
 }
 
 .inputSearch {

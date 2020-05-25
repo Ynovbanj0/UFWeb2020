@@ -8,7 +8,6 @@ from models import *
 
 import pymysql
 
-http = urllib3.PoolManager()
 db.init_app(app)
 
 @app.route("/", methods=["POST", "GET"])

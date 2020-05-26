@@ -17,6 +17,7 @@
     <header>
         <nav class="navContainer">
             <ul class="navElements">
+                <li class="navLogo"></li>
                 <li class="navItem1">
                     <a class="" href="">Home</a>
                 </li>
@@ -25,7 +26,7 @@
                 </li>
                 {% if not session['userId'] %}
                 <li class="navItem3">
-                    <a class="" href="">Connexion</a>
+                    <a onclick="signIn()">Connexion</a>
                 </li>
                 {% endif %} {% if session['userId'] %}
                 <li class="navItem3">
@@ -47,12 +48,43 @@
             <div class="colorNav22"></div>
             <div class="colorNav3"></div>
             <div class="colorNav33"></div>
+
         </nav>
     </header>
+    <section class="signInSection">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <form class="form-signin" method="POST">
+                                <div class="form-label-group">
+                                    <label for="inputEmail">Email address</label>
+                                    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                                </div>
+                                <div class="form-label-group">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign In</button>
+                                <div class='text-center mt-2'>
+                                    <a href="#" class="text-center ">Register</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <div class="overlay" onclick="closeSignInAndCo()"> -->
+    </div>
 
     {% block content %} {% endblock %}
 
-    <script href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 </body>
 
 </html>

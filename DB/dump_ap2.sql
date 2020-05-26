@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `category_product`;
 CREATE TABLE IF NOT EXISTS `category_product` (
   `category_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category_product`
@@ -337,10 +337,11 @@ INSERT INTO `category_product` (`category_id`, `product_id`) VALUES
 
 DROP TABLE IF EXISTS `code`;
 CREATE TABLE IF NOT EXISTS `code` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `code` varchar(50) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `product_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `code`
@@ -1356,13 +1357,14 @@ INSERT INTO `code` (`id`, `code`, `product_id`) VALUES
 
 DROP TABLE IF EXISTS `command`;
 CREATE TABLE IF NOT EXISTS `command` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `price` decimal(5,2) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `code` varchar(50) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `product_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `command`
@@ -1628,12 +1630,13 @@ INSERT INTO `command` (`id`, `price`, `date`, `code`, `user_id`, `product_id`) V
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `content` text,
   `date` date DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `product_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `comment`
@@ -1853,10 +1856,10 @@ CREATE TABLE IF NOT EXISTS `product` (
   `name` varchar(50) DEFAULT NULL,
   `price` decimal(5,2) DEFAULT NULL,
   `rating` decimal(3,2) DEFAULT NULL,
-  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'https://placeholder.com/250',
+  `image` varchar(255) CHARACTER SET utf8mb4 NOT NULL DEFAULT 'https://placeholder.com/250',
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `product`
@@ -2137,7 +2140,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `adress` varchar(50) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `user`

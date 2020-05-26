@@ -63,6 +63,19 @@ a:hover {
     width: 20vw;
     margin: 0;
     padding: 0;
+    transition: all .2s ease-in-out;
+}
+
+.navItem1:hover {
+    transform: scale(1.3);
+}
+
+.navItem2:hover {
+    transform: scale(1.3);
+}
+
+.navItem3:hover {
+    transform: scale(1.3);
 }
 
 .navItem2 {
@@ -74,6 +87,7 @@ a:hover {
     width: 20vw;
     margin: 0;
     padding: 0;
+    transition: all .2s ease-in-out;
 }
 
 .navItem3 {
@@ -85,6 +99,7 @@ a:hover {
     width: 20vw;
     margin: 0;
     padding: 0;
+    transition: all .2s ease-in-out;
 }
 
 .navSearch {
@@ -171,6 +186,7 @@ a:hover {
     font-family: pacman;
     font-size: 1.5em;
     justify-content: center;
+    transition: all .2s ease-in-out;
 }
 
 .searchIcon {
@@ -181,8 +197,13 @@ a:hover {
     background-size: cover;
 }
 
+.btnSearch:hover {
+    transform: scale(1.2);
+}
+
 .btnSearch:hover>.searchIcon {
     background-image: url(../img/searchW.png);
+    transform: scale(1.3);
 }
 
 .inputSearch {

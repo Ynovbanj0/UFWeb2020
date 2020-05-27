@@ -17,8 +17,8 @@
 
 .favorites {
     display: flex;
-    margin-top: 100px;
-    margin-bottom: 50px;
+    margin-top: 150px;
+    margin-bottom: 100px;
     height: 100px;
     width: 40%;
     background-color: white;
@@ -30,4 +30,115 @@
     justify-content: center;
     font-family: pacman, cursive;
     font-size: 2.5em;
+}
+
+.newGamesContainer {
+    display: grid;
+    height: 60vh;
+    width: 100%;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.nGelement {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 20px;
+    padding: 10%;
+}
+
+.favoritesContainer {
+    display: grid;
+    height: 60vh;
+    width: 100%;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 150px;
+}
+
+.favElement {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 20px;
+    padding: 10%;
+}
+
+.elementImg {
+    height: 70%;
+    width: 100%;
+    background: url(../img/demo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 10%;
+}
+
+.promo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: url(../img/discount.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    color: white;
+    font-size: 0.7em;
+    transform: translate(-18px, 2px);
+    font-family: 'Muli', sans-serif;
+}
+
+.elementInfo {
+    font-family: 'Muli', sans-serif;
+    height: 20%;
+}
+
+.elementTitle {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 5%;
+}
+
+.elementPrice {
+    display: grid;
+    grid-auto-columns: 70% 30%;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.price {
+    width: 100%;
+    grid-column: 1;
+    text-align: center;
+}
+
+.addToCard {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    grid-column: 2;
+    background: url(../img/add.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top: 15%;
+}
+
+.addToCard:hover {
+    cursor: pointer;
 }

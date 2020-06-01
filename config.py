@@ -1,9 +1,5 @@
-class BaseConfig(object):
-    SECRET_KEY = 'abcdef123456'
-    DEBUG = False
-    TESTING = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-
+class Config(object):
+    SECRET_KEY = 'p9Bv<3Eid9%$i01'
     MYSQL = {
         'user': 'root',
         'pw': '',
@@ -11,10 +7,17 @@ class BaseConfig(object):
         'host': 'localhost',
         'port': '3306',
     }
-
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % MYSQL
 
-
-class DevelopmentConfig(BaseConfig):
+class DevelopmentConfig(Config):
     DEBUG = True
-    TESTING = True
+    SQLALCHEMY_ECHO = True
+
+
+class ProductionConfig(Config):
+    DEBUG = False
+
+app_config = {
+    'dev': DevelopmentConfig,
+    'prod': ProductionConfig
+}

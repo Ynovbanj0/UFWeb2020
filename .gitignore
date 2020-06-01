@@ -1,5 +1,1 @@
-__pycache__/config.cpython-38.pyc
-__pycache__/main.cpython-38.pyc
-__pycache__/models.cpython-38.pyc
-__pycache__/application.cpython-38.pyc
-DB/dump_ap2.sql
+*.pyc

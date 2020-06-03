@@ -1,0 +1,33 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block body %}
+<div class="content-section">
+    <div class="outer">
+        <div class="middle">
+            <div class="inner">
+                <div class="center">
+                    <h2> {{ title }} : </h2>
+                    <h3> {{ product.name }} </h3>
+                    <h3> {{ rating }} </h3>
+                    <h4> {{ product.description }} </h4>
+                    <br>
+                    {% if current_user.id %}
+                        {{ wtf.quick_form(form) }}
+                    {% endif %}
+                    <br>
+                    {% for comment in product.comments %}
+                    <hr>
+                    <br>
+                    <h3> {{ comment.user.username }} </h3>
+                    <br>
+                    <h4> {{ comment.rating }} </h4>
+                    <br>
+                    <h4> {{ comment.content }} </h4>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

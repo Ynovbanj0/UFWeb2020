@@ -39,9 +39,9 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(255))
     date = db.Column(db.DateTime, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
-
     def __repr__(self):
         return '<Comment: {}>'.format(self.content)
 
@@ -50,8 +50,7 @@ class Product(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
-    price = db.Column(db.Numeric(5, 2), nullable=False)
-    rating = db.Column(db.Numeric(3, 2), nullable=False)
+    price = db.Column(db.Numeric(5, 2))
     image = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     comments = db.relationship('Comment',
@@ -63,7 +62,7 @@ class Product(db.Model):
     categories = db.relationship('Category',
                                  secondary=categories_products, lazy='subquery',
                                  back_populates="products")
-
+                                 
     def __repr__(self):
         return '<Product: {}, {}>'.format(self.name, self.description)
 
@@ -114,9 +113,7 @@ class User(UserMixin, db.Model):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return Employee.query.get(int(user_id))
-
-
+    return User.query.get(int(user_id))
 
 
 

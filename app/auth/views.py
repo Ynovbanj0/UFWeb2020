@@ -2,7 +2,7 @@ from flask import flash, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, AddressForm
 from .. import db
 from ..models import User
 
@@ -11,16 +11,6 @@ from ..models import User
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-<<<<<<< HEAD
-        user = User(email=form.email.data,
-                            username=form.username.data,
-                            first_name=form.first_name.data,
-                            last_name=form.last_name.data,
-                            password_hash=form.password.data
-                            # birthdate=form.birthdate.data
-                            # address=form.address.data
-        )
-=======
         user = User(username=form.username.data,
                     password=form.password.data,
                     email=form.email.data,
@@ -28,7 +18,6 @@ def register():
                     last_name=form.last_name.data,
                     address=form.address.data,
                     birthdate=form.birthdate.data)
->>>>>>> d88ceed2bce76c2e92b5daa6e91e66a44cab63f4
         db.session.add(user)
         db.session.commit()
         # flash('You have successfully registered! You may now login.')
@@ -65,28 +54,27 @@ def logout():
 @login_required
 def profil():
     user = User.query.get_or_404(current_user.id)
-    form = RegistrationForm(obj=user)
-    if form.validate_on_submit():
-        user.username=form.username.data
-        user.password=form.password.data
-        user.email=form.email.data
-        user.first_name=form.first_name.data
-        user.last_name=form.last_name.data
-        user.address=form.address.data
-        user.birthdate=form.birthdate.data
+    form_reg = RegistrationForm(obj=user)
+    form_add = AddressForm()
+    if form_reg.validate_on_submit():
+        user.username=form_reg.username.data
+        user.password=form_reg.password.data
+        user.email=form_reg.email.data
+        user.first_name=form_reg.first_name.data
+        user.last_name=form_reg.last_name.data
+        user.birthdate=form_reg.birthdate.data
         db.session.commit()
         flash('You have successfully edited the profil.')
         if user.is_admin:
             return redirect(url_for('home.admin_dashboard'))
         else:
             return redirect(url_for('home.dashboard'))
-    form.username.data = user.username
-    form.email.data = user.email
-    form.first_name.data = user.first_name
-    form.last_name.data = user.last_name
-    form.address.data = user.address
-    form.birthdate.data = user.birthdate
-    return render_template('auth/profil.html', form=form,
+    form_reg.username.data = user.username
+    form_reg.email.data = user.email
+    form_reg.first_name.data = user.first_name
+    form_reg.last_name.data = user.last_name
+    form_reg.birthdate.data = user.birthdate
+    return render_template('auth/profil.html', form_reg=form_reg, form_add=form_add,
                            title="Profil")
 
     

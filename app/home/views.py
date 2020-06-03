@@ -35,17 +35,25 @@ def product(id):
     for comment in product.comments:
         sum += comment.rating
         count +=1
-    rating = sum / count
+    rating = round(sum/count, 1)
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(content=form.content.data,
-                          date=datetime.now(),
-                          rating=form.rating.data,
-                          user_id=current_user.id,
-                          product_id=id)
+        if Comment.query.filter_by(user_id=current_user.id).first():
+            comment.content = form.content.data
+            comment.rating = form.rating.data
+            db.session.commit()
+        else:
+            comment = Comment(content=form.content.data,
+                            date=datetime.now(),
+                            rating=form.rating.data,
+                            user_id=current_user.id,
+                            product_id=id)
         try:
             db.session.add(comment)
             db.session.commit()
         except:
             pass
+    if Comment.query.filter_by(user_id=current_user.id).first():
+        form.content.data = comment.content
+        form.rating.data = comment.rating
     return render_template('home/product.html', product=product, form=form, user=current_user, rating=rating, title="Product")

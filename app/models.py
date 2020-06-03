@@ -4,6 +4,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login_manager
 
 
+class Address(db.Model):
+    __tablename__ = 'addesses'
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String(50), nullable=False)
+    city = db.Column(db.String(50), nullable=False)
+    postal = db.Column(db.String(50), nullable=False)
+    country = db.Column(db.String(50), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship("User", back_populates="address")
+
 categories_products = db.Table('categories_products',
                                db.Column('category_id', db.Integer, db.ForeignKey(
                                    'categories.id'), primary_key=True),
@@ -90,13 +100,13 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(60), index=True)
     last_name = db.Column(db.String(60), index=True)
     birthdate = db.Column(db.DateTime, nullable=False)
-    address = db.Column(db.String(255))
     is_admin = db.Column(db.Boolean, default=False)
     comments = db.relationship('Comment', backref='user',
                                lazy='dynamic')
     purchases = db.relationship('Purchase', backref='user',
                                 lazy='dynamic')
-
+    address = db.relationship("Address", uselist=False, back_populates="user")
+    
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute.')
@@ -114,28 +124,3 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-
-
-class Department(db.Model):
-    __tablename__ = 'departments'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True)
-    description = db.Column(db.String(200))
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True)
-    description = db.Column(db.String(200))
-class Employee(UserMixin, db.Model):
-    __tablename__ = 'employees'
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(60), index=True, unique=True)
-    username = db.Column(db.String(60), index=True, unique=True)
-    first_name = db.Column(db.String(60), index=True)
-    last_name = db.Column(db.String(60), index=True)
-    password_hash = db.Column(db.String(128))
-    department_id = db.Column(db.Integer, db.ForeignKey('departments.id'))
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-    is_admin = db.Column(db.Boolean, default=False)
-

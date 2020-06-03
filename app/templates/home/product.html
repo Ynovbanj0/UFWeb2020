@@ -17,13 +17,10 @@
                     <br>
                     {% for comment in product.comments %}
                     <hr>
-                    <br>
                     <h3> {{ comment.user.username }} </h3>
-                    <br>
                     <h4> {{ comment.rating }} </h4>
-                    <br>
                     <h4> {{ comment.content }} </h4>
-
+                    <br>
                     {% endfor %}
                 </div>
             </div>

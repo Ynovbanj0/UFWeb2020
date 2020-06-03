@@ -19,20 +19,20 @@
         <div class="nav--responsive">
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="#">
-                        ABOUT
-                    </a>
+                    <a class="" href="{{ url_for('home.homepage') }}">Home</a>
                 </li>
                 <li class="nav__item">
-                    <a href="#">
-                        PRODUCT
-                    </a>
+                    <a class="" href="">Categories</a>
                 </li>
+                {% if current_user.is_authenticated %}
                 <li class="nav__item">
-                    <a href="#">
-                        CONTACT
-                    </a>
+                    <a class="" href="{{ url_for('auth.profil') }}">Profil</a>
                 </li>
+                {% else %}
+                <li class="nav__item">
+                    <a href="{{ url_for('auth.login') }}">Connexion</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <div class="overlay"></div>

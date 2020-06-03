@@ -11,21 +11,21 @@
         <h1 class="leftTitle">Menu Profil</h1>
         <ul class="listLeftMenu">
             <li class="listLeftItem">
-                <a href="#persoInfo">Infos Perso</a></li>
+                <a href="#persoInfo">Personal Informations</a></li>
             <li class="listLeftItem">
-                <a href="#address">adresse</a></li>
+                <a href="#address">Address</a></li>
             <li class="listLeftItem">
-                <a href="#billing">facturation</a></li>
+                <a href="#billing">Billing</a></li>
             <li class="listLeftItem">
-                <a href="#commands">commandes</a></li>
+                <a href="#commands">Purchases</a></li>
             <li class="listLeftItem">
-                <a href="#comments">commentaires</a></li>
+                <a href="#comments">Comments</a></li>
             {% if current_user.is_admin %}
             <li class="listLeftItem">
                 <a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></li>
             {% endif %}
             <li class="listLeftItem">
-                <a class="unsign" href="">Deconnexion</a></li>
+                <a class="unsign" href="{{ url_for('auth.logout') }}">Logout</a></li>
         </ul>
     </section>
     <section class="rightSide">

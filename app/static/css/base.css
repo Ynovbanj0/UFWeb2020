@@ -450,6 +450,26 @@ a:hover {
     transition: 0.3s;
 }
 
+
+/* Footer */
+
+footer {
+    height: 150px;
+    background-color: white;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+footer>p {
+    font-size: 1.2em;
+}
+
+
+/* Responsiv */
+
 @media screen and (max-width: 1300px) {
     .navElements {
         font-size: 1.8em;
@@ -481,5 +501,12 @@ a:hover {
         position: absolute;
         top: 30%;
         right: 5%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    footer {
+        justify-content: left;
+        padding-left: 5%;
     }
 }

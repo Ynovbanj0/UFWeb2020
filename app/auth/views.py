@@ -65,10 +65,6 @@ def profil():
         user.birthdate=form.birthdate.data
         db.session.commit()
         flash('You have successfully edited the profil.')
-        if user.is_admin:
-            return redirect(url_for('home.admin_dashboard'))
-        else:
-            return redirect(url_for('home.dashboard'))
     form.username.data = user.username
     form.email.data = user.email
     form.first_name.data = user.first_name

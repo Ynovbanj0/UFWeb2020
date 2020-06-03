@@ -1,17 +1,111 @@
-{% import "bootstrap/wtf.html" as wtf %}
-{% extends "base.html" %}
-{% block body %}
-<div class="content-section">
- <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <div class="center">
-            <h1> {{ title }} </h1>
-            <br/>
-            {{ wtf.quick_form(form) }}
+{% import "bootstrap/wtf.html" as wtf %} {% extends "base.html" %} {% block title %} Profil {% endblock %} {% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profil.css') }}"> {% endblock %} {% block body %}
+<section class="main">
+    <section class="leftSide">
+        <div class="colorProfil1"></div>
+        <div class="colorProfil11"></div>
+        <div class="colorProfil2"></div>
+        <div class="colorProfil22"></div>
+        <div class="colorProfil3"></div>
+        <div class="colorProfil33"></div>
+        <h1 class="leftTitle">Menu Profil</h1>
+        <ul class="listLeftMenu">
+            <li class="listLeftItem">
+                <a href="#persoInfo">Infos Perso</a></li>
+            <li class="listLeftItem">
+                <a href="#address">adresse</a></li>
+            <li class="listLeftItem">
+                <a href="#billing">facturation</a></li>
+            <li class="listLeftItem">
+                <a href="#commands">commandes</a></li>
+            <li class="listLeftItem">
+                <a href="#comments">commentaires</a></li>
+            {% if current_user.is_admin %}
+            <li class="listLeftItem">
+                <a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></li>
+            {% endif %}
+            <li class="listLeftItem">
+                <a class="unsign" href="">Deconnexion</a></li>
+        </ul>
+    </section>
+    <section class="rightSide">
+        <div id="persoInfo"></div>
+        <div class="persoInfo">
+            <h1 class="rightTitle">Personal Informations</h1>
+            <form action="persoForm">
+                <div class="usrname ta-c">
+                    <h2 class="usernameLabel">Username</h2>
+                    <input type="text " class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="mailform ta-c ">
+                    <h2 class="mailLabel">Mail Address</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="pass ta-c">
+                    <h2 class="passLabel">Password</h2>
+                    <input type="password" class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="passVerif ta-c">
+                    <h2 class="passVerifLabel">Password Verification</h2>
+                    <input type="password" class="inputPerso" placeholder="value du back">
+                </div>
+                <button type="submit" class="btn-perso">Modify</button>
+            </form>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+        <div id="address"></div>
+        <div class="address">
+            <h1 class="rightTitle ">Address</h1>
+            <form action="persoForm">
+                <div class="usrname ta-c">
+                    <h2 class="usernameLabel">Address</h2>
+                    <input type="text " class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="mailform ta-c ">
+                    <h2 class="mailLabel">City</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="pass ta-c">
+                    <h2 class="passLabel">ZIP Code</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="passVerif ta-c">
+                    <h2 class="passVerifLabel">Country</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <button type="submit" class="btn-perso">Modify</button>
+            </form>
+        </div>
+        <div id="billing"></div>
+        <div class="billing">
+            <h1 class="rightTitle ">Billing</h1>
+            <form action="persoForm">
+                <div class="usrname ta-c">
+                    <h2 class="usernameLabel">Address</h2>
+                    <input type="text " class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="mailform ta-c ">
+                    <h2 class="mailLabel">City</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="pass ta-c">
+                    <h2 class="passLabel">ZIP Code</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <div class="passVerif ta-c">
+                    <h2 class="passVerifLabel">Country</h2>
+                    <input type="text" class="inputPerso" placeholder="value du back">
+                </div>
+                <button type="submit" class="btn-perso">Modify</button>
+            </form>
+        </div>
+        <div id="commands"></div>
+        <div class="commands">
+            <h1 class="rightTitle">Orders</h1>
+        </div>
+        <div id="comments"></div>
+        <div class="comments">
+            <h1 class="rightTitle ">Comments</h1>
+        </div>
+    </section>
+</section>
 {% endblock %}

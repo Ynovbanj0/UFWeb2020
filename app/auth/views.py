@@ -11,16 +11,6 @@ from ..models import User
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-<<<<<<< HEAD
-        user = User(email=form.email.data,
-                            username=form.username.data,
-                            first_name=form.first_name.data,
-                            last_name=form.last_name.data,
-                            password_hash=form.password.data
-                            # birthdate=form.birthdate.data
-                            # address=form.address.data
-        )
-=======
         user = User(username=form.username.data,
                     password=form.password.data,
                     email=form.email.data,
@@ -28,7 +18,6 @@ def register():
                     last_name=form.last_name.data,
                     address=form.address.data,
                     birthdate=form.birthdate.data)
->>>>>>> d88ceed2bce76c2e92b5daa6e91e66a44cab63f4
         db.session.add(user)
         db.session.commit()
         # flash('You have successfully registered! You may now login.')

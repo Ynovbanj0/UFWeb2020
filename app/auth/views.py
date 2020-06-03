@@ -65,16 +65,13 @@ def profil():
         user.birthdate=form_reg.birthdate.data
         db.session.commit()
         flash('You have successfully edited the profil.')
-        if user.is_admin:
-            return redirect(url_for('home.admin_dashboard'))
-        else:
-            return redirect(url_for('home.dashboard'))
-    form_reg.username.data = user.username
-    form_reg.email.data = user.email
-    form_reg.first_name.data = user.first_name
-    form_reg.last_name.data = user.last_name
-    form_reg.birthdate.data = user.birthdate
-    return render_template('auth/profil.html', form_reg=form_reg, form_add=form_add,
+    form.username.data = user.username
+    form.email.data = user.email
+    form.first_name.data = user.first_name
+    form.last_name.data = user.last_name
+    form.address.data = user.address
+    form.birthdate.data = user.birthdate
+    return render_template('auth/profil.html', form=form,
                            title="Profil")
 
     

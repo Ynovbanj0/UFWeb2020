@@ -239,90 +239,6 @@ a:hover {
 }
 
 
-/* SignIn CSS */
-
-.card-signin {
-    border: 0;
-    border-radius: 1rem;
-    box-shadow: 0px 3px 3px black;
-    position: fixed;
-}
-
-.card-signin .card-title {
-    margin-bottom: 2rem;
-    font-weight: 300;
-    font-size: 1.5rem;
-}
-
-.card-signin .card-body {
-    padding: 2rem;
-}
-
-.form-signin {
-    width: 100%;
-    font-family: 'Muli', sans-serif;
-}
-
-.form-signin .btn {
-    font-size: 80%;
-    border-radius: 5rem;
-    letter-spacing: 0.1rem;
-    font-weight: bold;
-    padding: 1rem;
-    transition: all 0.2s;
-}
-
-h1 {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    font-family: "Permanent Marker", cursive;
-    font-size: 100px;
-    color: black;
-}
-
-.signIn {
-    cursor: pointer;
-}
-
-.signInSection {
-    display: none;
-    position: absolute;
-    z-index: 9996;
-    top: 100px;
-    left: 60vw;
-    width: 30vw;
-}
-
-.btn-signIn {
-    display: flex;
-    width: 100%;
-    background-color: #4DD119;
-    border: 1px solid rgb(35, 94, 12);
-    line-height: 1.5;
-    text-transform: uppercase!important;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    border-radius: 30px;
-    transition: 0.2s;
-    font-weight: bold;
-    font-family: 'Muli', sans-serif;
-    margin-top: 20px;
-}
-
-.btn-signIn:hover {
-    background-color: white;
-    color: #4DD119;
-}
-
-.inputSignin {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-}
-
-
 /* Panier */
 
 .shopped {
@@ -534,6 +450,26 @@ h1 {
     transition: 0.3s;
 }
 
+
+/* Footer */
+
+footer {
+    height: 150px;
+    background-color: white;
+    border-top: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+footer>p {
+    font-size: 1.2em;
+}
+
+
+/* Responsiv */
+
 @media screen and (max-width: 1300px) {
     .navElements {
         font-size: 1.8em;
@@ -565,5 +501,12 @@ h1 {
         position: absolute;
         top: 30%;
         right: 5%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    footer {
+        justify-content: left;
+        padding-left: 5%;
     }
 }

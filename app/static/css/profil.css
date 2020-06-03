@@ -1,0 +1,281 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: url(../img/profil.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 20vw 80vw;
+}
+
+
+/* Leftside */
+
+.leftSide {
+    grid-column: 1;
+    border-right: 1px solid black;
+    box-shadow: 3px 0px 3px black;
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    color: white;
+}
+
+.colorProfil1 {
+    position: absolute;
+    height: 1000px;
+    width: 15px;
+    background-color: #4DD119;
+    z-index: 9900;
+    transform: rotate(-45deg);
+    bottom: -272px;
+    right: 145px;
+}
+
+.colorProfil11 {
+    position: absolute;
+    height: 1000px;
+    width: 3px;
+    background-color: rgb(35, 94, 12);
+    z-index: 9900;
+    transform: rotate(-45deg);
+    bottom: -287px;
+    right: 145px;
+}
+
+.colorProfil2 {
+    position: absolute;
+    height: 1000px;
+    width: 15px;
+    background-color: #D1140F;
+    z-index: 9900;
+    transform: rotate(-45deg);
+    bottom: -305px;
+    right: 145px;
+}
+
+.colorProfil22 {
+    position: absolute;
+    height: 1000px;
+    width: 3px;
+    background-color: rgb(63, 7, 5);
+    z-index: 9900;
+    transform: rotate(-45deg);
+    bottom: -320px;
+    right: 145px;
+}
+
+.colorProfil3 {
+    position: absolute;
+    height: 1000px;
+    width: 15px;
+    background-color: #7B24D1;
+    z-index: 9900;
+    transform: rotate(-45deg);
+    bottom: -338px;
+    right: 145px;
+}
+
+.colorProfil33 {
+    position: absolute;
+    height: 1000px;
+    width: 3px;
+    background-color: rgb(50, 15, 85);
+    z-index: 9900;
+    transform: rotate(-45deg);
+    bottom: -350px;
+    right: 150px;
+}
+
+.listLeftMenu {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+}
+
+.listLeftItem {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2.5vh;
+    margin-bottom: 2.5vh;
+}
+
+a {
+    text-decoration: none;
+    text-align: center;
+}
+
+.unsign {
+    color: red;
+}
+
+.leftTitle {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 17vh;
+    margin-bottom: 3vh;
+    color: black;
+    font-family: pacman;
+    font-size: 2em;
+    text-align: center;
+}
+
+
+/* Rightside */
+
+.ta-c {
+    text-align: center;
+}
+
+.rightSide {
+    grid-column: 2;
+    height: 100vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    margin: 0;
+}
+
+.rightTitle {
+    display: flex;
+    width: 250px;
+    justify-content: center;
+    font-family: pacman;
+    font-size: 1.8em;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 50px;
+    background: rgb(255, 255, 255);
+    border: 1px solid black;
+    text-align: center;
+}
+
+.persoInfo,
+.address,
+.billing,
+.commands,
+.comments {
+    padding: 150px 0 50px 0;
+    margin: 0px auto 100px auto;
+    width: 50%;
+    border-radius: 20px;
+}
+
+h2 {
+    width: 25%;
+    font-size: medium;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.inputPerso {
+    width: 50%;
+    margin-bottom: 40px;
+    height: 30px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn-perso {
+    display: flex;
+    margin: auto;
+}
+
+@media screen and (max-width: 1200px) {
+    .inputPerso {
+        width: 50%;
+    }
+    .rightSide>div {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .main {
+        grid-template-columns: 30vw 70vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .inputPerso {
+        width: 70%;
+    }
+    .rightSide>div {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .inputPerso {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main {
+        display: block;
+    }
+    .leftTitle {
+        margin-top: 170px;
+        margin-bottom: 10px;
+    }
+    .listLeftItem {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .colorProfil1 {
+        bottom: -700px;
+    }
+    .colorProfil11 {
+        bottom: -718px;
+    }
+    .colorProfil2 {
+        bottom: -730px;
+    }
+    .colorProfil22 {
+        bottom: -747px;
+    }
+    .colorProfil3 {
+        bottom: -760px;
+    }
+    .colorProfil33 {
+        bottom: -775px;
+    }
+    .rightSide {
+        overflow: initial;
+    }
+    .leftSide {
+        padding-bottom: 30px;
+        box-shadow: 0px 3px 3px black;
+    }
+    .persoInfo,
+    .address,
+    .billing,
+    .commands,
+    .comments {
+        padding-top: 150px;
+    }
+    h2 {
+        width: 50%;
+    }
+    .rightTitle {
+        width: 90%;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}

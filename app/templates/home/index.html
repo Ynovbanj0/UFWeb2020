@@ -1,5 +1,17 @@
 {% extends "base.html" %} {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> {% endblock %} {% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> {% endblock %} {% block body %} {% block shop %}
+<div class="shopped">
+    <div class="shoppedLogo"></div>
+</div>
+<section class="card cardShop">
+    <div class="cardContainer">
+        <ul>
+            <li class="cardNumber">3 items</li>
+            <li class="total">123</li>
+        </ul>
+    </div>
+</section> {% endblock %}
+
 <div class="container">
     <div class="newGames">
         New Games
@@ -257,4 +269,8 @@
     </div>
 </div>
 
-{% endblock %} {% block script %} {% endblock %}
+{% endblock %} {% block script %} {% endblock %} {% block footer %}
+<footer>
+    <p><small>&copy; Copyright 2018 | No pay, No Play</small></p>
+</footer>
+{% endblock %}

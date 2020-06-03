@@ -47,7 +47,7 @@
                 </li>
                 {% if current_user.is_authenticated %}
                 <li class="navItem3">
-                    <!-- <a class="" href="{{ url_for() }}">Profil</a> -->
+                    <a class="" href="{{ url_for('auth.profil') }}">Profil</a>
                 </li>
                 {% else %}
                 <li class="navItem3">

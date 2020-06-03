@@ -1,0 +1,569 @@
+body {
+    height: 100vh;
+    background: url(../img/backGrd.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@keyframes youhou {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@font-face {
+    font-family: pacman;
+    src: url(../font/crackman.ttf);
+}
+
+
+/* NavBar */
+
+.navContainer {
+    position: fixed;
+    top: 0;
+    z-index: 9997;
+    height: 100px;
+    width: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 3px 3px black;
+    background-color: white;
+    overflow: hidden;
+}
+
+.navElements {
+    display: flex;
+    height: 100px;
+    width: 60vw;
+    z-index: 9999;
+    list-style: none;
+    font-family: pacman;
+    font-size: 2em;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+.navLogo {
+    display: flex;
+    height: 80px;
+    width: 80px;
+    transition: all .2s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
+.navLogo:hover {
+    cursor: pointer;
+    animation: youhou 0.5s forwards 0s ease-in;
+}
+
+.navItem1 {
+    height: 100px;
+    display: flex;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    margin: 0;
+    padding: 0;
+    transition: all .2s ease-in-out;
+}
+
+.navItem1:hover {
+    transform: scale(1.3);
+}
+
+.navItem2:hover {
+    transform: scale(1.3);
+}
+
+.navItem3:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.navItem2 {
+    height: 100px;
+    display: flex;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    margin: 0;
+    padding: 0;
+    transition: all .2s ease-in-out;
+}
+
+.navItem3 {
+    height: 100px;
+    display: flex;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    margin: 0;
+    padding: 0;
+    transition: all .2s ease-in-out;
+}
+
+.navSearch {
+    margin-left: 5vw;
+}
+
+.colorNav1 {
+    position: absolute;
+    height: 16vh;
+    width: 1vw;
+    left: 26vw;
+    background-color: #4DD119;
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav11 {
+    position: absolute;
+    height: 16vh;
+    width: 0.2vw;
+    left: 27vw;
+    background-color: rgb(35, 94, 12);
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav2 {
+    position: absolute;
+    height: 16vh;
+    width: 1vw;
+    left: 44.5vw;
+    background-color: #D1140F;
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav22 {
+    position: absolute;
+    height: 16vh;
+    width: 0.2vw;
+    left: 45.6vw;
+    background-color: rgb(63, 7, 5);
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav3 {
+    position: absolute;
+    height: 16vh;
+    width: 1vw;
+    left: 63vw;
+    background-color: #7B24D1;
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+.colorNav33 {
+    position: absolute;
+    height: 16vh;
+    width: 0.2vw;
+    left: 64vw;
+    background-color: rgb(50, 15, 85);
+    z-index: 9998;
+    transform: rotate(45deg);
+}
+
+
+/* Searchbar */
+
+.formSearch {
+    height: 100%;
+    display: grid;
+}
+
+.btnSearch {
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    display: flex;
+    grid-column: 2;
+    align-items: center;
+    font-family: pacman;
+    font-size: 1.5em;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+}
+
+.searchIcon {
+    height: 100%;
+    width: 100%;
+    background-image: url(../img/searchG.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.btnSearch:hover {
+    transform: scale(1.2);
+}
+
+.btnSearch:hover>.searchIcon {
+    background-image: url(../img/searchW.png);
+    transform: scale(1.3);
+}
+
+.inputSearch {
+    display: flex;
+    grid-column: 1;
+}
+
+
+/* SignIn CSS */
+
+.card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 3px black;
+    position: fixed;
+}
+
+.card-signin .card-title {
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+    padding: 2rem;
+}
+
+.form-signin {
+    width: 100%;
+    font-family: 'Muli', sans-serif;
+}
+
+.form-signin .btn {
+    font-size: 80%;
+    border-radius: 5rem;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+}
+
+h1 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: "Permanent Marker", cursive;
+    font-size: 100px;
+    color: black;
+}
+
+.signIn {
+    cursor: pointer;
+}
+
+.signInSection {
+    display: none;
+    position: absolute;
+    z-index: 9996;
+    top: 100px;
+    left: 60vw;
+    width: 30vw;
+}
+
+.btn-signIn {
+    display: flex;
+    width: 100%;
+    background-color: #4DD119;
+    border: 1px solid rgb(35, 94, 12);
+    line-height: 1.5;
+    text-transform: uppercase!important;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 30px;
+    transition: 0.2s;
+    font-weight: bold;
+    font-family: 'Muli', sans-serif;
+    margin-top: 20px;
+}
+
+.btn-signIn:hover {
+    background-color: white;
+    color: #4DD119;
+}
+
+.inputSignin {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+
+/* Panier */
+
+.shopped {
+    position: fixed;
+    display: flex;
+    bottom: 40px;
+    right: 40px;
+    height: 75px;
+    width: 75px;
+    border: 1px solid black;
+    border-radius: 50%;
+    box-shadow: 0px 3px 3px black;
+    background-color: white;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    z-index: 9995;
+}
+
+.shopped:hover {
+    cursor: pointer;
+}
+
+.shoppedLogo {
+    height: 70%;
+    width: 70%;
+    background-image: url(../img/backpack.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.3s;
+}
+
+.shoppedLogo:hover {
+    transform: scale(1.2);
+}
+
+.cardShop {
+    height: 90px;
+    width: 200px;
+    position: fixed;
+    bottom: -18px;
+    right: 30px;
+    z-index: 9994;
+    background-color: white;
+    transform: translateY(-50px);
+    border: 1px solid black;
+    border-radius: 30px;
+    box-shadow: 0px 3px 3px black;
+}
+
+.cardContainer {
+    display: flex;
+    margin: 20px;
+    margin-right: 95px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Muli', sans-serif;
+}
+
+.cardContainer ul {
+    list-style: none;
+}
+
+.total {
+    font-weight: bold;
+}
+
+
+/* BurgerMenu */
+
+@keyframes nav--responsive--anim {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes nav--responsive--anim--close {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #000000d0;
+    z-index: 9998;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.overlay.is-open {
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.overflow {
+    overflow: hidden;
+}
+
+.nav--responsive {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -70vw;
+    width: 70vw;
+    height: 100%;
+    background: white;
+    z-index: 9999;
+    box-shadow: 3px 3px 3px grey;
+    transition: 0.3s;
+}
+
+.nav--responsive__active {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    background: #252525;
+    z-index: 9999;
+    box-shadow: 3px 3px 3px #252525;
+    animation: nav--responsive--anim 0.3s forwards 0s ease-in;
+    align-items: center;
+}
+
+.nav--responsive__active .nav__list {
+    height: 30vh;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.nav--responsive__active .nav__item {
+    padding: 10px 0;
+}
+
+.nav--responsive__active a {
+    font-size: 1.7em;
+    color: white;
+    text-decoration: none;
+}
+
+.header-nav__wrapper {
+    display: none;
+    padding: 15px 5px;
+    cursor: pointer;
+}
+
+.header-nav-burger {
+    width: 30px;
+    height: 2px;
+    background: black;
+    position: relative;
+    transition: 0.3s;
+}
+
+.header-nav-burger.is-animate {
+    background: white;
+    transition: 0.3s;
+}
+
+.header-nav-burger:before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+    background: black;
+    width: 30px;
+    height: 2px;
+}
+
+.header-nav-burger.is-animate:before {
+    transform: rotate(45deg);
+    bottom: 0px;
+    transition: 0.3s;
+}
+
+.header-nav-burger:after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    background: black;
+    width: 30px;
+    height: 2px;
+}
+
+.header-nav-burger.is-animate:after {
+    transform: rotate(-45deg);
+    top: 0px;
+    transition: 0.3s;
+}
+
+@media screen and (max-width: 1300px) {
+    .navElements {
+        font-size: 1.8em;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .navElements {
+        font-size: 1.6em;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .navElements {
+        font-size: 1.4em;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    /* burgermenu */
+    .navItem1,
+    .navItem2,
+    .navItem3,
+    .navSearch {
+        display: none;
+    }
+    .header-nav__wrapper {
+        display: block;
+        position: absolute;
+        top: 30%;
+        right: 5%;
+    }
+}

@@ -1,13 +1,13 @@
-{% import "bootstrap/utils.html" as utils %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% extends "base.html" %}
-{% block title %}Register{% endblock %}
-{% block body %}
+{% import "bootstrap/utils.html" as utils %} {% import "bootstrap/wtf.html" as wtf %} {% extends "base.html" %} {% block title %}Register{% endblock %} {% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}"> {% endblock %} {% block body %}
 <div class="content-section">
-  <div class="center">
-    <h1>Register for an account</h1>
-    <br/>
-    {{ wtf.quick_form(form) }}
-  </div>
+    <div class="center">
+        <h1 class="loginTitle">Register for an account</h1>
+        <br/>
+        <div class="registerForm">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
 </div>
 {% endblock %}

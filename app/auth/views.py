@@ -4,21 +4,24 @@ from flask_login import login_required, login_user, logout_user
 from . import auth
 from .forms import LoginForm, RegistrationForm
 from .. import db
-from ..models import Employee
+from ..models import User
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        employee = Employee(email=form.email.data,
+        user = User(email=form.email.data,
                             username=form.username.data,
                             first_name=form.first_name.data,
                             last_name=form.last_name.data,
-                            password=form.password.data)
-        db.session.add(employee)
+                            password_hash=form.password.data
+                            # birthdate=form.birthdate.data
+                            # address=form.address.data
+        )
+        db.session.add(user)
         db.session.commit()
-        flash('You have successfully registered! You may now login.')
+        # flash('You have successfully registered! You may now login.')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form, title='Register')
 
@@ -27,14 +30,14 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        employee = Employee.query.filter_by(email=form.email.data).first()
-        if employee is not None and employee.verify_password(
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None and user.verify_password(
                 form.password.data):
-            login_user(employee)
-            if employee.is_admin:
+            login_user(user)
+            if user.is_admin:
                 return redirect(url_for('home.admin_dashboard'))
             else:
-                return redirect(url_for('home.dashboard'))
+                return redirect(url_for('home.homepage'))
         else:
             flash('Invalid email or password.')
     return render_template('auth/login.html', form=form, title='Login')

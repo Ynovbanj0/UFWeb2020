@@ -9,7 +9,7 @@ from ..models import *
 
 @home.route('/')
 def homepage():
-    return render_template('test.html', title="Test", fetch=Product.query.first())
+    return render_template('home/index.html', title="Welcome") #, fetch=Product.query.first())
     # return render_template('home/index.html', title="Welcome")
 
 

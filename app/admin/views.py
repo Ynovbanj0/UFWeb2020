@@ -2,9 +2,9 @@ from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
 from . import admin
-from .forms import DepartmentForm, EmployeeAssignForm, RoleForm
+from .forms import ProductForm, CategoryForm, Codeform
 from .. import db
-from ..models import Department, Employee, Role
+from ..models import Product, Purchase, User, Category, Code, Comment
 
 
 def check_admin():
@@ -12,147 +12,164 @@ def check_admin():
         abort(403)
 
 
-@admin.route('/departments', methods=['GET', 'POST'])
+@admin.route('/product')
 @login_required
-def list_departments():
+def list_products():
     check_admin()
-    departments = Department.query.all()
-    return render_template('admin/departments/departments.html',
-                           departments=departments, title="Departments")
+    products = Product.query.all()
+    return render_template('admin/products/products.html',
+                           products=products, title="Products")
 
 
-@admin.route('/departments/add', methods=['GET', 'POST'])
+@admin.route('/product/add', methods=['GET', 'POST'])
 @login_required
-def add_department():
+def add_product():
     check_admin()
-    form = DepartmentForm()
+    form = ProductForm()
     if form.validate_on_submit():
-        department = Department(name=form.name.data, 
-                                description=form.description.data)
+        product = Product(name=form.name.data,
+                          price=form.price.data,
+                          rating=form.rating.data,
+                          image=form.image.data,
+                          description=form.description.data)
         try:
-            db.session.add(department)
+            db.session.add(product)
             db.session.commit()
         except:
             pass
-        return redirect(url_for('admin.list_departments'))
+        return redirect(url_for('admin.list_products'))
 
-    return render_template('admin/departments/department.html', action="Add",
-                           add_department=True, form=form,
-                           title="Add Department")
+    return render_template('admin/products/product.html', form=form,
+                           title="Add product")
 
 
-@admin.route('/departments/edit/<int:id>', methods=['GET', 'POST'])
+@admin.route('/product/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit_department(id):
+def edit_product(id):
     check_admin()
-    department = Department.query.get_or_404(id)
-    form = DepartmentForm(obj=department)
+    product = Product.query.get_or_404(id)
+    form = ProductForm(obj=product)
     if form.validate_on_submit():
-        department.name = form.name.data
-        department.description = form.description.data
+        product.name = form.name.data
+        product.price = form.price.data
+        product.rating = form.rating.data
+        product.image = form.image.data
+        product.description = form.description.data
+        product.categories = form.categories.data
         db.session.commit()
-        flash('You have successfully edited the department.')
-        return redirect(url_for('admin.list_departments'))
-    form.description.data = department.description
-    form.name.data = department.name
-    return render_template('admin/departments/department.html', action="Edit",
-                           add_department=add_department, form=form,
-                           department=False, title="Edit Department")
+        flash('You have successfully edited the product.')
+        return redirect(url_for('admin.list_products'))
+    form.name.data = product.name
+    form.price.data = product.price
+    form.rating.data = product.rating
+    form.image.data = product.image
+    form.description.data = product.description
+    form.categories.data = product.categories
+    return render_template('admin/products/product.html', form=form,
+                           title="Edit Product")
 
 
-@admin.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
+@admin.route('/product/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_department(id):
+def delete_product(id):
     check_admin()
-    department = Department.query.get_or_404(id)
-    db.session.delete(department)
+    product = Product.query.get_or_404(id)
+    db.session.delete(product)
     db.session.commit()
-    flash('You have successfully deleted the department.')
-    return redirect(url_for('admin.list_departments'))
+    flash('You have successfully deleted the product.')
+    return redirect(url_for('admin.list_products'))
 
 
-@admin.route('/roles')
+@admin.route('/code/add', methods=['GET', 'POST'])
 @login_required
-def list_roles():
+def add_code():
     check_admin()
-    roles = Role.query.all()
-    return render_template('admin/roles/roles.html',
-                           roles=roles, title='Roles')
-
-
-@admin.route('/roles/add', methods=['GET', 'POST'])
-@login_required
-def add_role():
-    check_admin()
-    form = RoleForm()
+    form = Codeform()
     if form.validate_on_submit():
-        role = Role(name=form.name.data,
-                    description=form.description.data)
+        code = Code(code=form.code.data,
+                    product=form.product.data)
         try:
-            db.session.add(role)
+            db.session.add(code)
             db.session.commit()
         except:
             pass
-        return redirect(url_for('admin.list_roles'))
-    return render_template('admin/roles/role.html', action="Add", 
-                           add_role=True, form=form,
-                           title='Add Role')
+        return redirect(url_for('admin.list_codes'))
+
+    return render_template('admin/codes/code.html', form=form,
+                           title="Add code")
 
 
-@admin.route('/roles/edit/<int:id>', methods=['GET', 'POST'])
+@admin.route('/code')
 @login_required
-def edit_role(id):
+def list_codes():
     check_admin()
-    role = Role.query.get_or_404(id)
-    form = RoleForm(obj=role)
+    listCodes = []
+    p = 0
+    for product in Product.query.all():
+        listCodes.append([product.name, []])
+        for code in product.codes:
+            listCodes[p][1].append(code)
+        p += 1
+
+    return render_template('admin/codes/codes.html',
+                           listCodes=listCodes, title="Codes")
+
+
+@admin.route('/category')
+@login_required
+def list_categories():
+    check_admin()
+    listCategories = []
+    p = 0
+    for category in Category.query.all():
+        listCategories.append([category.name, []])
+        for product in category.products:
+            listCategories[p][1].append(product)
+        p += 1
+    return render_template('admin/categories/categories.html',
+                           listCategories=listCategories, title="Categories")
+
+
+@admin.route('/category/add', methods=['GET', 'POST'])
+@login_required
+def add_category():
+    check_admin()
+    form = CategoryForm()
     if form.validate_on_submit():
-        role.name = form.name.data
-        role.description = form.description.data
-        db.session.add(role)
-        db.session.commit()
-        flash('You have successfully edited the role.')
-        return redirect(url_for('admin.list_roles'))
-    form.description.data = role.description
-    form.name.data = role.name
-    return render_template('admin/roles/role.html', add_role=False,
-                           form=form, title="Edit Role")
+        category = Category(name=form.name.data)
+        try:
+            db.session.add(category)
+            db.session.commit()
+        except:
+            pass
+        return redirect(url_for('admin.list_categories'))
+
+    return render_template('admin/categories/category.html', form=form,
+                           title="Add category")
 
 
-@admin.route('/roles/delete/<int:id>', methods=['GET', 'POST'])
+@admin.route('/category/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def delete_role(id):
+def edit_category(id):
     check_admin()
-    role = Role.query.get_or_404(id)
-    db.session.delete(role)
+    category = Category.query.get_or_404(id)
+    form = CategoryForm(obj=category)
+    if form.validate_on_submit():
+        category.name = form.name.data
+        db.session.commit()
+        flash('You have successfully edited the category.')
+        return redirect(url_for('admin.list_categories'))
+    form.name.data = category.name
+    return render_template('admin/categories/category.html', form=form,
+                           title="Edit Category")
+
+
+@admin.route('/category/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_category(id):
+    check_admin()
+    category = Category.query.get_or_404(id)
+    db.session.delete(category)
     db.session.commit()
-    flash('You have successfully deleted the role.')
-    return redirect(url_for('admin.list_roles'))
-
-
-@admin.route('/employees')
-@login_required
-def list_employees():
-    check_admin()
-    employees = Employee.query.all()
-    return render_template('admin/employees/employees.html',
-                           employees=employees, title='Employees')
-
-
-@admin.route('/employees/assign/<int:id>', methods=['GET', 'POST'])
-@login_required
-def assign_employee(id):
-    check_admin()
-    employee = Employee.query.get_or_404(id)
-    if employee.is_admin:
-        abort(403)
-    form = EmployeeAssignForm(obj=employee)
-    if form.validate_on_submit():
-        employee.department = form.department.data
-        employee.role = form.role.data
-        db.session.add(employee)
-        db.session.commit()
-        flash('You have successfully assigned a department and role.')
-        return redirect(url_for('admin.list_employees'))
-    return render_template('admin/employees/employee.html',
-                           employee=employee, form=form,
-                           title='Assign Employee')
+    flash('You have successfully deleted the category.')
+    return redirect(url_for('admin.list_categories'))

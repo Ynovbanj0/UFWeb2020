@@ -1,31 +1,39 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, ValidationError
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms import StringField, SubmitField, ValidationError, DecimalField, SelectMultipleField, widgets, SelectMultipleField
+from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField, QuerySelectField
 from wtforms.validators import DataRequired
 
-from ..models import Department, Role
+from ..models import Product, Category
+
+class MultiCheckboxField(QuerySelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput() 
 
 
-class DepartmentForm(FlaskForm):
+class ProductForm(FlaskForm):
+    submit = SubmitField('Submit')
     name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
+    price = DecimalField('Price')
+    rating = DecimalField('Rating')
+    image = StringField('Image', validators=[DataRequired()])
+    description = StringField('Description')
+    categories = MultiCheckboxField('Categories', query_factory=lambda: Category.query.all(), get_label="name", validators=[DataRequired()]) 
+
+    # def validate_name(self, field):
+    #     if Product.query.filter_by(name=field.data).first():
+    #         raise ValidationError('Product already exists.')
+
+
+class CategoryForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
     def validate_name(self, field):
-        if Department.query.filter_by(name=field.data).first():
-            raise ValidationError('Department already exists.')
-
-class RoleForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Submit')
-
-    def validate_name(self, field):
-        if Role.query.filter_by(name=field.data).first():
-            raise ValidationError('Role already exists.')
+        if Category.query.filter_by(name=field.data).first():
+            raise ValidationError('Category already exists.')
 
 
-class EmployeeAssignForm(FlaskForm):
-    department = QuerySelectField(query_factory=lambda: Department.query.all(), get_label="name")
-    role = QuerySelectField(query_factory=lambda: Role.query.all(), get_label="name")
+class Codeform(FlaskForm):
+    code = StringField('Code', validators=[DataRequired()])
+    product = QuerySelectField(query_factory=lambda: Product.query.all(), get_label="name")
     submit = SubmitField('Submit')

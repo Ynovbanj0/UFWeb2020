@@ -1,0 +1,17 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block body %}
+<div class="content-section">
+    <br />
+    {{ utils.flashed_messages() }}
+    <br />
+    <div class="center">
+        <br />
+        <ul>
+            {% for product in products %}
+                <li>{{ product.name }}</li>
+            {% endfor%}
+        </ul>
+    </div>
+</div>
+{% endblock %}

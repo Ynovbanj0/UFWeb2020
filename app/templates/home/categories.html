@@ -14,8 +14,8 @@
 
 <div class="catMain">
     {% for categorie in categories %}
-    <div class="cat" id="{{ categorie[0] }}" onclick="goToCat(this.id)">
-        {{ categorie[0] }}
+    <div class="cat" id="{{ categorie.name }}" onclick="goToCat(this.id)">
+        {{ categorie.name }}
     </div>
     {% endfor %}
 </div>

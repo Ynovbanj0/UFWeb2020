@@ -61,13 +61,7 @@ def product(id):
 
 @home.route('/categories')
 def list_categories():
-    categories = []
-    p = 0
-    for category in Category.query.all():
-        categories.append([category.name, []])
-        for product in category.products:
-            categories[p][1].append(product)
-        p += 1
+    categories = Category.query.all();
     return render_template('home/categories.html',
                            categories=categories, title="Categories")
 

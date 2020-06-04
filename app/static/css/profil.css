@@ -1,11 +1,12 @@
 body {
     padding: 0;
     margin: 0;
-    background: url(../img/profil.jpg);
+    background-color: rgb(255, 255, 255);
+    /* background: url(../img/profil.jpg);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
 }
 
 .main {

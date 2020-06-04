@@ -12,7 +12,6 @@ class Address(db.Model):
     postal = db.Column(db.String(50), nullable=False)
     country = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship("User", back_populates="address")
 
 categories_products = db.Table('categories_products',
                                db.Column('category_id', db.Integer, db.ForeignKey(
@@ -72,7 +71,7 @@ class Product(db.Model):
     categories = db.relationship('Category',
                                  secondary=categories_products, lazy='subquery',
                                  back_populates="products")
-                                 
+
     def __repr__(self):
         return '<Product: {}, {}>'.format(self.name, self.description)
 
@@ -105,7 +104,7 @@ class User(UserMixin, db.Model):
                                lazy='dynamic')
     purchases = db.relationship('Purchase', backref='user',
                                 lazy='dynamic')
-    address = db.relationship("Address", uselist=False, back_populates="user")
+    address = db.relationship("Address")
     
     @property
     def password(self):

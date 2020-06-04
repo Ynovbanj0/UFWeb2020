@@ -11,17 +11,12 @@ class MultiCheckboxField(QuerySelectMultipleField):
 
 
 class ProductForm(FlaskForm):
-    submit = SubmitField('Submit')
     name = StringField('Name', validators=[DataRequired()])
     price = DecimalField('Price')
-    rating = DecimalField('Rating')
     image = StringField('Image', validators=[DataRequired()])
     description = StringField('Description')
-    categories = MultiCheckboxField('Categories', query_factory=lambda: Category.query.all(), get_label="name", validators=[DataRequired()]) 
-
-    # def validate_name(self, field):
-    #     if Product.query.filter_by(name=field.data).first():
-    #         raise ValidationError('Product already exists.')
+    categories = MultiCheckboxField('Categories', query_factory=lambda: Category.query.all(), get_label="name", validators=[DataRequired()])
+    submit = SubmitField('Submit') 
 
 
 class CategoryForm(FlaskForm):

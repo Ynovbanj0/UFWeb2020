@@ -2,9 +2,9 @@ from flask import flash, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
-from .forms import LoginForm, RegistrationForm, AddressForm
+from .forms import LoginForm, RegistrationForm, AddressForm, EditForm
 from .. import db
-from ..models import User
+from ..models import User, Address
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -16,7 +16,6 @@ def register():
                     email=form.email.data,
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
-                    address=form.address.data,
                     birthdate=form.birthdate.data)
         db.session.add(user)
         db.session.commit()
@@ -54,24 +53,39 @@ def logout():
 @login_required
 def profil():
     user = User.query.get_or_404(current_user.id)
-    form_reg = RegistrationForm(obj=user)
+    addresses = Address.query.filter_by(id, current_user.id)
+    form_ed = EditForm(obj=user)
     form_add = AddressForm()
-    if form_reg.validate_on_submit():
-        user.username=form_reg.username.data
-        user.password=form_reg.password.data
-        user.email=form_reg.email.data
-        user.first_name=form_reg.first_name.data
-        user.last_name=form_reg.last_name.data
-        user.birthdate=form_reg.birthdate.data
+    if form_ed.validate_on_submit():
+        if User.query.filter_by(email=form_ed.email.data).first() or User.query.filter_by(username=form_ed.username.data).first():
+            if User.query.filter_by(email=form_ed.email.data).first().email == current_user.email and User.query.filter_by(username=form_ed.username.data).first().username == current_user.username:
+                user.username=form_ed.username.data
+                user.password=form_ed.password.data
+                user.email=form_ed.email.data
+                user.first_name=form_ed.first_name.data
+                user.last_name=form_ed.last_name.data
+                user.birthdate=form_ed.birthdate.data
+                db.session.commit()
+                flash('You have successfully edited the profil.')
+            else:
+                flash('Either your username or your email is already taken.')
+        else:
+            user.username=form_ed.username.data
+            user.password=form_ed.password.data
+            user.email=form_ed.email.data
+            user.first_name=form_ed.first_name.data
+            user.last_name=form_ed.last_name.data
+            user.birthdate=form_ed.birthdate.data
+            db.session.commit()
+            flash('You have successfully edited the profil.')
+    if form.validate_on_submit():
+        address = Address(address=form.address.data,
+                          city=form.city.data,
+                          postal=form.postal.data,
+                          country=form.country.data)
+        db.session.add(user)
         db.session.commit()
-        flash('You have successfully edited the profil.')
-    form.username.data = user.username
-    form.email.data = user.email
-    form.first_name.data = user.first_name
-    form.last_name.data = user.last_name
-    form.address.data = user.address
-    form.birthdate.data = user.birthdate
-    return render_template('auth/profil.html', form=form,
+    return render_template('auth/profil.html', form_ed=form_ed, form_add=form_add,
                            title="Profil")
 
     

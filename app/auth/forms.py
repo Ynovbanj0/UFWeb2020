@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField, ValidationError
+from wtforms import PasswordField, StringField, SubmitField, ValidationError, SelectField
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms.fields.html5 import DateField
@@ -36,4 +36,16 @@ class AddressForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     postal = StringField('PostalCode', validators=[DataRequired()])
-    country = StringField('Country', validators=[DataRequired()])
+    country = SelectField('Country', validators=[DataRequired()], choices=['France', 'Uk', 'Italia', 'Spain'])
+    submit = SubmitField('Submit')
+
+
+class EditForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    birthdate = DateField('Birthdate', validators=[DataRequired()], format='%Y-%m-%d')
+    password = PasswordField('Password', validators=[DataRequired(), EqualTo('confirm_password')])
+    confirm_password = PasswordField('Confirm Password')
+    submit = SubmitField('Update')

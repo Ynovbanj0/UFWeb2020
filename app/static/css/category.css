@@ -2,10 +2,156 @@ body {
     height: fit-content;
 }
 
-.main {
+.container {
+    margin-bottom: 100px;
+    margin-top: 150px;
+}
+
+.gamesContainer {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    height: 80%;
+    height: fit-content;
     width: 100%;
-    margin: 100px auto 0px auto;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 70px;
+}
+
+.nGelement {
+    height: 300px;
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px black;
+    border-radius: 5px;
+    padding: 10%;
+    margin: auto;
+}
+
+.elementImg {
+    height: 70%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-bottom: 10%;
+}
+
+.elementImg:hover {
+    cursor: pointer;
+}
+
+.promo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background: url(../img/discount.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    color: white;
+    font-size: 0.7em;
+    transform: translate(-18px, 2px);
+    font-family: 'Muli', sans-serif;
+}
+
+.elementInfo {
+    font-family: 'Muli', sans-serif;
+    height: 20%;
+}
+
+.elementTitle {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 5%;
+}
+
+.elementPrice {
+    display: grid;
+    grid-auto-columns: 70% 30%;
+    width: 100%;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.price {
+    width: 100%;
+    grid-column: 1;
+    text-align: center;
+}
+
+.addToCard {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    grid-column: 2;
+    background: url(../img/add.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: 0.3s;
+    margin-top: 15%;
+}
+
+.addToCard:hover {
+    transform: scale(1.2);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .gamesContainer {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-gap: 50px 10%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .nGelement {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .gamesContainer {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
+    .nGelement {
+        height: 300px;
+    }
+    .promo {
+        transform: translate(10px, 2px);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .gamesContainer {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        padding: 0 15%;
+    }
+    .promo {
+        display: none;
+    }
+    .addToCard {
+        margin: 0;
+        margin-top: 10px;
+    }
+    .elementTitle {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .gamesContainer {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        padding: 0 3%;
+    }
 }

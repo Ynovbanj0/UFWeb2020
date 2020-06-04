@@ -1,4 +1,4 @@
-from flask import abort, render_template
+from flask import abort, render_template, session
 from flask_login import current_user, login_required
 from datetime import datetime
 
@@ -7,10 +7,13 @@ from .. import db
 from .forms import CommentForm
 from ..models import *
 
+import json
 
 @home.route('/')
 def homepage():
-    return render_template('home/index.html', title="Welcome")
+    nbItem = len(session['productsId'])
+    total = session['total'] / 100
+    return render_template('home/index.html', total=total, nbItem=nbItem, title="Welcome")
 
 
 @home.route('/dashboard')
@@ -68,14 +71,48 @@ def product(id):
     return render_template('home/product/product.html', product=product, form=form, user=current_user, rating=rating, title="Product")
 
 
-@home.route('/category')
-def list_category():
-    categories = Category.query.all()
-    return render_template('home/category/categories.html',
-                           categories=categories, title="Categories")
+@home.route('/categories')
+def list_categories():
+    categories = Category.query.all();
+    nbItem = len(session['productsId'])
+    total = session['total'] / 100 
+    return render_template('home/categories.html',
+                           categories=categories, total=total, nbItem=nbItem, title="Categories")
 
 
 @home.route('/category/<name>')
 def category(name):
     category = Category.query.filter_by(name=name).first()
-    return render_template('home/category/category.html', category=category, title=name)
+    nbItem = len(session['productsId'])
+    total = session['total'] / 100
+    # seeTotal = session['total']
+    # seeId = session['productsId']
+    return render_template('home/category.html', 
+                           category=category, total=total, nbItem=nbItem, title=category.name)
+
+
+@home.route('/addToCard/<int:id>')
+def addToCard(id):
+    # On récupère l'objet du produit ajouté au panier
+    product = Product.query.filter_by(id=id).first()
+    productId = [product.id]
+    # On peut pas stocké un type decimal en session
+    productPrice = int(product.price * 100)
+    # On créer un total a update en vérifiant que session['total'] existe sinon set a 0
+    if session['total'] != None :
+        session['total'] = session['total'] + productPrice
+    else :
+        session['total'] = 0
+        session['total'] = session['total'] + productPrice
+    # On créer une liste a update en vérifiant que session['productsId'] existe sinon set a vide
+    if session['productsId'] != None :
+        tempProdId = session['productsId'] 
+        tempProdId = tempProdId + productId
+        session['productsId'] = tempProdId
+    else :
+        session['productsId'] = []
+        tempProdId = session['productsId'] 
+        tempProdId = tempProdId + productId
+        session['productsId'] = tempProdId
+    message = '{ "message":"Card Updated" }'
+    return json.loads(message)

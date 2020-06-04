@@ -29,7 +29,6 @@ def add_product():
     if form.validate_on_submit():
         product = Product(name=form.name.data,
                           price=form.price.data,
-                          rating=form.rating.data,
                           image=form.image.data,
                           description=form.description.data)
         try:
@@ -50,18 +49,29 @@ def edit_product(id):
     product = Product.query.get_or_404(id)
     form = ProductForm(obj=product)
     if form.validate_on_submit():
-        product.name = form.name.data
-        product.price = form.price.data
-        product.rating = form.rating.data
-        product.image = form.image.data
-        product.description = form.description.data
-        product.categories = form.categories.data
-        db.session.commit()
-        flash('You have successfully edited the product.')
-        return redirect(url_for('admin.list_products'))
+        if Product.query.filter_by(name=form.name.data).first():
+            if Product.query.filter_by(name=form.name.data).first().name == Product.query.filter_by(id=id).first().name:
+                product.name = form.name.data
+                product.price = form.price.data
+                product.image = form.image.data
+                product.description = form.description.data
+                product.categories = form.categories.data
+                db.session.commit()
+                flash('You have successfully edited the product.')
+                return redirect(url_for('admin.list_products'))
+            else:
+                flash('The product name is already taken.')
+        else:
+            product.name = form.name.data
+            product.price = form.price.data
+            product.image = form.image.data
+            product.description = form.description.data
+            product.categories = form.categories.data
+            db.session.commit()
+            flash('You have successfully edited the product.')
+            return redirect(url_for('admin.list_products'))
     form.name.data = product.name
     form.price.data = product.price
-    form.rating.data = product.rating
     form.image.data = product.image
     form.description.data = product.description
     form.categories.data = product.categories

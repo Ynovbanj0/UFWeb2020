@@ -5,7 +5,7 @@ from app import db, login_manager
 
 
 class Address(db.Model):
-    __tablename__ = 'addesses'
+    __tablename__ = 'addresses'
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
@@ -62,6 +62,7 @@ class Product(db.Model):
     price = db.Column(db.Numeric(5, 2))
     image = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
+    rating = db.Column(db.Integer, default=0)
     comments = db.relationship('Comment',
                                backref='product', lazy='dynamic')
     purchases = db.relationship('Purchase',

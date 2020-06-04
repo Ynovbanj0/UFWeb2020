@@ -2,9 +2,15 @@ from flask import flash, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
-from .forms import LoginForm, RegistrationForm, AddressForm, EditForm
+from .forms import LoginForm, RegistrationForm, AddressForm, EditForm, CommentForm
 from .. import db
-from ..models import User, Address
+from ..models import User, Address, Comment
+from datetime import datetime
+
+
+def check_user(id):
+    if id != current_user.id:
+        abort(403)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -53,40 +59,110 @@ def logout():
 @login_required
 def profil():
     user = User.query.get_or_404(current_user.id)
-    addresses = Address.query.filter_by(id=current_user.id).all()
+    addresses = Address.query.filter_by(user_id=current_user.id).all()
+    comments = Comment.query.filter_by(user_id=current_user.id).all()
+    print(current_user.id)
     form_ed = EditForm(obj=user)
-    form_add = AddressForm()
     if form_ed.validate_on_submit():
-        if User.query.filter_by(email=form_ed.email.data).first() or User.query.filter_by(username=form_ed.username.data).first():
+        if User.query.filter_by(email=form_ed.email.data).first() and User.query.filter_by(username=form_ed.username.data).first():
             if User.query.filter_by(email=form_ed.email.data).first().email == current_user.email and User.query.filter_by(username=form_ed.username.data).first().username == current_user.username:
-                user.username=form_ed.username.data
-                user.password=form_ed.password.data
-                user.email=form_ed.email.data
-                user.first_name=form_ed.first_name.data
-                user.last_name=form_ed.last_name.data
-                user.birthdate=form_ed.birthdate.data
+                user.username = form_ed.username.data
+                user.password = form_ed.password.data
+                user.email = form_ed.email.data
+                user.first_name = form_ed.first_name.data
+                user.last_name = form_ed.last_name.data
+                user.birthdate = form_ed.birthdate.data
                 db.session.commit()
                 flash('You have successfully edited the profil.')
             else:
                 flash('Either your username or your email is already taken.')
         else:
-            user.username=form_ed.username.data
-            user.password=form_ed.password.data
-            user.email=form_ed.email.data
-            user.first_name=form_ed.first_name.data
-            user.last_name=form_ed.last_name.data
-            user.birthdate=form_ed.birthdate.data
+            user.username = form_ed.username.data
+            user.password = form_ed.password.data
+            user.email = form_ed.email.data
+            user.first_name = form_ed.first_name.data
+            user.last_name = form_ed.last_name.data
+            user.birthdate = form_ed.birthdate.data
             db.session.commit()
             flash('You have successfully edited the profil.')
-    if form_add.validate_on_submit():
-        address = Address(city=form_add.city.data,
-                          postal=form_add.postal.data,
-                          country=form_add.country.data,
-                          address=form_add.address.data,
+    return render_template('auth/profil.html', form_ed=form_ed, addresses=addresses, comments=comments,
+                           title="Profil")
+
+
+@auth.route('/address/add', methods=['GET', 'POST'])
+@login_required
+def add_address():
+    form = AddressForm()
+    if form.validate_on_submit():
+        address = Address(address=form.address.data,
+                          city=form.city.data,
+                          postal=form.postal.data,
+                          country=form.country.data,
                           user_id=current_user.id)
         db.session.add(address)
         db.session.commit()
-    return render_template('auth/profil.html', form_ed=form_ed, form_add=form_add,
-                           title="Profil")
+        return redirect(url_for('auth.profil'))
+    return render_template('auth/address/address.html', form=form,
+                           title="Add address")
 
-    
+
+@auth.route('/address/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_address(id):
+    check_user(id)
+    address = Address.query.get_or_404(id)
+    form = AddressForm(obj=address)
+    if form.validate_on_submit():
+        address.address = form.address.data
+        address.city = form.city.data
+        address.postal = form.postal.data
+        address.country = form.country.data
+        db.session.commit()
+        flash('You have successfully edited the address.')
+        return redirect(url_for('auth.profil'))
+    form.address.data = address.address
+    form.city.data = address.city
+    form.postal.data = address.postal
+    form.country.data = address.country
+    return render_template('auth/address/address.html', form=form,
+                           title="Edit Address")
+
+
+@auth.route('/address/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_address(id):
+    check_user(id)
+    address = Address.query.get_or_404(id)
+    db.session.delete(address)
+    db.session.commit()
+    flash('You have successfully deleted the address.')
+    return redirect(url_for('auth.profil'))
+
+
+@auth.route('/comment/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_comment(id):
+    check_user(id)
+    comment = Comment.query.get_or_404(id)
+    form = CommentForm(obj=comment)
+    if form.validate_on_submit():
+        comment.content = form.content.data
+        comment.rating = form.rating.data
+        db.session.commit()
+        flash('You have successfully edited the comment.')
+        return redirect(url_for('auth.profil'))
+    form.content.data = comment.content
+    form.rating.data = comment.rating
+    return render_template('auth/comment/comment.html', form=form,
+                           title="Edit Comment")
+
+
+@auth.route('/comment/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(id):
+    check_user(id)
+    comment = Comment.query.get_or_404(id)
+    db.session.delete(comment)
+    db.session.commit()
+    flash('You have successfully deleted the comment.')
+    return redirect(url_for('auth.profil'))

@@ -13,7 +13,11 @@
 </section> {% endblock %}{% block body %}
 
 <div class="main">
-    {{ category.products }}
+    <ul>
+        {% for product in category.products %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
 </div>
 
 {% endblock %} {% block script %}

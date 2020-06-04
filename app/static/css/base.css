@@ -12,7 +12,7 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(0.3);
+        transform: scale(0.75);
     }
     100% {
         transform: scale(1);

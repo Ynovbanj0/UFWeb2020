@@ -13,7 +13,7 @@ class RegistrationForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
     last_name = StringField('Last Name', validators=[DataRequired()])
     birthdate = DateField('Birthdate', validators=[DataRequired()], format='%Y-%m-%d')
-    password = PasswordField('Password', validators=[DataRequired(), EqualTo('confirm_password')])
+    password = PasswordField('Password', validators=[DataRequired(), EqualTo('confirm_password', message='Passwords do not match')])
     confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Register')
 
@@ -36,7 +36,7 @@ class AddressForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     postal = StringField('PostalCode', validators=[DataRequired()])
-    country = SelectField('Country', validators=[DataRequired()], choices=['France', 'Uk', 'Italia', 'Spain'])
+    country = SelectField('Country', validators=[DataRequired()], choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')])
     submit = SubmitField('Submit')
 
 

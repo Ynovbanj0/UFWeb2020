@@ -53,7 +53,7 @@ def logout():
 @login_required
 def profil():
     user = User.query.get_or_404(current_user.id)
-    addresses = Address.query.filter_by(id, current_user.id)
+    addresses = Address.query.filter_by(id=current_user.id).all()
     form_ed = EditForm(obj=user)
     form_add = AddressForm()
     if form_ed.validate_on_submit():
@@ -78,12 +78,13 @@ def profil():
             user.birthdate=form_ed.birthdate.data
             db.session.commit()
             flash('You have successfully edited the profil.')
-    if form.validate_on_submit():
-        address = Address(address=form.address.data,
-                          city=form.city.data,
-                          postal=form.postal.data,
-                          country=form.country.data)
-        db.session.add(user)
+    if form_add.validate_on_submit():
+        address = Address(city=form_add.city.data,
+                          postal=form_add.postal.data,
+                          country=form_add.country.data,
+                          address=form_add.address.data,
+                          user_id=current_user.id)
+        db.session.add(address)
         db.session.commit()
     return render_template('auth/profil.html', form_ed=form_ed, form_add=form_add,
                            title="Profil")

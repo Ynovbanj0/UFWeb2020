@@ -33,11 +33,13 @@
     <div id="persoInfo"></div>
     <div class="persoInfo">
       <h1 class="rightTitle">Personal Informations</h1>
-
-      {{ wtf.quick_form(form_ed) }}
+      <div>
+        {{ wtf.quick_form(form_ed) }}
+      </div>
       <hr>
-      {{ wtf.quick_form(form_add) }}
-
+      <div>
+        {{ wtf.quick_form(form_add) }}
+      </div>
 <!-- 
       <form action="persoForm">
         <div class="usrname ta-c">

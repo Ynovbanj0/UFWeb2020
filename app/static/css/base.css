@@ -1,10 +1,10 @@
 body {
     height: 100vh;
-    /* background: url(../img/backGrd.jpg);
+    background: url(../img/backGrd3.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed; */
+    background-attachment: fixed;
 }
 
 @keyframes youhou {
@@ -40,7 +40,7 @@ body {
     text-align: center;
     border-bottom: 1px solid black;
     box-shadow: 0px 3px 3px black;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     overflow: hidden;
 }
 
@@ -135,7 +135,7 @@ a:hover {
 
 .colorNav1 {
     position: absolute;
-    height: 16vh;
+    height: 16.1vh;
     width: 1vw;
     left: 26vw;
     background-color: #4DD119;
@@ -145,7 +145,7 @@ a:hover {
 
 .colorNav11 {
     position: absolute;
-    height: 16vh;
+    height: 16.1vh;
     width: 0.2vw;
     left: 27vw;
     background-color: rgb(35, 94, 12);
@@ -155,7 +155,7 @@ a:hover {
 
 .colorNav2 {
     position: absolute;
-    height: 16vh;
+    height: 16.1vh;
     width: 1vw;
     left: 44.5vw;
     background-color: #D1140F;
@@ -165,7 +165,7 @@ a:hover {
 
 .colorNav22 {
     position: absolute;
-    height: 16vh;
+    height: 16.1vh;
     width: 0.2vw;
     left: 45.6vw;
     background-color: rgb(63, 7, 5);
@@ -175,7 +175,7 @@ a:hover {
 
 .colorNav3 {
     position: absolute;
-    height: 16vh;
+    height: 16.1vh;
     width: 1vw;
     left: 63vw;
     background-color: #7B24D1;
@@ -185,7 +185,7 @@ a:hover {
 
 .colorNav33 {
     position: absolute;
-    height: 16vh;
+    height: 16.1vh;
     width: 0.2vw;
     left: 64vw;
     background-color: rgb(50, 15, 85);

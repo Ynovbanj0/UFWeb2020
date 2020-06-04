@@ -36,7 +36,7 @@ function drawRegionsMap() {
         ['United States', 300],
         ['Brazil', 400],
         ['Canada', 500],
-        ['France', 600],
+        ['FRANCE', 600],
         ['RU', 700]
     ]);
 

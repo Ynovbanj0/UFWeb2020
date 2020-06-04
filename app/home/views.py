@@ -69,3 +69,10 @@ def list_categories():
 def category(name):
     category = Category.query.filter_by(name=name).first()
     return render_template('home/category.html', category=category, title=category.name)
+
+
+@home.route('/addToCard/<int:id>')
+@login_required
+def addToCard(id):
+    product = Product.query.filter_by(id=id).first()
+    return

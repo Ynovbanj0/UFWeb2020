@@ -2,12 +2,17 @@ body {
     height: fit-content;
 }
 
-.main {
+.container {
+    margin-bottom: 100px;
+    margin-top: 150px;
+}
+
+.gamesContainer {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     height: fit-content;
-    margin: 150px 100px 100px 100px;
-    grid-gap: 100px 100px;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 70px;
 }
 
 .nGelement {
@@ -100,12 +105,23 @@ body {
 }
 
 @media screen and (max-width: 1200px) {
+    .gamesContainer {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        grid-gap: 50px 10%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
     .nGelement {
         margin-top: 0;
     }
 }
 
 @media screen and (max-width: 992px) {
+    .gamesContainer {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
     .nGelement {
         height: 300px;
     }
@@ -115,6 +131,11 @@ body {
 }
 
 @media screen and (max-width: 550px) {
+    .gamesContainer {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        padding: 0 15%;
+    }
     .promo {
         display: none;
     }
@@ -124,5 +145,13 @@ body {
     }
     .elementTitle {
         margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .gamesContainer {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        padding: 0 3%;
     }
 }

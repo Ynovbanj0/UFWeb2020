@@ -12,21 +12,23 @@
     </div>
 </section> {% endblock %}{% block body %}
 
-<div class="main">
-    {% for product in category.products %}
-    <div class="nGelement">
-        <div class="elementImg" style="background-image: url({{ product.image }});">
-            <div class="promo">-40%</div>
-        </div>
-        <div class="elementInfo ">
-            <div class="elementTitle">{{ product.name }}</div>
-            <div class="elementPrice">
-                <div class="price">{{ product.price }} e</div>
-                <div class="addToCard"></div>
+<div class="container">
+    <div class="gamesContainer">
+        {% for product in category.products %}
+        <div class="nGelement">
+            <div class="elementImg" style="background-image: url({{ product.image }});">
+                <div class="promo">-40%</div>
+            </div>
+            <div class="elementInfo ">
+                <div class="elementTitle">{{ product.name }}</div>
+                <div class="elementPrice">
+                    <div class="price">{{ product.price }} e</div>
+                    <div class="addToCard" id="{{ product.id }}"></div>
+                </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %} {% block script %}

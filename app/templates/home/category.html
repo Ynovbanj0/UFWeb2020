@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/categories.css') }}"> {% endblock %} {% block shop %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}"> {% endblock %} {% block shop %}
 <div class="shopped">
     <div class="shoppedLogo"></div>
 </div>
@@ -12,16 +12,12 @@
     </div>
 </section> {% endblock %}{% block body %}
 
-<div class="catMain">
-    {% for categorie in categories %}
-    <div class="cat" id="{{ categorie.id }}" onclick="goToCat(this.id)">
-        {{ categorie.name }}
-    </div>
-    {% endfor %}
+<div class="main">
+    {{ category.products }}
 </div>
 
 {% endblock %} {% block script %}
-<script src="{{ url_for('static', filename='js/categories.js') }}"></script> {% endblock %} {% block footer %}
+<script src="{{ url_for('static', filename='js/category.js') }}"></script> {% endblock %} {% block footer %}
 <footer>
     <p><small>&copy; Copyright 2018 | No pay, No Play</small></p>
 </footer>

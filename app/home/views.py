@@ -57,3 +57,21 @@ def product(id):
         form.content.data = comment.content
         form.rating.data = comment.rating
     return render_template('home/product.html', product=product, form=form, user=current_user, rating=rating, title="Product")
+
+
+@home.route('/categories')
+def list_categories():
+    categories = []
+    p = 0
+    for category in Category.query.all():
+        categories.append([category.name, []])
+        for product in category.products:
+            categories[p][1].append(product)
+        p += 1
+    return render_template('home/categories.html',
+                           categories=categories, title="Categories")
+
+@home.route('/categories/<name>')
+def category(name):
+    category = Category.query.filter_by(name=name).first()
+    return render_template('home/category.html', category=category, title=category.name)

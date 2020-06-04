@@ -125,21 +125,6 @@ def list_codes():
                            listCodes=listCodes, title="Codes")
 
 
-@admin.route('/category')
-@login_required
-def list_categories():
-    check_admin()
-    listCategories = []
-    p = 0
-    for category in Category.query.all():
-        listCategories.append([category.name, []])
-        for product in category.products:
-            listCategories[p][1].append(product)
-        p += 1
-    return render_template('admin/categories/categories.html',
-                           listCategories=listCategories, title="Categories")
-
-
 @admin.route('/category/add', methods=['GET', 'POST'])
 @login_required
 def add_category():
@@ -154,7 +139,7 @@ def add_category():
             pass
         return redirect(url_for('admin.list_categories'))
 
-    return render_template('admin/categories/category.html', form=form,
+    return render_template('admin/categories/categoryAdd.html', form=form,
                            title="Add category")
 
 
@@ -183,3 +168,4 @@ def delete_category(id):
     db.session.commit()
     flash('You have successfully deleted the category.')
     return redirect(url_for('admin.list_categories'))
+

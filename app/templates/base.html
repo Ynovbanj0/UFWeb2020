@@ -22,7 +22,7 @@
                     <a class="" href="{{ url_for('home.homepage') }}">Home</a>
                 </li>
                 <li class="nav__item">
-                    <a class="" href="">Categories</a>
+                    <a class="" href="{{ url_for('home.list_categories') }}">Categories</a>
                 </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav__item">
@@ -43,7 +43,7 @@
                     <a class="" href="{{ url_for('home.homepage') }}">Home</a>
                 </li>
                 <li class="navItem2">
-                    <a class="" href="">Categories</a>
+                    <a class="" href="{{ url_for('home.list_categories') }}">Categories</a>
                 </li>
                 {% if current_user.is_authenticated %}
                 <li class="navItem3">

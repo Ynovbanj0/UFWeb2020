@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/categories.css') }}"> {% endblock %} {% block shop %}
+<div class="shopped">
+    <div class="shoppedLogo"></div>
+</div>
+<section class="card cardShop">
+    <div class="cardContainer">
+        <ul>
+            <li class="cardNumber">3 items</li>
+            <li class="total">123</li>
+        </ul>
+    </div>
+</section> {% endblock %}{% block body %}
+
+<div class="catMain">
+    {% for categorie in categories %}
+    <div class="cat" id="{{ categorie[0] }}" onclick="goToCat(this.id)">
+        {{ categorie[0] }}
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %} {% block script %}
+<script src="{{ url_for('static', filename='js/categories.js') }}"></script>
+{% endblock %} {% block footer %}
+<footer>
+    <p><small>&copy; Copyright 2018 | No pay, No Play</small></p>
+</footer>
+{% endblock %}

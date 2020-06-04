@@ -1,0 +1,40 @@
+body {
+    height: fit-content;
+}
+
+.catMain {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 80%;
+    width: 100%;
+    margin: 100px auto 0px auto;
+}
+
+.cat {
+    display: flex;
+    width: 80%;
+    height: 70px;
+    font-family: pacman;
+    font-size: 2em;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+    margin: 30px auto 30px auto;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    background-color: white;
+}
+
+.cat:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .catMain {
+        display: block;
+        margin: 150px auto 0px auto;
+    }
+}

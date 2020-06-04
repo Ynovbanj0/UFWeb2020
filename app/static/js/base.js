@@ -26,18 +26,19 @@ jQuery(function($) {
 
 
 $('.addToCard').click(function() {
-    var prodId = $('.addToCard').attr("id");
+    var prodId = $(this).attr("id");
     jQuery.ajax({
         type: 'GET',
         url: window.origin + '/addToCard' + '/' + prodId,
         dataType: 'JSON',
 
         success: function(code_html, statut) {
-            console.log("Well added to comments.");
+            console.log("Well added to Card.");
         },
 
         error: function(resultat, statut, erreur) {
-            console.log("Can not add it to comments.");
+            console.log("Can not add it to Card.");
+            console.log(erreur);
         },
         complete: function(resultat, statut) {
             document.location.reload(true);

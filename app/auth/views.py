@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template, url_for
+from flask import flash, abort, redirect, render_template, url_for
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
@@ -109,8 +109,8 @@ def add_address():
 @auth.route('/address/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_address(id):
-    check_user(id)
     address = Address.query.get_or_404(id)
+    check_user(address.user_id)
     form = AddressForm(obj=address)
     if form.validate_on_submit():
         address.address = form.address.data
@@ -131,8 +131,8 @@ def edit_address(id):
 @auth.route('/address/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_address(id):
-    check_user(id)
     address = Address.query.get_or_404(id)
+    check_user(address.user_id)
     db.session.delete(address)
     db.session.commit()
     flash('You have successfully deleted the address.')
@@ -142,8 +142,8 @@ def delete_address(id):
 @auth.route('/comment/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_comment(id):
-    check_user(id)
     comment = Comment.query.get_or_404(id)
+    check_user(address.user_id)
     form = CommentForm(obj=comment)
     if form.validate_on_submit():
         comment.content = form.content.data
@@ -160,8 +160,8 @@ def edit_comment(id):
 @auth.route('/comment/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_comment(id):
-    check_user(id)
     comment = Comment.query.get_or_404(id)
+    check_user(address.user_id)
     db.session.delete(comment)
     db.session.commit()
     flash('You have successfully deleted the comment.')

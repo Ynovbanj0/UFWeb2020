@@ -166,4 +166,24 @@ def delete_comment(id_com, id_prod):
     comment = Comment.query.get_or_404(id_com)
     db.session.delete(comment)
     db.session.commit()
-    return redirect(url_for('home.product/', id=id_prod))
+    return redirect(url_for('home.product', id=id_prod))
+
+
+@home.route('/card')
+@login_required
+def card():
+    card= []
+    for item in session['productsId']:
+        product = Product.query.filter_by(id=item).first()
+        card.append(product)
+    if 'total' in session :
+        total = session['total'] / 100
+    else :
+        session['total'] = 0
+    return render_template('/home/card.html', card=card, total=total, title="Card")
+
+@home.route('/gimmeYourBankAccount')
+@login_required
+def yumyum():
+    
+    return render_template('/home/yumyum.html', title="No Pay ?")

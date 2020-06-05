@@ -1,16 +1,5 @@
 {% extends "base.html" %} {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/categories.css') }}"> {% endblock %} {% block shop %}
-<div class="shopped">
-    <div class="shoppedLogo"></div>
-</div>
-<section class="card cardShop">
-    <div class="cardContainer">
-        <ul>
-            <li class="cardNumber">{{ session['nbItem'] }} items</li>
-            <li class="total">{{ session['total'] / 100 }} $</li>
-        </ul>
-    </div>
-</section> {% endblock %}{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/categories.css') }}"> {% endblock %} {% block shop %} {% include "shopCard.html" %} {% endblock %}{% block body %}
 
 <div class="catMain">
     {% for category in categories %}

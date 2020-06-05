@@ -1,0 +1,32 @@
+{% extends "base.html" %}{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shopCard.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> {% endblock %} {% block title %}Card{% endblock %} {% block body %}
+<div class="cardTitle">You'r Card</div>
+<div class="main">
+    {% for product in card %}
+    <div class="parts">
+        <div class="imgCard" style="background-image: url({{product.image}})" id="{{product.id}}"></div>
+        <div class="card cardProd">
+            <h5 class="card-header">{{product.name}}</h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <p>{{product.price}}$</p>
+                    {% if product.rating != none %}
+                    <p>Rating : {{product.rating}}/5</p>
+                    {% else %}
+                    <p>Not rated yet !</p>
+                    {% endif %}
+                </h5>
+                <p class="card-text">{{product.description}}</p>
+                <div class="cardDelBtn">Delete from card</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="totalCard">
+        <div class="totalItem">{{session['nbItem']}} items in your card</div>
+        <div class="totalCount">{{total}}$</div>
+    </div>
+    <div class="buy">Buy Now !</div>
+</div>
+{% endblock %}

@@ -11,261 +11,49 @@
         </ul>
     </div>
 </section> {% endblock %}{% block body %}
-
 <div class="container">
     <div class="newGames">
         New Games
     </div>
     <div class="newGamesContainer">
+        {% for product in newGames.products %}
         <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
+            <div class="elementImg" style="background-image: url({{ product.image }});">
+                {% if product.discount != 0 %}
+                <div class="promo">-{{ product.discount }}%</div>
+                {% endif %}
             </div>
             <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
+                <div class="elementTitle">{{ product.name }}</div>
                 <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
+                    <div class="price">{{ product.price }} e</div>
+                    <div class="addToCard" id="{{ product.id }}"></div>
                 </div>
             </div>
         </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-
-
-
 
     <div class="favorites">
         Best Sellers
     </div>
     <div class="newGamesContainer">
+        {% for product in favoriteGames.products %}
         <div class="nGelement">
-            <div class="elementImg ">
-                <div class="promo "></div>
+            <div class="elementImg" style="background-image: url({{ product.image }});">
+                {% if product.discount != 0 %}
+                <div class="promo">-{{ product.discount }}%</div>
+                {% endif %}
             </div>
             <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
+                <div class="elementTitle">{{ product.name }}</div>
                 <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
+                    <div class="price">{{ product.price }} e</div>
+                    <div class="addToCard" id="{{ product.id }}"></div>
                 </div>
             </div>
         </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
-        <div class="nGelement">
-            <div class="elementImg">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle ">No Pay, No Play</div>
-                <div class="elementPrice">
-                    <div class="price">9999 e</div>
-                    <div class="addToCard"></div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 

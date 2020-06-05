@@ -140,7 +140,7 @@ def add_category():
         db.session.add(category)
         db.session.commit()
         return redirect(url_for('admin.list_categories'))
-    return render_template('admin/categories/category.html', form=form,
+    return render_template('admin/category/category.html', form=form,
                            title="Add category")
 
 

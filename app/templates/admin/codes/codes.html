@@ -1,30 +1,52 @@
-{% import "bootstrap/utils.html" as utils %}
-{% extends "base.html" %}
-{% block body %}
+{% import "bootstrap/utils.html" as utils %} {% extends "base.html" %}{% block title %}Admin Codes{% endblock %} {% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminLists.css') }}"> {% endblock %} {% block body %}
 <div class="content-section">
-    <br />
     {{ utils.flashed_messages() }}
-    <br />
-    <div class="center">
-        <br><br><br><br><br>
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th width="20%"> Name </th>
-                    <th width="70%"> Price </th>
-                    <th width="10%"> Delete </th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for code in codes %}
-                <tr>
-                    <td> {{ code.product.name }} </td>
-                    <td> {{ code.code }} </td>
-                    <td><a href="{{ url_for('admin.delete_code', id=code.id) }}"><i class="fa fa-trash"></i> Delete </a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <section class="main">
+        <section class="leftSide">
+            <div class="colorProfil1"></div>
+            <div class="colorProfil11"></div>
+            <div class="colorProfil2"></div>
+            <div class="colorProfil22"></div>
+            <div class="colorProfil3"></div>
+            <div class="colorProfil33"></div>
+            <h1 class="leftTitle">Menu Profil</h1>
+            <ul class="listLeftMenu">
+                <li class="listLeftItem">
+                    <a href="{{ url_for('home.admin_dashboard') }}">Data</a></li>
+                <li class="listLeftItem">
+                    <a href="{{ url_for('admin.list_category') }}">Categories</a></li>
+                <li class="listLeftItem">
+                    <a href="{{ url_for('admin.list_products') }}">Products</a></li>
+                <li class="listLeftItem">
+                    <a href="{{ url_for('admin.list_codes') }}">Codes</a></li>
+            </ul>
+        </section>
+        <section class="rightSide">
+            <div class="center">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="20%"> Name </th>
+                            <th width="70%"> Price </th>
+                            <th width="10%"> Delete </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for code in codes %}
+                        <tr>
+                            <td> {{ code.product.name }} </td>
+                            <td> {{ code.code }} </td>
+                            <td><a href="{{ url_for('admin.delete_code', id=code.id) }}"><i class="fa fa-trash"></i> Delete </a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="addDiv">
+                <a class="addOne" href="{{ url_for('admin.add_code') }}">Add</a>
+            </div>
+        </section>
+    </section>
 </div>
 {% endblock %}

@@ -12,13 +12,13 @@
         <h1 class="leftTitle">Menu Profil</h1>
         <ul class="listLeftMenu">
             <li class="listLeftItem">
-                <a href="#persoInfo">Users</a></li>
+                <a href="{{ url_for('home.admin_dashboard') }}">Data</a></li>
             <li class="listLeftItem">
-                <a href="#address">Countries</a></li>
+                <a href="{{ url_for('admin.list_category') }}">Categories</a></li>
             <li class="listLeftItem">
-                <a href="#billing">Commands</a></li>
+                <a href="{{ url_for('admin.list_products') }}">Products</a></li>
             <li class="listLeftItem">
-                <a href="#age">Consumer's Sex</a></li>
+                <a href="{{ url_for('admin.list_codes') }}">Codes</a></li>
         </ul>
     </section>
     <section class="rightSide">

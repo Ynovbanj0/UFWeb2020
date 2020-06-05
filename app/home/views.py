@@ -1,6 +1,7 @@
 from flask import abort, render_template, session
 from flask_login import current_user, login_required
 from datetime import datetime
+from decimal import Decimal
 
 from . import home
 from .. import db
@@ -11,6 +12,7 @@ import json
 
 @home.route('/')
 def homepage():
+    # Code pour Panier
     if 'productsId' in session :
         nbItem = len(session['productsId'])
         session['nbItem'] = nbItem
@@ -21,7 +23,23 @@ def homepage():
         total = session['total'] / 100
     else :
         session['total'] = 0
-    return render_template('home/index.html', title="Welcome")
+    # Affichage des nouveaux jeux et des plus populaires avec un maximum de 10
+    newGames = Category.query.filter_by(name="New Games").first()
+    newGames.products.reverse()
+    if len(newGames.products) > 10 :
+        size = len(newGames.products)
+        while size > 10 :
+            newGames.products.pop()
+            size = len(newGames.products)
+    # Affichage des nouveaux jeux et des plus populaires avec un maximum de 10
+    favoriteGames = Category.query.filter_by(name="Favorites").first()
+    favoriteGames.products.reverse()
+    if len(favoriteGames.products) > 10 :
+        size2 = len(favoriteGames.products)
+        while size2 > 10 :
+            favoriteGames.products.pop()
+            size2 = len(favoriteGames.products)
+    return render_template('home/index.html', newGames=newGames, favoriteGames=favoriteGames, title="Welcome")
 
 
 @home.route('/dashboard')

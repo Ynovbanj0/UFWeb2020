@@ -50,6 +50,16 @@ def add_cart(id):
 
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):
+    if 'productsId' in session :
+        nbItem = len(session['productsId'])
+        session['nbItem'] = nbItem
+    else :
+        session['productsId'] = []
+        session['nbItem'] = 0
+    if 'total' in session :
+        total = session['total'] / 100
+    else :
+        session['total'] = 0
     product = Product.query.get_or_404(id)
     comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0

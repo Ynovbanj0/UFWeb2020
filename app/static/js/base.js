@@ -1,7 +1,3 @@
-function signIn() {
-    $('.signInSection').css('display') === "none" ? $('.signInSection').css('display', "flex") : $('.signInSection').css('display', "none");
-}
-
 jQuery(function($) {
     $('.header-nav__wrapper').on('click', function() {
         $('.nav--responsive').toggleClass("nav--responsive__active", true).toggleClass("nav--responsive", false);
@@ -44,4 +40,10 @@ $('.addToCard').click(function() {
             document.location.reload(true);
         }
     });
+});
+
+$('.nGelement').click(function() {
+    var prodId = $(this).attr("id");
+    var url = window.origin + '/product' + '/' + prodId
+    window.location.replace(url);
 });

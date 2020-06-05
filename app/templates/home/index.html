@@ -17,7 +17,7 @@
     </div>
     <div class="newGamesContainer">
         {% for product in newGames.products %}
-        <div class="nGelement">
+        <div class="nGelement" id="{{ product.id }}">
             <div class="elementImg" style="background-image: url({{ product.image }});">
                 {% if product.discount != 0 %}
                 <div class="promo">-{{ product.discount }}%</div>
@@ -39,7 +39,7 @@
     </div>
     <div class="newGamesContainer">
         {% for product in favoriteGames.products %}
-        <div class="nGelement">
+        <div class="nGelement" id="{{ product.id }}">
             <div class="elementImg" style="background-image: url({{ product.image }});">
                 {% if product.discount != 0 %}
                 <div class="promo">-{{ product.discount }}%</div>

@@ -138,6 +138,14 @@ body {
     font-weight: 700;
 }
 
+.delComm {
+    margin-top: 30px;
+}
+
+.delComm>a {
+    color: red;
+}
+
 
 /* Responsiv */
 

@@ -62,6 +62,11 @@
                 <div class="commContent ">
                     {{ comment.content }}
                 </div>
+                {% if current_user.is_admin %}
+                <div class='delComm'>
+                    <a href="{{ url_for('auth.delete_comment', id=comment.id) }}">Delete </a>
+                </div>
+                {% endif %}
             </div>
 
             {% endfor %}

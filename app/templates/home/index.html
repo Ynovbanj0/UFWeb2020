@@ -12,11 +12,11 @@
     </div>
 </section> {% endblock %}{% block body %}
 <div class="container">
-    <div class="newGames">
+    <div class="newProducts">
         New Games
     </div>
-    <div class="newGamesContainer">
-        {% for product in newGames.products %}
+    <div class="newProductsContainer">
+        {% for product in newProducts %}
         <div class="nGelement">
             <div class="elementImg" style="background-image: url({{ product.image }});">
                 {% if product.discount != 0 %}
@@ -37,8 +37,8 @@
     <div class="favorites">
         Best Sellers
     </div>
-    <div class="newGamesContainer">
-        {% for product in favoriteGames.products %}
+    <div class="newProductsContainer">
+        {% for product in newProducts %}
         <div class="nGelement">
             <div class="elementImg" style="background-image: url({{ product.image }});">
                 {% if product.discount != 0 %}

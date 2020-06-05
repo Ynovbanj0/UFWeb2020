@@ -59,9 +59,6 @@ def logout():
 @login_required
 def profil():
     user = User.query.get_or_404(current_user.id)
-    addresses = Address.query.filter_by(user_id=current_user.id).all()
-    comments = Comment.query.filter_by(user_id=current_user.id).all()
-    print(current_user.id)
     form_ed = EditForm(obj=user)
     if form_ed.validate_on_submit():
         if User.query.filter_by(email=form_ed.email.data).first() and User.query.filter_by(username=form_ed.username.data).first():
@@ -85,7 +82,7 @@ def profil():
             user.birthdate = form_ed.birthdate.data
             db.session.commit()
             flash('You have successfully edited the profil.')
-    return render_template('auth/profil.html', form_ed=form_ed, addresses=addresses, comments=comments,
+    return render_template('auth/profil.html', form_ed=form_ed, user=user,
                            title="Profil")
 
 

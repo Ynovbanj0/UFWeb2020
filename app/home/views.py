@@ -1,4 +1,4 @@
-from flask import abort, render_template, session
+from flask import abort, render_template, session, redirect, url_for
 from flask_login import current_user, login_required
 from datetime import datetime
 from decimal import Decimal
@@ -23,23 +23,9 @@ def homepage():
         total = session['total'] / 100
     else :
         session['total'] = 0
-    # Affichage des nouveaux jeux et des plus populaires avec un maximum de 10
-    newGames = Category.query.filter_by(name="New Games").first()
-    newGames.products.reverse()
-    if len(newGames.products) > 10 :
-        size = len(newGames.products)
-        while size > 10 :
-            newGames.products.pop()
-            size = len(newGames.products)
-    # Affichage des nouveaux jeux et des plus populaires avec un maximum de 10
-    favoriteGames = Category.query.filter_by(name="Favorites").first()
-    favoriteGames.products.reverse()
-    if len(favoriteGames.products) > 10 :
-        size2 = len(favoriteGames.products)
-        while size2 > 10 :
-            favoriteGames.products.pop()
-            size2 = len(favoriteGames.products)
-    return render_template('home/index.html', newGames=newGames, favoriteGames=favoriteGames, title="Welcome")
+    newProducts = Product.query.order_by(Product.id.desc()).limit(10)
+    favoriteProducts = Product.query.filter_by(name="Favorites").first() #COMING SOON
+    return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, title="Welcome")
 
 
 @home.route('/dashboard')
@@ -53,7 +39,7 @@ def dashboard():
 def admin_dashboard():
     if not current_user.is_admin:
         abort(403)
-    return render_template('home/admin_dashboard.html', title="Dashboard")
+    return render_template('admin/admin_dashboard.html', title="Dashboard")
 
 
 @home.route('/cart/add/<int:id>', methods=['GET', 'POST'])
@@ -65,6 +51,7 @@ def add_cart(id):
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):
     product = Product.query.get_or_404(id)
+    comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0
     count = 0
     for comment in product.comments:
@@ -76,7 +63,7 @@ def product(id):
         rating = 0
     form = CommentForm()
     if form.validate_on_submit():
-        if Comment.query.filter_by(user_id=current_user.id).first():
+        if Comment.query.filter_by(user_id=current_user.id).filter_by(product_id=id).first():
             comment.content = form.content.data
             comment.rating = form.rating.data
             product.rating = rating
@@ -159,3 +146,14 @@ def addToCard(id):
         session['productsId'] = tempProdId
     message = '{ "message":"Card Updated" }'
     return "json.loads(message)"
+
+
+@home.route('/comment/delete/<int:id_com>/<int:id_prod>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(id_com, id_prod):
+    if not current_user.is_admin:
+        abort(403)
+    comment = Comment.query.get_or_404(id_com)
+    db.session.delete(comment)
+    db.session.commit()
+    return redirect(url_for('home.product/', id=id_prod))

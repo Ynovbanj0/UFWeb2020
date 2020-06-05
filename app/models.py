@@ -20,6 +20,13 @@ categories_products = db.Table('categories_products',
                                    'products.id'), primary_key=True)
                                )
 
+purchases_products = db.Table('purchases_products',
+                               db.Column('purchase_id', db.Integer, db.ForeignKey(
+                                   'purchases.id'), primary_key=True),
+                               db.Column('product_id', db.Integer, db.ForeignKey(
+                                   'products.id'), primary_key=True)
+                               )
+
 
 class Category(db.Model):
     __tablename__ = "categories"
@@ -73,6 +80,9 @@ class Product(db.Model):
     categories = db.relationship('Category',
                                  secondary=categories_products, lazy='subquery',
                                  back_populates="products")
+    purchases = db.relationship('Purchase',
+                                 secondary=purchases_products, lazy='subquery',
+                                 back_populates="products")
 
     def __repr__(self):
         return '<Product: {}, {}>'.format(self.name, self.description)
@@ -87,6 +97,9 @@ class Purchase(db.Model):
     code = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    products = db.relationship('Product',
+                               secondary=purchases_products, lazy='subquery',
+                               back_populates="purchases")
 
     def __repr__(self):
         return '<Purchase: {}, {}>'.format(self.name, self.price)
@@ -106,7 +119,7 @@ class User(UserMixin, db.Model):
                                lazy='dynamic')
     purchases = db.relationship('Purchase', backref='user',
                                 lazy='dynamic')
-    address = db.relationship("Address")
+    addresses = db.relationship("Address")
     
     @property
     def password(self):

@@ -128,7 +128,7 @@ def edit_address(id):
                            title="Edit Address")
 
 
-@auth.route('/address/delete/<int:id>', methods=['GET', 'POST'])
+@auth.route('/address/delete/<int:id>')
 @login_required
 def delete_address(id):
     address = Address.query.get_or_404(id)
@@ -157,7 +157,7 @@ def edit_comment(id):
                            title="Edit Comment")
 
 
-@auth.route('/comment/delete/<int:id>', methods=['GET', 'POST'])
+@auth.route('/comment/delete/<int:id>')
 @login_required
 def delete_comment(id):
     comment = Comment.query.get_or_404(id)
@@ -171,12 +171,13 @@ def delete_comment(id):
 @auth.route('/purchase')
 @login_required
 def purchase():
-    purchase = Purchase(price= int(session['total']) / 100,
-                        date = datetime.now(),
-                        user_id = current_user.id)
+    purchase = Purchase(price=int(session['total']) / 100,
+                        date=datetime.now(),
+                        user_id=current_user.id)
     db.session.add(purchase)
     for id in session['productsId']:
-        purchase.codes.append(Code.query.filter_by(product_id=id).filter_by(purchase_id=None).first())
+        purchase.codes.append(Code.query.filter_by(
+            product_id=id).filter_by(purchase_id=None).first())
         purchase.products.append(Product.query.filter_by(id=id).first())
         db.session.commit()
     # Send mail to User with purchase

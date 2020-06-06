@@ -23,7 +23,11 @@
             </div>
         </div>
         <div class="addDiv">
-            <div class="addOne addToCard" id="{{ product.id }}">Add to your cart</div>
+            {% if available %}
+                <div class="addOne addToCard" id="{{ product.id }}">Add to your cart</div>
+            {% else %}
+                <div>Out Of Stock :/</div>
+            {% endif %}
         </div>
         {% if current_user.id %}
         <div class="commentForm ">

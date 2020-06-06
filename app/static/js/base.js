@@ -19,8 +19,6 @@ jQuery(function($) {
     });
 })
 
-
-
 $('.addToCard').click(function() {
     var prodId = $(this).attr("id");
     jQuery.ajax({

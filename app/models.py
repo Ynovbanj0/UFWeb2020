@@ -46,6 +46,7 @@ class Code(db.Model):
     code = db.Column(db.String(50), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     purchase_id = db.Column(db.Integer, db.ForeignKey('purchases.id'))
+    
     def __repr__(self):
         return "<Code: {}>".format(self.code)
 

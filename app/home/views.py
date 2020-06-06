@@ -23,6 +23,7 @@ def homepage():
         total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
     favoriteProducts = Product.query.filter_by(name="Favorites").first() #COMING SOON
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
@@ -60,6 +61,7 @@ def product(id):
         total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     product = Product.query.get_or_404(id)
     comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0
@@ -110,6 +112,7 @@ def list_category():
         total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     return render_template('home/category/categories.html',
                            categories=categories, total=total, title="Categories")
 
@@ -127,6 +130,7 @@ def category(name):
         total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     return render_template('home/category/category.html', 
                            category=category, total=total, title=category.name)
 
@@ -181,6 +185,7 @@ def card():
         total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     return render_template('/home/card.html', card=card, total=total, title="Card")
 
 @home.route('/deleteCard/<int:id>')

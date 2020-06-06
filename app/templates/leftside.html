@@ -1,0 +1,41 @@
+<section class="leftSide">
+  <div class="colorProfil1"></div>
+  <div class="colorProfil11"></div>
+  <div class="colorProfil2"></div>
+  <div class="colorProfil22"></div>
+  <div class="colorProfil3"></div>
+  <div class="colorProfil33"></div>
+  {% if "admin" in request.path %}
+  <h1 class="leftTitle">Menu Profil</h1>
+  <ul class="listLeftMenu">
+    <li class="listLeftItem">
+      <a href="{{ url_for('home.admin_dashboard') }}">Data</a></li>
+    <li class="listLeftItem">
+      <a href="{{ url_for('admin.list_category') }}">Categories</a></li>
+    <li class="listLeftItem">
+      <a href="{{ url_for('admin.list_product') }}">Products</a></li>
+    <li class="listLeftItem">
+      <a href="{{ url_for('admin.list_code') }}">Codes</a></li>
+    <li class="listLeftItem">
+      <a href="{{ url_for('admin.list_user') }}">Users</a></li>
+  </ul>
+  {% else %}
+  <h1 class="leftTitle">Menu Profil</h1>
+  <ul class="listLeftMenu">
+    <li class="listLeftItem">
+      <a href="#persoInfo">Personal Informations</a></li>
+    <li class="listLeftItem">
+      <a href="#address">Address</a></li>
+    <li class="listLeftItem">
+      <a href="#commands">Purchases</a></li>
+    <li class="listLeftItem">
+      <a href="#comments">Comments</a></li>
+    {% if current_user.is_admin %}
+    <li class="listLeftItem">
+      <a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></li>
+    {% endif %}
+    <li class="listLeftItem">
+      <a class="unsign" href="{{ url_for('auth.logout') }}">Logout</a></li>
+  </ul>
+  {% endif %}
+</section>

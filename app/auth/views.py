@@ -166,32 +166,19 @@ def delete_comment(id):
     flash('You have successfully deleted the comment.')
     return redirect(url_for('auth.profil'))
 
-@auth.route('/lastStep')
+
+@auth.route('/purchase/add', methods=['GET', 'POST'])
 @login_required
-def last_step():
-    return render_template('auth/lastStep.html', title="Last Step")
-
-# @auth.route('/printToPDF')
-# @login_required
-# def print_pdf():
-#     card= []
-#     for item in session['productsId']:
-#         product = Product.query.filter_by(id=item).first()
-#         card.append(product)
-#     if 'total' in session :
-#         total = int(session['total']) / 100
-#     else :
-#         session['total'] = 0
-#         total = 0
-#     # We rendre the template
-#     rendered = render_template('auth/cardToPDF.html', card=card, total=total)
-#     #converting to pdf
-#     pdf = pdfkit.from_string(rendered, False)
-#     # Custumizing headers to gice good infos to navigator
-#     response = make_response(pdf)
-#     # Specifying content type and content disposition (wich tells the navigator the way to display it: 'inline' is in a tab or 'attachment' makes it downloaded directly)
-#     response.headers['Content-Type'] = 'application/pdf'
-#     response.headers['Content-Disposition'] = 'inline; filename=MyGreatOrder.pdf'
-
-#     return response
+def add_purchase():
+    form = PurchaseForm()
+    if form.validate_on_submit():
+        purchase = Purchase(purchase=form.purchase.data,
+                          city=form.city.data,
+                          postal=form.postal.data,
+                          country=form.country.data,
+                          user_id=current_user.id)
+        db.session.add(purchase)
+        db.session.commit()
+        return redirect(url_for('auth.profil'))
+    return redirect(url_for('auth.profil'))
 

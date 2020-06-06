@@ -1,5 +1,9 @@
+body {
+    height: fit-content;
+}
+
 .main {
-    margin: 50px 10%;
+    margin: 60px 10%;
     background-color: rgba(255, 255, 255, 0.534);
     border: 1px solid black;
     box-shadow: 0px 0px 3px black;
@@ -90,6 +94,7 @@
     background-color: #D1140F;
     color: white;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .totalCard {

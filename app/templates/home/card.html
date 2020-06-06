@@ -18,7 +18,7 @@
                     {% endif %}
                 </h5>
                 <p class="card-text">{{product.description}}</p>
-                <div class="cardDelBtn">Delete from card</div>
+                <div class="cardDelBtn" id="{{ product.id }}">Delete from card</div>
             </div>
         </div>
     </div>
@@ -27,6 +27,12 @@
         <div class="totalItem">{{session['nbItem']}} items in your card</div>
         <div class="totalCount">{{total}}$</div>
     </div>
+    {% if total != 0 %}
     <div class="buy">Buy Now !</div>
+    {% endif %}
 </div>
+{% endblock %} {% block footer %}
+<footer>
+    <p><small>&copy; Copyright 2018 | No pay, No Play</small></p>
+</footer>
 {% endblock %}

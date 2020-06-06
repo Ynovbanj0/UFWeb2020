@@ -3,8 +3,8 @@
 <div class="container">
     <div class="gamesContainer">
         {% for product in category.products %}
-        <div class="nGelement" id="{{ product.id }}">
-            <div class="elementImg" style="background-image: url({{ product.image }});">
+        <div class="nGelement">
+            <div class="elementImg" style="background-image: url({{ product.image }});" id="{{ product.id }}">
                 <div class="promo">-40%</div>
             </div>
             <div class="elementInfo ">

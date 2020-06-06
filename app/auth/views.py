@@ -1,5 +1,6 @@
 from flask import flash, abort, redirect, render_template, url_for, session
 from flask_login import login_required, login_user, logout_user, current_user
+from flask_mail import Mail, Message
 
 from . import auth
 from .forms import LoginForm, RegistrationForm, AddressForm, EditForm, CommentForm
@@ -167,7 +168,7 @@ def delete_comment(id):
     return redirect(url_for('auth.profil'))
 
 
-@auth.route('/purchase', methods=['GET', 'POST'])
+@auth.route('/purchase')
 @login_required
 def purchase():
     purchase = Purchase(price= int(session['total']) / 100,
@@ -178,4 +179,7 @@ def purchase():
         purchase.codes.append(Code.query.filter_by(product_id=id).filter_by(purchase_id=None).first())
         purchase.products.append(Product.query.filter_by(id=id).first())
         db.session.commit()
+    # Send mail to User with purchase
+    msg = Message('You\'r purchase(s) at No Play No Play !', recipients=[current_user.email])
+    mail.send(msg)
     return redirect(url_for('auth.profil'))

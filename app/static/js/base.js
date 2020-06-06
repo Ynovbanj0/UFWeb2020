@@ -40,9 +40,3 @@ $('.addToCard').click(function() {
         }
     });
 });
-
-$('.elementImg').click(function() {
-    var prodId = $(this).attr("id");
-    var url = window.origin + '/product' + '/' + prodId
-    window.location.replace(url);
-});

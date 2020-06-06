@@ -9,6 +9,7 @@ from datetime import datetime
 
 import json
 
+
 def check_user(id):
     if id != current_user.id:
         abort(403)
@@ -163,5 +164,21 @@ def delete_comment(id):
     db.session.delete(comment)
     db.session.commit()
     flash('You have successfully deleted the comment.')
+    return redirect(url_for('auth.profil'))
+
+
+@auth.route('/purchase/add', methods=['GET', 'POST'])
+@login_required
+def add_purchase():
+    form = PurchaseForm()
+    if form.validate_on_submit():
+        purchase = Purchase(purchase=form.purchase.data,
+                          city=form.city.data,
+                          postal=form.postal.data,
+                          country=form.country.data,
+                          user_id=current_user.id)
+        db.session.add(purchase)
+        db.session.commit()
+        return redirect(url_for('auth.profil'))
     return redirect(url_for('auth.profil'))
 

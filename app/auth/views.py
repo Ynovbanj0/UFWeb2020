@@ -1,10 +1,10 @@
-from flask import flash, abort, redirect, render_template, url_for
+from flask import flash, abort, redirect, render_template, url_for, session
 from flask_login import login_required, login_user, logout_user, current_user
 
 from . import auth
 from .forms import LoginForm, RegistrationForm, AddressForm, EditForm, CommentForm
 from .. import db
-from ..models import User, Address, Comment
+from ..models import User, Address, Comment, Code, Purchase, Product
 from datetime import datetime
 
 import json
@@ -167,18 +167,15 @@ def delete_comment(id):
     return redirect(url_for('auth.profil'))
 
 
-@auth.route('/purchase/add', methods=['GET', 'POST'])
+@auth.route('/purchase', methods=['GET', 'POST'])
 @login_required
-def add_purchase():
-    form = PurchaseForm()
-    if form.validate_on_submit():
-        purchase = Purchase(purchase=form.purchase.data,
-                          city=form.city.data,
-                          postal=form.postal.data,
-                          country=form.country.data,
-                          user_id=current_user.id)
-        db.session.add(purchase)
+def purchase():
+    purchase = Purchase(price= int(session['total']) / 100,
+                        date = datetime.now(),
+                        user_id = current_user.id)
+    db.session.add(purchase)
+    for id in session['productsId']:
+        purchase.codes.append(Code.query.filter_by(product_id=id).filter_by(purchase_id=None).first())
+        purchase.products.append(Product.query.filter_by(id=id).first())
         db.session.commit()
-        return redirect(url_for('auth.profil'))
     return redirect(url_for('auth.profil'))
-

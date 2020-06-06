@@ -45,7 +45,7 @@ class Code(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(50), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
-
+    purchase_id = db.Column(db.Integer, db.ForeignKey('purchases.id'))
     def __repr__(self):
         return "<Code: {}>".format(self.code)
 
@@ -91,15 +91,13 @@ class Product(db.Model):
 class Purchase(db.Model):
     __tablename__ = 'purchases'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
     price = db.Column(db.Numeric(5, 2), nullable=False)
     date = db.Column(db.DateTime, nullable=False)
-    code = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     products = db.relationship('Product',
                                secondary=purchases_products, lazy='subquery',
                                back_populates="purchases")
+    codes = db.relationship("Code")
 
     def __repr__(self):
         return '<Purchase: {}, {}>'.format(self.name, self.price)

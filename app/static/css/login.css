@@ -38,6 +38,21 @@
     border: 1px solid black;
     justify-content: center;
     transition: 0.3s;
+    margin-bottom: 100px;
+}
+
+.btn {
+    background-color: #7B24D1;
+    color: white;
+    border: 1px solid black;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: rgb(50, 15, 85);
+    color: white;
+    transform: scale(1.2);
+    transition: 0.3s;
 }
 
 .registerBtn:hover {

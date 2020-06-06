@@ -26,7 +26,6 @@ $('.addToCard').click(function() {
     jQuery.ajax({
         type: 'GET',
         url: window.origin + '/addToCard' + '/' + prodId,
-        dataType: 'JSON',
 
         success: function(code_html, statut) {
             console.log("Well added to Card.");
@@ -42,7 +41,7 @@ $('.addToCard').click(function() {
     });
 });
 
-$('.nGelement').click(function() {
+$('.elementImg').click(function() {
     var prodId = $(this).attr("id");
     var url = window.origin + '/product' + '/' + prodId
     window.location.replace(url);

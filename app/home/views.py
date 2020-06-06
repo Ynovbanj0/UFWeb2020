@@ -20,12 +20,13 @@ def homepage():
         session['productsId'] = []
         session['nbItem'] = 0
     if 'total' in session :
-        total = session['total'] / 100
+        total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
     favoriteProducts = Product.query.filter_by(name="Favorites").first() #COMING SOON
-    return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, title="Welcome")
+    return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
 
 
 @home.route('/dashboard')
@@ -57,9 +58,10 @@ def product(id):
         session['productsId'] = []
         session['nbItem'] = 0
     if 'total' in session :
-        total = session['total'] / 100
+        total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     product = Product.query.get_or_404(id)
     comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0
@@ -94,7 +96,7 @@ def product(id):
     if user_comment:
         form.content.data = user_comment.content
         form.rating.data = user_comment.rating
-    return render_template('home/product/product.html', product=product, form=form, user=current_user, rating=rating, title="Product")
+    return render_template('home/product/product.html', product=product, form=form, user=current_user, rating=rating, total=total, title="Product")
 
 
 @home.route('/categories')
@@ -107,11 +109,12 @@ def list_category():
         session['productsId'] = []
         session['nbItem'] = 0
     if 'total' in session :
-        total = session['total'] / 100
+        total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     return render_template('home/category/categories.html',
-                           categories=categories, title="Categories")
+                           categories=categories, total=total, title="Categories")
 
 
 @home.route('/category/<name>')
@@ -124,11 +127,12 @@ def category(name):
         session['productsId'] = []
         session['nbItem'] = 0
     if 'total' in session :
-        total = session['total'] / 100
+        total = int(session['total']) / 100
     else :
         session['total'] = 0
+        total = 0
     return render_template('home/category/category.html', 
-                           category=category, title=category.name)
+                           category=category, total=total, title=category.name)
 
 
 @home.route('/addToCard/<int:id>')
@@ -140,7 +144,8 @@ def addToCard(id):
     productPrice = int(product.price * 100)
     # On créer un total a update en vérifiant que session['total'] existe sinon set a 0
     if session['total'] != None :
-        session['total'] = session['total'] + productPrice
+        total = int(session['total']) + productPrice
+        session['total'] = str(total)
     else :
         session['total'] = 0
         session['total'] = session['total'] + productPrice
@@ -166,4 +171,42 @@ def delete_comment(id_com, id_prod):
     comment = Comment.query.get_or_404(id_com)
     db.session.delete(comment)
     db.session.commit()
-    return redirect(url_for('category', id=id_prod))
+    return redirect(url_for('home.product', id=id_prod))
+
+
+@home.route('/card')
+@login_required
+def card():
+    card= []
+    for item in session['productsId']:
+        product = Product.query.filter_by(id=item).first()
+        card.append(product)
+    if 'total' in session :
+        total = int(session['total']) / 100
+    else :
+        session['total'] = 0
+        total = 0
+    return render_template('/home/card.html', card=card, total=total, title="Card")
+
+@home.route('/deleteCard/<int:id>')
+def deleteFromCard(id):
+    # we get the product into databse
+    product = Product.query.filter_by(id=id).first()
+    # We find he's index in the list
+    index = session['productsId'].index(id)
+    # we delete it from the list
+    session['productsId'].pop(index)
+    # update the total of card
+    tempTotal = int(session['total']) - int(product.price * 100)
+    session['total'] = str(tempTotal)
+    # update the number of articles in the card
+    tempNumber = int(session['nbItem']) - 1
+    session['nbItem'] = str(tempNumber)
+    message = '{ "message":"Card Updated" }'
+    return "json.loads(message)"
+
+
+@home.route('/gimmeYourBankAccount')
+@login_required
+def yumyum():
+    return render_template('/home/yumyum.html', title="No Pay ?")

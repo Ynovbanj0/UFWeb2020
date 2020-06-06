@@ -2,27 +2,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}"> {% endblock %} {% block body %}
 
 <section class="main">
-    <section class="leftSide">
-        <div class="colorProfil1"></div>
-        <div class="colorProfil11"></div>
-        <div class="colorProfil2"></div>
-        <div class="colorProfil22"></div>
-        <div class="colorProfil3"></div>
-        <div class="colorProfil33"></div>
-        <h1 class="leftTitle">Menu Profil</h1>
-        <ul class="listLeftMenu">
-            <li class="listLeftItem">
-                <a href="{{ url_for('home.admin_dashboard') }}">Data</a></li>
-            <li class="listLeftItem">
-                <a href="{{ url_for('admin.list_category') }}">Categories</a></li>
-            <li class="listLeftItem">
-                <a href="{{ url_for('admin.list_product') }}">Products</a></li>
-            <li class="listLeftItem">
-                <a href="{{ url_for('admin.list_code') }}">Codes</a></li>
-            <li class="listLeftItem">
-                <a href="{{ url_for('admin.list_user') }}">Users</a></li>
-        </ul>
-    </section>
+    {% include  "leftside.html" %}
     <section class="rightSide">
         <div id="persoInfo"></div>
         <div class="persoInfo">

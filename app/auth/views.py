@@ -7,6 +7,7 @@ from .. import db
 from ..models import User, Address, Comment
 from datetime import datetime
 
+import json
 
 def check_user(id):
     if id != current_user.id:
@@ -163,3 +164,4 @@ def delete_comment(id):
     db.session.commit()
     flash('You have successfully deleted the comment.')
     return redirect(url_for('auth.profil'))
+

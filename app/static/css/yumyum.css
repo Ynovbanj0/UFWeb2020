@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("https://media.giphy.com/media/3o8dFzIXb0qaE3pYWs/giphy.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.out {
+    display: flex;
+    height: 10%;
+    width: 30%;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 3px black;
+    transition: 0.3s;
+}
+
+.out:hover {
+    transition: 0.3s;
+    transform: scale(1.5);
+    cursor: pointer;
+}

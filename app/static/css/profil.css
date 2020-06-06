@@ -196,6 +196,52 @@ h2 {
     margin: auto;
 }
 
+.control-label {
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
+
+.btn {
+    background-color: #7B24D1;
+    color: white;
+    border: 1px solid black;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: rgb(50, 15, 85);
+    color: white;
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+.address {
+    background-color: #7B24D1;
+    border: 1px solid black;
+    box-shadow: 0 0 3px black;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 50px;
+    transition: 0.3s;
+}
+
+.address>a {
+    color: white;
+}
+
+.address:hover {
+    background-color: rgb(50, 15, 85);
+    color: white;
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+.table {
+    background-color: white;
+}
+
 @media screen and (max-width: 1200px) {
     .inputPerso {
         width: 50%;

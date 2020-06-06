@@ -1,0 +1,16 @@
+.errorMess {
+    background-color: white;
+    width: 50%;
+    margin: auto;
+    margin-top: 15%;
+    padding: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 3px black;
+}
+
+@media screen and (max-width: 450px) {
+    .errorMess {
+        padding: 10px;
+    }
+}

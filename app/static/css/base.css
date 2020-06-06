@@ -219,18 +219,21 @@ a:hover {
 .searchIcon {
     height: 100%;
     width: 100%;
-    background-image: url(../img/searchG.png);
+    background-image: url(../img/searchW.png);
     background-position: center;
     background-size: cover;
+    transition: 0.2s;
 }
 
 .btnSearch:hover {
     transform: scale(1.2);
+    box-shadow: 0 0 3px black;
+    transition: 0.2s;
 }
 
 .btnSearch:hover>.searchIcon {
-    background-image: url(../img/searchW.png);
     transform: scale(1.3);
+    transition: 0.2s;
 }
 
 .inputSearch {

@@ -150,8 +150,19 @@ def delete_comment(id_com, id_prod):
 @home.route('/card')
 @login_required
 def card():
+    card = []
     total= checksession()
-    card= []
+    index = 0
+    if 'productsId' in session :
+        nbItem = len(session['productsId'])
+    else :
+        session['productsId'] = []
+        nbItem = 0
+    while index < nbItem :
+        tempProd = session['productsId'][index]
+        product = Product.query.filter_by(id=tempProd).first()
+        card.append(product)
+        index += 1
     return render_template('/home/card.html', card=card, total=total, title="Card")
 
 @home.route('/deleteCard/<int:id>')

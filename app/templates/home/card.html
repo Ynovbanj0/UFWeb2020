@@ -1,11 +1,14 @@
 {% extends "base.html" %}{% block links %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/shopCard.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> {% endblock %} {% block title %}Card{% endblock %} {% block body %}
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> {% endblock %}
+{% block title %}Card{% endblock %} {% block body %}
 <div class="cardTitle">You'r Card</div>
 <div class="main">
     {% for product in card %}
     <div class="parts">
+        <a href="{{ url_for('home.product', id=product.id) }}">
         <div class="imgCard" style="background-image: url({{product.image}})" id="{{product.id}}"></div>
+        </a>
         <div class="card cardProd">
             <h5 class="card-header">{{product.name}}</h5>
             <div class="card-body">
@@ -28,7 +31,9 @@
         <div class="totalCount">{{total}}$</div>
     </div>
     {% if total != 0 %}
+    <a href="{{ url_for('home.yumyum') }}">
     <div class="buy">Buy Now !</div>
+    </a>
     {% endif %}
 </div>
 {% endblock %} {% block footer %}

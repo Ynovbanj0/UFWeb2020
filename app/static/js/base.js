@@ -19,8 +19,6 @@ jQuery(function($) {
     });
 })
 
-
-
 $('.addToCard').click(function() {
     var prodId = $(this).attr("id");
     jQuery.ajax({
@@ -39,10 +37,4 @@ $('.addToCard').click(function() {
             document.location.reload(true);
         }
     });
-});
-
-$('.elementImg').click(function() {
-    var prodId = $(this).attr("id");
-    var url = window.origin + '/product' + '/' + prodId
-    window.location.replace(url);
 });

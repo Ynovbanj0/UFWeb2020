@@ -1,19 +1,22 @@
 {% extends "base.html" %} {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}"> {% endblock %} {% block shop %} {% include "shopCard.html" %} {% endblock %}{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}"> {% endblock %} {% block shop %}
+{% include "shopCard.html" %} {% endblock %}{% block body %}
 <div class="container">
     <div class="gamesContainer">
         {% for product in category.products %}
-        <div class="nGelement" id="{{ product.id }}">
-            <div class="elementImg" style="background-image: url({{ product.image }});">
-                <div class="promo">-40%</div>
-            </div>
-            <div class="elementInfo ">
-                <div class="elementTitle">{{ product.name }}</div>
-                <div class="elementPrice">
-                    <div class="price">{{ product.price }} e</div>
-                    <div class="addToCard" id="{{ product.id }}"></div>
+        <div class="nGelement">
+            <a href="{{ url_for('home.product', id=product.id) }}">
+                <div class="elementImg" style="background-image: url({{ product.image }});">
+                    <div class="promo">-40%</div>
                 </div>
-            </div>
+                <div class="elementInfo ">
+                    <div class="elementTitle">{{ product.name }}</div>
+                    <div class="elementPrice">
+                        <div class="price">{{ product.price }} e</div>
+                        <div class="addToCard" id="{{ product.id }}"></div>
+                    </div>
+                </div>
+            </a>
         </div>
         {% endfor %}
     </div>

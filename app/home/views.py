@@ -31,13 +31,6 @@ def homepage():
     favoriteProducts = Product.query.filter_by(name="Favorites").first() #COMING SOON
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
 
-
-@home.route('/dashboard')
-@login_required
-def dashboard():
-    return render_template('home/dashboard.html', title="Dashboard")
-
-
 @home.route('/admin/dashboard')
 @login_required
 def admin_dashboard():
@@ -46,17 +39,12 @@ def admin_dashboard():
     return render_template('admin/admin_dashboard.html', title="Dashboard")
 
 
-@home.route('/cart/add/<int:id>', methods=['GET', 'POST'])
-@login_required
-def add_cart(id):
-    return "Comming Soon"
-
-
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):
     total= checksession()
     product = Product.query.get_or_404(id)
     comment = Comment.query.filter_by(user_id=current_user.id).first()
+    available = product.codes.first()
     sum = 0
     count = 0
     for comment in product.comments:
@@ -89,7 +77,8 @@ def product(id):
     if user_comment:
         form.content.data = user_comment.content
         form.rating.data = user_comment.rating
-    return render_template('home/product/product.html', product=product, form=form, user=current_user, rating=rating, total=total, title="Product")
+    return render_template('home/product/product.html', product=product, form=form, user=current_user, total=total, available=available,
+                            title="Product")
 
 
 @home.route('/categories')
@@ -110,19 +99,15 @@ def category(name):
 
 @home.route('/addToCard/<int:id>')
 def addToCard(id):
-    # On récupère l'objet du produit ajouté au panier
     product = Product.query.filter_by(id=id).first()
     productId = [product.id]
-    # On peut pas stocké un type decimal en session
     productPrice = int(product.price * 100)
-    # On créer un total a update en vérifiant que session['total'] existe sinon set a 0
     if session['total'] != None :
         total = int(session['total']) + productPrice
         session['total'] = str(total)
     else :
         session['total'] = 0
         session['total'] = session['total'] + productPrice
-    # On créer une liste a update en vérifiant que session['productsId'] existe sinon set a vide
     if session['productsId'] != None :
         tempProdId = session['productsId'] 
         tempProdId = tempProdId + productId

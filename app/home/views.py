@@ -166,4 +166,4 @@ def delete_comment(id_com, id_prod):
     comment = Comment.query.get_or_404(id_com)
     db.session.delete(comment)
     db.session.commit()
-    return redirect(url_for('home.product/', id=id_prod))
+    return redirect(url_for('category', id=id_prod))

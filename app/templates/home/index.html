@@ -11,7 +11,7 @@
                 <div class="elementImg" style="background-image: url({{ product.image }});">
                     {% if product.discount %}
                     <div class="promo">- {{ product.discount }} %</div>
-                    {% endif %}s
+                    {% endif %}
                 </div>
                 <div class="elementInfo ">
                     <div class="elementTitle">{{ product.name }}</div>
@@ -30,10 +30,10 @@
     </div>
 
     <div class="favorites">
-        Best Sellers
+        Popular
     </div>
     <div class="newGamesContainer">
-        {% for product in favoriteProducts.products %}
+        {% for product in popularProducts.products %}
         <div class="nGelement" id="{{ product.id }}">
             <a href="{{ url_for('home.product', id=product.id) }}">
                 <div class="elementImg" style="background-image: url({{ product.image }});">

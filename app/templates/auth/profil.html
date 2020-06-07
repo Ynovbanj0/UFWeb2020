@@ -34,8 +34,8 @@
             <td> {{ address.city }} </td>
             <td> {{ address.postal }}</td>
             <td> {{ address.country }}</td>
-            <td><a href="{{ url_for('auth.edit_address', id=address.id) }}"><i class="fa fa-pencil"></i> Edit </a></td>
-            <td><a href="{{ url_for('auth.delete_address', id=address.id) }}"><i class="fa fa-trash"></i> Delete </a>
+            <td><a href="{{ url_for('auth.edit_address', id=address.id) }}" style="color: #7B24D1"> Edit </a></td>
+            <td><a href="{{ url_for('auth.delete_address', id=address.id) }}" style="color: #D1140F"> Delete </a>
             </td>
           </tr>
           {% endfor %}
@@ -88,8 +88,8 @@
             <td> {{ comment.date }} </td>
             <td> {{ comment.rating }} </td>
             <td> {{ comment.content }}</td>
-            <td><a href="{{ url_for('auth.edit_comment', id=comment.id) }}"><i class="fa fa-pencil"></i> Edit </a></td>
-            <td><a href="{{ url_for('auth.delete_comment', id=comment.id) }}"><i class="fa fa-trash"></i> Delete </a>
+            <td><a href="{{ url_for('auth.edit_comment', id=comment.id) }}" style="color: #7B24D1"> Edit </a></td>
+            <td><a href="{{ url_for('auth.delete_comment', id=comment.id) }}" style="color: #D1140F"> Delete </a>
             </td>
           </tr>
           {% endfor %}

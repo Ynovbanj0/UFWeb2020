@@ -1,5 +1,6 @@
 from flask import abort, render_template, session, redirect, url_for, request
 from flask_login import current_user, login_required
+from sqlalchemy.sql.expression import func
 from datetime import datetime
 from decimal import Decimal
 
@@ -12,6 +13,7 @@ import json
 
 
 def checksession():
+    # Function tchecking if session variable is set or sets it to 0
     if 'productsId' in session:
         nbItem = len(session['productsId'])
         session['nbItem'] = nbItem
@@ -29,16 +31,20 @@ def checksession():
 @home.route('/')
 def homepage():
     total = checksession()
+    # Query to get 10 newest products
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
-    favoriteProducts = Category.query.filter_by(name="Favorites").first()  # COMING SOON
-    return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
+    popularProducts = Category.query.filter_by(name="Favorite").first()
+    return render_template('home/index.html', newProducts=newProducts, popularProducts=popularProducts, total=total, title="Welcome")
 
 
 @home.route('/search', methods=['GET', 'POST'])
 def search():
-    total = checksession()
+    total= checksession()
+    # Getting the GET form data, False if there is nothing there so it doesn't crash
     tag = request.args.get("s", False)
+    # formatting data to put it in a like query
     search = "%{}%".format(tag)
+    # Query to get all products with a name like the GET data
     searchProd = Product.query.filter(Product.name.like(search)).all()
     return render_template('home/search.html', searchProd=searchProd, total=total, title="Search")
 
@@ -46,7 +52,9 @@ def search():
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):
     total = checksession()
+    # Getting products with id in url or 404 if id doesn't exist 
     product = Product.query.get_or_404(id)
+    # Getting the comment from the user to pre fill the form for comments
     comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0
     count = 0

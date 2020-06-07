@@ -184,8 +184,8 @@ def purchase():
         Product.query.filter_by(id=id).first().stock -= 1
         db.session.commit()
     # Send mail to User with purchase
-    message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
-    mail.send(message) 
+    # message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
+    # mail.send(message) 
     session['productsId'] = []
     session['nbItem'] = 0
     session['total'] = 0    

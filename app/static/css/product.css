@@ -31,8 +31,9 @@ body {
 }
 
 .prodDesc2 {
-    display: flex;
     margin-bottom: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .descName {
@@ -61,7 +62,7 @@ body {
 }
 
 .descDesc {
-    padding-bottom: 50px;
+    padding-bottom: 30px;
 }
 
 .addDiv {
@@ -160,7 +161,7 @@ body {
 
 @media screen and (max-width: 700px) {
     .prodDesc {
-        padding-left: 0;
+        margin-left: 0;
     }
     .prodImg {
         margin: auto;

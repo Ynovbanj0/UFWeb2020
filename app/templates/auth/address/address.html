@@ -1,17 +1,14 @@
-{% import "bootstrap/wtf.html" as wtf %}
-{% extends "base.html" %}
-{% block body %}
+{% import "bootstrap/wtf.html" as wtf %} {% extends "base.html" %}{% block title %}Add Category{% endblock %} {% block links %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adminForms.css') }}"> {% endblock %} {% block body %}
 <div class="content-section">
- <div class="outer">
-    <div class="middle">
-      <div class="inner">
-        <div class="center">
-            <h1> {{ title }} </h1>
-            <br/>
-            {{ wtf.quick_form(form) }}
-        </div>
-      </div>
-    </div>
-  </div>
+    <section class="main">
+        {% include "leftside.html" %}
+        <section class="rightSide">
+            <div class="center">
+                <h1> {{ title }} </h1>
+                <br/> {{ wtf.quick_form(form, extra_classes="btn-sucess") }}
+            </div>
+        </section>
+    </section>
 </div>
 {% endblock %}

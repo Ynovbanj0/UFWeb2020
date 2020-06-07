@@ -54,10 +54,9 @@ def product(id):
     total = checksession()
     # Getting products with id in url or 404 if id doesn't exist 
     product = Product.query.get_or_404(id)
-    # Getting the comment from the user to pre fill the form for comments
-    comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0
     count = 0
+    # Get the average rating for a product
     for comment in product.comments:
         sum += comment.rating
         count += 1
@@ -65,6 +64,7 @@ def product(id):
         rating = round(sum/count, 1)
     else:
         rating = 0
+    # The add comment form for the connected user
     form = CommentForm()
     if form.validate_on_submit():
         if Comment.query.filter_by(user_id=current_user.id).filter_by(product_id=id).first():
@@ -103,9 +103,9 @@ def list_category():
 @home.route('/category/<name>')
 def category(name):
     total = checksession()
-    category = Category.query.filter_by(name=name).first()
+    category = Category.query.filter_by(name=name).first().name
     return render_template('home/category/category.html',
-                           category=category, total=total, title=category.name)
+                           category=category, total=total, title=category)
 
 
 @home.route('/addToCard/<int:id>')

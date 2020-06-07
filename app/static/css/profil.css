@@ -14,6 +14,33 @@ body {
     grid-template-columns: 20vw 80vw;
 }
 
+div>h3 {
+    background-color: white;
+    padding: 10px;
+}
+
+.addAddress {
+    text-align: center;
+}
+
+.addAddress>a {
+    margin: auto;
+    padding: 10px;
+    background-color: #7B24D1;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    transition: 0.2s;
+}
+
+.addAddress>a:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 3px black;
+    transition: 0.2s;
+    color: white;
+}
+
 
 /* Leftside */
 

@@ -2,7 +2,7 @@
 {% block links %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/profil.css') }}"> {% endblock %} {% block body %}
 <section class="main">
-  {% include  "leftside.html" %}
+  {% include "leftside.html" %}
   <section class="rightSide">
     <div id="persoInfo"></div>
     <div class="persoInfo">
@@ -14,9 +14,11 @@
     <hr>
     <div id="addresses"></div>
     <div>
-      <h3>Adresses</h3>
-      <a href="{{ url_for('auth.add_address') }}">Add a new address to your account </a>
-      <table class="table table-striped table-bordered">
+      <h3 class="mb-5">Adresses</h3>
+      <div class="addAddress">
+        <a href="{{ url_for('auth.add_address') }}">Add a new address to your account </a>
+      </div>
+      <table class="table table-striped table-bordered mt-5">
         <thead>
           <tr>
             <th width="35%"> Address </th>

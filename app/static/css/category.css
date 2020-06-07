@@ -7,7 +7,7 @@ footer {}
 .container {
     margin-bottom: 150px;
     margin-top: 150px;
-    height: 60vh;
+    height: fit-content;
 }
 
 .gamesContainer {
@@ -68,8 +68,8 @@ footer {}
     width: 100%;
     justify-content: center;
     font-weight: bold;
-    font-size: 1em;
-    margin-bottom: 5%;
+    font-size: 0.9em;
+    text-align: center;
 }
 
 .elementPrice {

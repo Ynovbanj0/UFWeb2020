@@ -48,7 +48,6 @@ def product(id):
     total = checksession()
     product = Product.query.get_or_404(id)
     comment = Comment.query.filter_by(user_id=current_user.id).first()
-    available = product.codes.filter_by(purchase_id=None).first()
     sum = 0
     count = 0
     for comment in product.comments:
@@ -81,7 +80,7 @@ def product(id):
     if user_comment:
         form.content.data = user_comment.content
         form.rating.data = user_comment.rating
-    return render_template('home/product/product.html', product=product, form=form, user=current_user, total=total, available=available,
+    return render_template('home/product/product.html', product=product, form=form, user=current_user, total=total,
                            title="Product")
 
 

@@ -12,8 +12,9 @@ class Config(object):
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_USERNAME = 'ufweb2020@gmail.com'
-    MAIL_PASSWORD = 'Bobo1234'
+    MAIL_USERNAME = 'latartefrancaise@gmail.com'
+    MAIL_PASSWORD = '4XaE1X1j0J9maXXlcf'
+    MAIL_DEBUG = True
     
 
 class DevelopmentConfig(Config):

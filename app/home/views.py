@@ -32,21 +32,30 @@ def homepage():
     total = checksession()
     # Query to get 10 newest products
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
+<<<<<<< HEAD
     # Query to get 10 best-sellers products (for now giving all of them back)
     favoriteProducts = Category.query.filter_by(name="Favorites").first() #COMING SOON
+=======
+    favoriteProducts = Category.query.filter_by(name="Favorites").first()  # COMING SOON
+>>>>>>> 4f6963ada769a8429bcc164c306dc001cc33fa54
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
+
 
 @home.route('/search', methods=['GET', 'POST'])
 def search():
+<<<<<<< HEAD
     total= checksession()
     # Getting the GET form data, False if there is nothing there so it doesn't crash
+=======
+    total = checksession()
+>>>>>>> 4f6963ada769a8429bcc164c306dc001cc33fa54
     tag = request.args.get("s", False)
     # formatting data to put it in a like query
     search = "%{}%".format(tag)
     # Query to get all products with a name like the GET data
     searchProd = Product.query.filter(Product.name.like(search)).all()
     return render_template('home/search.html', searchProd=searchProd, total=total, title="Search")
-    
+
 
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):

@@ -9,7 +9,7 @@ function MemberChart() {
     var listNumberMember = $('#listNumberMember').data();
     var data = google.visualization.arrayToDataTable(listNumberMember.name);
     var options = {
-        title: 'Income',
+        title: 'New Subscription (2020)',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
@@ -22,7 +22,7 @@ function PurchaseYChart() {
     console.log(listPurchase)
     var data = google.visualization.arrayToDataTable(listPurchase.name);
     var options = {
-        title: 'Income',
+        title: 'New purchase (2020)',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
@@ -34,7 +34,7 @@ function PurchaseWChart() {
     var listPurchase = $('#listPurchaseW').data();
     var data = google.visualization.arrayToDataTable(listPurchase.name);
     var options = {
-        title: 'Income',
+        title: 'New purchases (week)',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
@@ -46,7 +46,7 @@ function IncomeYChart() {
     var listIncome = $('#listIncomeY').data();
     var data = google.visualization.arrayToDataTable(listIncome.name);
     var options = {
-        title: 'Income',
+        title: 'Gross Income (2020)',
         curveType: 'function',
         legend: { position: 'bottom' }
     };
@@ -58,7 +58,7 @@ function IncomeWChart() {
     var listIncome = $('#listIncomeW').data();
     var data = google.visualization.arrayToDataTable(listIncome.name);
     var options = {
-        title: 'Income',
+        title: 'Gross Income (week)',
         curveType: 'function',
         legend: { position: 'bottom' }
     };

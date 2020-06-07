@@ -9,9 +9,9 @@
         <div class="nGelement">
             <a href="{{ url_for('home.product', id=product.id) }}">
                 <div class="elementImg" style="background-image: url({{ product.image }});">
-                    {% if product.discount != 0 %}
-                    <div class="promo">-{{ product.discount }}%</div>
-                    {% endif %}
+                    {% if product.discount %}
+                    <div class="promo">- {{ product.discount }} %</div>
+                    {% endif %}s
                 </div>
                 <div class="elementInfo ">
                     <div class="elementTitle">{{ product.name }}</div>

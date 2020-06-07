@@ -14,7 +14,11 @@
                     <div class="elementTitle">{{ product.name }}</div>
                     <div class="elementPrice">
                         <div class="price">{{ product.price }} e</div>
-                        <div class="addToCard" id="{{ product.id }}"></div>
+                        {% if product.stock %}
+                        <div class="addOne addToCard sd" id="{{ product.id }}">Add to your cart</div>
+                        {% else %}
+                        <div class="addOne ofs"></div>
+                        {% endif %}
                     </div>
                 </div>
             </a>

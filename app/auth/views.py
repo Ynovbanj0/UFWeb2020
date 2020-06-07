@@ -183,14 +183,9 @@ def purchase():
         purchase.products.append(Product.query.filter_by(id=id).first())
         Product.query.filter_by(id=id).first().stock -= 1
         db.session.commit()
-<<<<<<< HEAD
+    message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
+    mail.send(message) 
     session['productsId'] = []
     session['nbItem'] = 0
     session['total'] = 0
-    return redirect(url_for('auth.profil'))
-=======
-    # Send mail to User with purchase
-    message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
-    mail.send(message) 
     return render_template('auth/lastStep.html', user=current_user, title="Thank You")
->>>>>>> a8e71cee40c8ee27d77a33f5de8a9297c633811c

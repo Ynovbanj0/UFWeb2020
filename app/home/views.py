@@ -10,41 +10,37 @@ from ..models import *
 
 import json
 
+
 def checksession():
-    if 'productsId' in session :
+    if 'productsId' in session:
         nbItem = len(session['productsId'])
         session['nbItem'] = nbItem
-    else :
+    else:
         session['productsId'] = []
         session['nbItem'] = 0
-    if 'total' in session :
+    if 'total' in session:
         total = int(session['total']) / 100
-    else :
+    else:
         session['total'] = 0
         total = 0
     return total
 
+
 @home.route('/')
 def homepage():
-    total= checksession()
+    total = checksession()
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
-    favoriteProducts = Product.query.filter_by(name="Favorites").first() #COMING SOON
+    favoriteProducts = Product.query.filter_by(
+        name="Favorites").first()  # COMING SOON
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
-
-@home.route('/admin/dashboard')
-@login_required
-def admin_dashboard():
-    if not current_user.is_admin:
-        abort(403)
-    return render_template('admin/admin_dashboard.html', title="Dashboard")
 
 
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):
-    total= checksession()
+    total = checksession()
     product = Product.query.get_or_404(id)
     comment = Comment.query.filter_by(user_id=current_user.id).first()
-    available = product.codes.first()
+    available = product.codes.filter_by(purchase_id=None).first()
     sum = 0
     count = 0
     for comment in product.comments:
@@ -78,22 +74,22 @@ def product(id):
         form.content.data = user_comment.content
         form.rating.data = user_comment.rating
     return render_template('home/product/product.html', product=product, form=form, user=current_user, total=total, available=available,
-                            title="Product")
+                           title="Product")
 
 
 @home.route('/categories')
 def list_category():
-    total= checksession()
-    categories = Category.query.all();
+    total = checksession()
+    categories = Category.query.all()
     return render_template('home/category/categories.html',
                            categories=categories, total=total, title="Categories")
 
 
 @home.route('/category/<name>')
 def category(name):
-    total= checksession()
+    total = checksession()
     category = Category.query.filter_by(name=name).first()
-    return render_template('home/category/category.html', 
+    return render_template('home/category/category.html',
                            category=category, total=total, title=category.name)
 
 
@@ -102,19 +98,19 @@ def addToCard(id):
     product = Product.query.filter_by(id=id).first()
     productId = [product.id]
     productPrice = int(product.price * 100)
-    if session['total'] != None :
+    if session['total'] != None:
         total = int(session['total']) + productPrice
         session['total'] = str(total)
-    else :
+    else:
         session['total'] = 0
         session['total'] = session['total'] + productPrice
-    if session['productsId'] != None :
-        tempProdId = session['productsId'] 
+    if session['productsId'] != None:
+        tempProdId = session['productsId']
         tempProdId = tempProdId + productId
         session['productsId'] = tempProdId
-    else :
+    else:
         session['productsId'] = []
-        tempProdId = session['productsId'] 
+        tempProdId = session['productsId']
         tempProdId = tempProdId + productId
         session['productsId'] = tempProdId
     message = '{ "message":"Card Updated" }'
@@ -136,19 +132,20 @@ def delete_comment(id_com, id_prod):
 @login_required
 def card():
     card = []
-    total= checksession()
+    total = checksession()
     index = 0
-    if 'productsId' in session :
+    if 'productsId' in session:
         nbItem = len(session['productsId'])
-    else :
+    else:
         session['productsId'] = []
         nbItem = 0
-    while index < nbItem :
+    while index < nbItem:
         tempProd = session['productsId'][index]
         product = Product.query.filter_by(id=tempProd).first()
         card.append(product)
         index += 1
     return render_template('/home/card.html', card=card, total=total, title="Card")
+
 
 @home.route('/deleteCard/<int:id>')
 def deleteFromCard(id):

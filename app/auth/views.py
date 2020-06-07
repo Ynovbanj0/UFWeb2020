@@ -24,6 +24,7 @@ def register():
                     email=form.email.data,
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
+                    subscription=datetime.now(),
                     birthdate=form.birthdate.data)
         db.session.add(user)
         db.session.commit()
@@ -41,7 +42,7 @@ def login():
                 form.password.data):
             login_user(user)
             if user.is_admin:
-                return redirect(url_for('home.admin_dashboard'))
+                return redirect(url_for('admin.admin_dashboard'))
             else:
                 return redirect(url_for('home.homepage'))
         else:
@@ -178,5 +179,9 @@ def purchase():
         purchase.codes.append(Code.query.filter_by(
             product_id=id).filter_by(purchase_id=None).first())
         purchase.products.append(Product.query.filter_by(id=id).first())
+        Product.query.filter_by(id=id).first().stock -= 1
         db.session.commit()
+    session['productsId'] = []
+    session['nbItem'] = 0
+    session['total'] = 0
     return redirect(url_for('auth.profil'))

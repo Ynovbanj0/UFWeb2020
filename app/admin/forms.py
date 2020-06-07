@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, ValidationError, DecimalField, SelectMultipleField, widgets, SelectMultipleField, PasswordField
+from wtforms import StringField, SubmitField, ValidationError, DecimalField, SelectMultipleField, widgets, SelectMultipleField, PasswordField, IntegerField
 from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField, QuerySelectField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms.fields.html5 import DateField
@@ -13,9 +13,10 @@ class MultiCheckboxField(QuerySelectMultipleField):
 
 class ProductForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    price = DecimalField('Price')
+    price = DecimalField('Price', validators=[DataRequired()])
+    discount = IntegerField('Discount')
     image = StringField('Image', validators=[DataRequired()])
-    description = StringField('Description')
+    description = StringField('Description', validators=[DataRequired()])
     categories = MultiCheckboxField('Categories', query_factory=lambda: Category.query.all(), get_label="name", validators=[DataRequired()])
     submit = SubmitField('Submit') 
 

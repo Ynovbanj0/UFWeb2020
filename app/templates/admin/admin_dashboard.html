@@ -4,37 +4,39 @@
 <section class="main">
     {% include  "leftside.html" %}
     <section class="rightSide">
-        <div id="persoInfo"></div>
-        <div class="persoInfo">
-            <h1 class="rightTitle">Users</h1>
-        </div>
+        <br><br><br><br><br><br>
+        <h1 class="rightTitle ">Subscription  Year</h1>
         <div class="chart">
-            <div id="curve_chart" class="chartItem"></div>
+            <div id="curve_chart1" class="chartItem"></div>
         </div>
-        <div id="address"></div>
-        <div class="address">
-            <h1 class="rightTitle ">Countries</h1>
+        <h1 class="rightTitle ">Purchase Year </h1>
+        <div class="chart">
+            <div id="curve_chart2" class="chartItem"></div>
         </div>
+        <h1 class="rightTitle ">Purchase  Week) </h1>
+        <div class="chart">
+            <div id="curve_chart3" class="chartItem"></div>
+        </div>
+        <h1 class="rightTitle ">Income  Year </h1>
+        <div class="chart">
+            <div id="curve_chart4" class="chartItem"></div>
+        </div>
+        <h1 class="rightTitle ">Income  Week) </h1>
+        <div class="chart">
+            <div id="curve_chart5" class="chartItem"></div>
+        </div>
+        <h1 class="rightTitle ">Countries</h1>
         <div class="chart">
             <div id="regions_div" class="chartItem"></div>
         </div>
-        <div id="billing"></div>
-        <div class="billing">
-            <h1 class="rightTitle">Commands</h1>
-        </div>
-        <div class="chart">
-            <div id="chart_div" class="chartItem"></div>
-        </div>
-        <div id="age"></div>
-        <div class="age">
-            <h1 class="rightTitle">Consumer's Sex</h1>
-        </div>
-        <div class="chart">
-            <div id="donutchart" class="chartItem"></div>
-        </div>
     </section>
 </section>
-
+<meta id="listNumberMember" data-name="{{ listNumberMember }}">
+<meta id="listCountryMember" data-name="{{ listCountryMember }}">
+<meta id="listPurchaseY" data-name="{{ listPurchaseY }}">
+<meta id="listPurchaseW" data-name="{{ listPurchaseW }}">
+<meta id="listIncomeY" data-name="{{ listIncomeY }}">
+<meta id="listIncomeW" data-name="{{ listIncomeW }}">
 {% endblock %} {% block script %}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="{{ url_for('static', filename='js/admin.js') }}"></script> {% endblock %}

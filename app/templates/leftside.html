@@ -18,6 +18,8 @@
       <a href="{{ url_for('admin.list_code') }}">Codes</a></li>
     <li class="listLeftItem">
       <a href="{{ url_for('admin.list_user') }}">Users</a></li>
+    <li class="listLeftItem">
+      <a href="{{ url_for('admin.list_purchase') }}">Purchases</a></li>
   </ul>
   {% else %}
   <h1 class="leftTitle">Menu Profil</h1>
@@ -25,9 +27,9 @@
     <li class="listLeftItem">
       <a href="#persoInfo">Personal Informations</a></li>
     <li class="listLeftItem">
-      <a href="#address">Address</a></li>
+      <a href="#addresses">Address</a></li>
     <li class="listLeftItem">
-      <a href="#purchase">Purchases</a></li>
+      <a href="#purchases">Purchases</a></li>
     <li class="listLeftItem">
       <a href="#comments">Comments</a></li>
     {% if current_user.is_admin %}

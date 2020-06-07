@@ -30,17 +30,18 @@ def checksession():
 def homepage():
     total = checksession()
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
-    favoriteProducts = Category.query.filter_by(name="Favorites").first() #COMING SOON
+    favoriteProducts = Category.query.filter_by(name="Favorites").first()  # COMING SOON
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
+
 
 @home.route('/search', methods=['GET', 'POST'])
 def search():
-    total= checksession()
+    total = checksession()
     tag = request.args.get("s", False)
     search = "%{}%".format(tag)
     searchProd = Product.query.filter(Product.name.like(search)).all()
     return render_template('home/search.html', searchProd=searchProd, total=total, title="Search")
-    
+
 
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):

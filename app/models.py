@@ -9,7 +9,7 @@ class Address(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(50), nullable=False)
     city = db.Column(db.String(50), nullable=False)
-    postal = db.Column(db.String(50), nullable=False)
+    postal = db.Column(db.String(50))
     country = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
@@ -71,7 +71,7 @@ class Product(db.Model):
     price = db.Column(db.Numeric(5, 2))
     discount = db.Column(db.Numeric(3, 0))
     stock = db.Column(db.Integer, default=0)
-    image = db.Column(db.String(50), nullable=False)
+    image = db.Column(db.String(50), default="https://via.placeholder.com/150")
     description = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer)
     comments = db.relationship('Comment',

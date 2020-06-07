@@ -1,13 +1,13 @@
 from flask import flash, abort, redirect, render_template, url_for, session
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_mail import Message
-from .. import mail
 
 from . import auth
 from .forms import LoginForm, RegistrationForm, AddressForm, EditForm, CommentForm
 from .. import db
 from ..models import User, Address, Comment, Code, Purchase, Product
 from datetime import datetime
+from .. import mail
 
 import json
 
@@ -26,8 +26,8 @@ def register():
                     email=form.email.data,
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
-                    subscription=datetime.now(),
-                    birthdate=form.birthdate.data)
+                    birthdate=form.birthdate.data,
+                    subscription=datetime.now())
         db.session.add(user)
         db.session.commit()
         # flash('You have successfully registered! You may now login.')
@@ -183,14 +183,10 @@ def purchase():
         purchase.products.append(Product.query.filter_by(id=id).first())
         Product.query.filter_by(id=id).first().stock -= 1
         db.session.commit()
-<<<<<<< HEAD
-    session['productsId'] = []
-    session['nbItem'] = 0
-    session['total'] = 0
-    return redirect(url_for('auth.profil'))
-=======
     # Send mail to User with purchase
     message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
     mail.send(message) 
-    return render_template('auth/lastStep.html', user=current_user, title="Thank You")
->>>>>>> a8e71cee40c8ee27d77a33f5de8a9297c633811c
+    session['productsId'] = []
+    session['nbItem'] = 0
+    session['total'] = 0    
+    return render_template('auth/lastStep.html', title="Thank You")

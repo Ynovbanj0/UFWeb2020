@@ -1,4 +1,11 @@
 class Config(object):
+    MAIL_SERVEUR = 'smtp.gmail.com'
+    MAIL_PORT = 465
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = 'latartefrancaise@gmail.com'
+    MAIL_PASSWORD = '4XaE1X1j0J9maXXlcf'
+    MAIL_DEBUG = True
     SECRET_KEY = 'p9Bv<3Eid9%$i01'
     MYSQL = {
         'user': 'root',
@@ -8,13 +15,6 @@ class Config(object):
         'port': '3306',
     }
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%(user)s:%(pw)s@%(host)s:%(port)s/%(db)s' % MYSQL
-    MAIL_SERVEUR = 'smtp.gmail.com'
-    MAIL_PORT = 465
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    MAIL_USERNAME = 'latartefrancaise@gmail.com'
-    MAIL_PASSWORD = '4XaE1X1j0J9maXXlcf'
-    MAIL_DEBUG = True
     
 
 class DevelopmentConfig(Config):

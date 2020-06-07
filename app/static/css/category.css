@@ -2,9 +2,12 @@ body {
     height: fit-content;
 }
 
+footer {}
+
 .container {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
     margin-top: 150px;
+    height: 60vh;
 }
 
 .gamesContainer {

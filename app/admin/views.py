@@ -30,6 +30,7 @@ def add_product():
         product = Product(name=form.name.data,
                           price=form.price.data,
                           image=form.image.data,
+                          categories = form.categories.data,
                           description=form.description.data)
         db.session.add(product)
         db.session.commit()

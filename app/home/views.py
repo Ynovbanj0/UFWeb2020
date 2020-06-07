@@ -1,4 +1,4 @@
-from flask import abort, render_template, session, redirect, url_for
+from flask import abort, render_template, session, redirect, url_for, request
 from flask_login import current_user, login_required
 from datetime import datetime
 from decimal import Decimal
@@ -24,12 +24,21 @@ def checksession():
         total = 0
     return total
 
+
 @home.route('/')
 def homepage():
     total= checksession()
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
-    favoriteProducts = Product.query.filter_by(name="Favorites").first() #COMING SOON
+    favoriteProducts = Category.query.filter_by(name="Favorites").first() #COMING SOON
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
+
+@home.route('/search', methods=['GET', 'POST'])
+def search():
+    total= checksession()
+    tag = request.args.get("s", False)
+    search = "%{}%".format(tag)
+    searchProd = Product.query.filter(Product.name.like(search)).all()
+    return render_template('home/search.html', searchProd=searchProd, total=total, title="Search")
 
 @home.route('/admin/dashboard')
 @login_required

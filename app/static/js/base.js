@@ -1,7 +1,7 @@
 jQuery(function($) {
     $('.header-nav__wrapper').on('click', function() {
         $('.nav--responsive').toggleClass("nav--responsive__active", true).toggleClass("nav--responsive", false);
-        $('.overlay').toggle();
+        $('.overlay').css("display", "block");
         setTimeout(function() {
             $('.overlay').addClass("is-open");
         }, 300);
@@ -12,7 +12,7 @@ jQuery(function($) {
         $('.nav--responsive__active').toggleClass("nav--responsive__active", false).toggleClass("nav--responsive", true);
         $('.overlay').removeClass("is-open");
         setTimeout(function() {
-            $('.overlay').toggle();
+            $('.overlay').css("display", "none");
         }, 300);
         $('.header-nav-burger').removeClass('is-animate');
         $('body').removeClass('overflow');

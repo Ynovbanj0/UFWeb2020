@@ -1,5 +1,7 @@
 from flask import flash, abort, redirect, render_template, url_for, session
 from flask_login import login_required, login_user, logout_user, current_user
+# from flask_mail import Mail, Message
+# from app import mail
 
 from . import auth
 from .forms import LoginForm, RegistrationForm, AddressForm, EditForm, CommentForm
@@ -181,7 +183,14 @@ def purchase():
         purchase.products.append(Product.query.filter_by(id=id).first())
         Product.query.filter_by(id=id).first().stock -= 1
         db.session.commit()
+<<<<<<< HEAD
     session['productsId'] = []
     session['nbItem'] = 0
     session['total'] = 0
     return redirect(url_for('auth.profil'))
+=======
+    # Send mail to User with purchase
+    # message = Message('You\'r purchase(s) at No Play No Play !', sender='ufweb2020@gmail.com', recipients=[current_user.email])  # Not fking working no idea why
+    # mail.send(message)  # Not fking working no idea why
+    return render_template('auth/lastStep.html', user=current_user, title="Thank You")
+>>>>>>> a8e71cee40c8ee27d77a33f5de8a9297c633811c

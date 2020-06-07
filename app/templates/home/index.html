@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> {% endblock %} {% block shop %}
-{% include "shopCard.html" %} {% endblock %}{% block body %} {{newProducts}}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> {% endblock %} {% block shop %} {% include "shopCard.html" %} {% endblock %}{% block body %}
 <div class="container">
     <div class="newGames">
         New Games

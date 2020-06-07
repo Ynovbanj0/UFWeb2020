@@ -65,10 +65,11 @@ class Comment(db.Model):
 
 class Product(db.Model):
     __tablename__ = 'products'
+    __searchable__ = ['name']
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     price = db.Column(db.Numeric(5, 2))
-    discount = db.Column(db.Numeric(3, 0), default=0)
+    discount = db.Column(db.Numeric(3, 0))
     stock = db.Column(db.Integer, default=0)
     image = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)

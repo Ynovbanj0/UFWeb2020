@@ -2,11 +2,11 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/adminForms.css') }}"> {% endblock %} {% block body %}
 <div class="content-section">
     <section class="main">
-        {% include  "leftside.html" %}
+        {% include "leftside.html" %}
         <section class="rightSide">
             <div class="center">
                 <h1> {{ title }} </h1>
-                <br/> {{ wtf.quick_form(form) }}
+                <br>{{ wtf.quick_form(form) }}
             </div>
         </section>
     </section>

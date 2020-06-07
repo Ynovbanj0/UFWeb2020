@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block links %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/lastStep.css') }}"> {% endblock %} {% block body %}
 
-<div class="thx"> Thanks you {{user.first_name}} for trusting No Pay, No Play for you'r purchases ! You will get a resume of you'r order soon on {{ user.email }} !</div>
+<div class="thx"> Thanks you {{user.first_name}} for trusting No Pay, No Play for you'r purchases ! You will get a resume of you'r order soon at {{ user.email }} !</div>
 <div class="cmdToPDF">Download my order resume</div>
 
 

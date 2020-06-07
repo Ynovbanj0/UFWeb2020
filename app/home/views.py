@@ -12,6 +12,7 @@ import json
 
 
 def checksession():
+    # Function tchecking if session variable is set or sets it to 0
     if 'productsId' in session:
         nbItem = len(session['productsId'])
         session['nbItem'] = nbItem
@@ -29,15 +30,20 @@ def checksession():
 @home.route('/')
 def homepage():
     total = checksession()
+    # Query to get 10 newest products
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
+    # Query to get 10 best-sellers products (for now giving all of them back)
     favoriteProducts = Category.query.filter_by(name="Favorites").first() #COMING SOON
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
 
 @home.route('/search', methods=['GET', 'POST'])
 def search():
     total= checksession()
+    # Getting the GET form data, False if there is nothing there so it doesn't crash
     tag = request.args.get("s", False)
+    # formatting data to put it in a like query
     search = "%{}%".format(tag)
+    # Query to get all products with a name like the GET data
     searchProd = Product.query.filter(Product.name.like(search)).all()
     return render_template('home/search.html', searchProd=searchProd, total=total, title="Search")
     
@@ -45,9 +51,10 @@ def search():
 @home.route('/product/<int:id>', methods=['GET', 'POST'])
 def product(id):
     total = checksession()
+    # Getting products with id in url or 404 if id doesn't exist 
     product = Product.query.get_or_404(id)
+    # Getting the comment from the user to pre fill the form for comments
     comment = Comment.query.filter_by(user_id=current_user.id).first()
-    available = product.codes.filter_by(purchase_id=None).first()
     sum = 0
     count = 0
     for comment in product.comments:
@@ -80,7 +87,7 @@ def product(id):
     if user_comment:
         form.content.data = user_comment.content
         form.rating.data = user_comment.rating
-    return render_template('home/product/product.html', product=product, form=form, user=current_user, total=total, available=available,
+    return render_template('home/product/product.html', product=product, form=form, user=current_user, total=total,
                            title="Product")
 
 

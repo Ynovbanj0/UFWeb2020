@@ -69,7 +69,8 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
     price = db.Column(db.Numeric(5, 2))
-    discount = db.Column(db.Numeric(3, 0), default=0)
+    discount = db.Column(db.Numeric(3, 0))
+    stock = db.Column(db.Integer, default=0)
     image = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     rating = db.Column(db.Integer)
@@ -113,6 +114,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(60), index=True, unique=True)
     first_name = db.Column(db.String(60), index=True)
     last_name = db.Column(db.String(60), index=True)
+    subscription = db.Column(db.DateTime, nullable=False)
     birthdate = db.Column(db.DateTime, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     comments = db.relationship('Comment', backref='user',

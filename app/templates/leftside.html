@@ -9,7 +9,7 @@
   <h1 class="leftTitle">Menu Profil</h1>
   <ul class="listLeftMenu">
     <li class="listLeftItem">
-      <a href="{{ url_for('home.admin_dashboard') }}">Data</a></li>
+      <a href="{{ url_for('admin.admin_dashboard') }}">Data</a></li>
     <li class="listLeftItem">
       <a href="{{ url_for('admin.list_category') }}">Categories</a></li>
     <li class="listLeftItem">
@@ -32,7 +32,7 @@
       <a href="#comments">Comments</a></li>
     {% if current_user.is_admin %}
     <li class="listLeftItem">
-      <a href="{{ url_for('home.admin_dashboard') }}">Admin Dashboard</a></li>
+      <a href="{{ url_for('admin.admin_dashboard') }}">Admin Dashboard</a></li>
     {% endif %}
     <li class="listLeftItem">
       <a class="unsign" href="{{ url_for('auth.logout') }}">Logout</a></li>

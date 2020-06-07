@@ -26,6 +26,7 @@ def register():
                     email=form.email.data,
                     first_name=form.first_name.data,
                     last_name=form.last_name.data,
+                    subscription=datetime.now(),
                     birthdate=form.birthdate.data)
         db.session.add(user)
         db.session.commit()
@@ -43,7 +44,7 @@ def login():
                 form.password.data):
             login_user(user)
             if user.is_admin:
-                return redirect(url_for('home.admin_dashboard'))
+                return redirect(url_for('admin.admin_dashboard'))
             else:
                 return redirect(url_for('home.homepage'))
         else:
@@ -180,8 +181,16 @@ def purchase():
         purchase.codes.append(Code.query.filter_by(
             product_id=id).filter_by(purchase_id=None).first())
         purchase.products.append(Product.query.filter_by(id=id).first())
+        Product.query.filter_by(id=id).first().stock -= 1
         db.session.commit()
+<<<<<<< HEAD
+    session['productsId'] = []
+    session['nbItem'] = 0
+    session['total'] = 0
+    return redirect(url_for('auth.profil'))
+=======
     # Send mail to User with purchase
     message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
     mail.send(message) 
     return render_template('auth/lastStep.html', user=current_user, title="Thank You")
+>>>>>>> a8e71cee40c8ee27d77a33f5de8a9297c633811c

@@ -28,10 +28,10 @@
             </div>
         </div>
         <div class="addDiv">
-            {% if available %}
-                <div class="addOne addToCard" id="{{ product.id }}">Add to your cart</div>
+            {% if product.stock %}
+            <div class="addOne addToCard" id="{{ product.id }}">Add to your cart</div>
             {% else %}
-                <div>Out Of Stock :/</div>
+            <div class="addOne">Out of Stock</div>
             {% endif %}
         </div>
         {% if current_user.id %}

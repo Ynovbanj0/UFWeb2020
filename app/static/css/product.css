@@ -78,6 +78,7 @@ body {
 
 .addDiv:hover {
     cursor: pointer;
+    background-color: rgb(50, 15, 85);
     transform: scale(1.05);
     transition: 0.3s;
 }
@@ -85,6 +86,14 @@ body {
 .addOne {
     Color: white;
     padding: 10px;
+}
+
+.ofs {
+    background-image: url(../img/outofstock.png);
+}
+
+.sd {
+    background-image: url(../img/add.png);
 }
 
 

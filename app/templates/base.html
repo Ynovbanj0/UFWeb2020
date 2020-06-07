@@ -15,73 +15,75 @@
 </head>
 
 <body>
-    <header>
-        <div class="nav--responsive">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a class="" href="{{ url_for('home.homepage') }}">Home</a>
-                </li>
-                <li class="nav__item">
-                    <a class="" href="{{ url_for('home.list_category') }}">Categories</a>
-                </li>
-                {% if current_user.is_authenticated %}
-                <li class="nav__item">
-                    <a class="" href="{{ url_for('auth.profil') }}">Profil</a>
-                </li>
-                {% else %}
-                <li class="nav__item">
-                    <a href="{{ url_for('auth.login') }}">Connexion</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-        <div class="overlay"></div>
-        <nav class="navContainer">
-            <ul class="navElements">
-                <li class="navLogo">Np²</li>
-                <li class="navItem1">
-                    <a class="" href="{{ url_for('home.homepage') }}">Home</a>
-                </li>
-                <li class="navItem2">
-                    <a class="" href="{{ url_for('home.list_category') }}">Categories</a>
-                </li>
-                {% if current_user.is_authenticated %}
-                <li class="navItem3">
-                    <a class="" href="{{ url_for('auth.profil') }}">Profil</a>
-                </li>
-                {% else %}
-                <li class="navItem3">
-                    <a href="{{ url_for('auth.login') }}">Connexion</a>
-                </li>
-                {% endif %}
-            </ul>
-            <div class="navSearch">
-                <form class="formSearch" method="GET" action="search">
-                    <input class="form-control form-control-lg inputSearch" type="text" aria-label="Search" name="s">
-                    <button class="btn btn-outline-success btnSearch" type="submit">
+    <div class="background">
+        <header>
+            <div class="nav--responsive">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a class="" href="{{ url_for('home.homepage') }}">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a class="" href="{{ url_for('home.list_category') }}">Categories</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav__item">
+                        <a class="" href="{{ url_for('auth.profil') }}">Profil</a>
+                    </li>
+                    {% else %}
+                    <li class="nav__item">
+                        <a href="{{ url_for('auth.login') }}">Connexion</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="overlay"></div>
+            <nav class="navContainer">
+                <ul class="navElements">
+                    <li class="navLogo">Np²</li>
+                    <li class="navItem1">
+                        <a class="" href="{{ url_for('home.homepage') }}">Home</a>
+                    </li>
+                    <li class="navItem2">
+                        <a class="" href="{{ url_for('home.list_category') }}">Categories</a>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="navItem3">
+                        <a class="" href="{{ url_for('auth.profil') }}">Profil</a>
+                    </li>
+                    {% else %}
+                    <li class="navItem3">
+                        <a href="{{ url_for('auth.login') }}">Connexion</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="navSearch">
+                    <form class="formSearch" method="GET" action="search">
+                        <input class="form-control form-control-lg inputSearch" type="text" aria-label="Search" name="s">
+                        <button class="btn btn-outline-success btnSearch" type="submit">
                         <div class="searchIcon"></div>
                     </button>
-                </form>
-            </div>
-            <div class="header-nav__wrapper">
-                <div class="header-nav-burger"></div>
-            </div>
-            <div class="colorNav1"></div>
-            <div class="colorNav11"></div>
-            <div class="colorNav2"></div>
-            <div class="colorNav22"></div>
-            <div class="colorNav3"></div>
-            <div class="colorNav33"></div>
+                    </form>
+                </div>
+                <div class="header-nav__wrapper">
+                    <div class="header-nav-burger"></div>
+                </div>
+                <div class="colorNav1"></div>
+                <div class="colorNav11"></div>
+                <div class="colorNav2"></div>
+                <div class="colorNav22"></div>
+                <div class="colorNav3"></div>
+                <div class="colorNav33"></div>
 
-        </nav>
-    </header>
-    {% block shop %} {% endblock %} {% block body %} {% endblock %}
+            </nav>
+        </header>
+        {% block shop %} {% endblock %} {% block body %} {% endblock %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/shopCard.js') }}"></script>
-    {% block script %} {% endblock %} {% block footer %} {% endblock %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/shopCard.js') }}"></script>
+        {% block script %} {% endblock %} {% block footer %} {% endblock %}
+    </div>
 </body>
 
 </html>

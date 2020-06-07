@@ -15,9 +15,9 @@
                     <div class="elementPrice">
                         <div class="price">{{ product.price }} e</div>
                         {% if product.stock %}
-                            <div class="addToCard" id="{{ product.id }}"></div>
+                        <div class="addOne addToCard sd" id="{{ product.id }}"></div>
                         {% else %}
-                            <div>R</div>
+                        <div class="addOne ofs"></div>
                         {% endif %}
                     </div>
                 </div>

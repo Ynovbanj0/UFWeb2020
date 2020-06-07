@@ -32,23 +32,15 @@ def homepage():
     total = checksession()
     # Query to get 10 newest products
     newProducts = Product.query.order_by(Product.id.desc()).limit(10)
-<<<<<<< HEAD
     # Query to get 10 best-sellers products (for now giving all of them back)
     favoriteProducts = Category.query.filter_by(name="Favorites").first() #COMING SOON
-=======
-    favoriteProducts = Category.query.filter_by(name="Favorites").first()  # COMING SOON
->>>>>>> 4f6963ada769a8429bcc164c306dc001cc33fa54
     return render_template('home/index.html', newProducts=newProducts, favoriteProducts=favoriteProducts, total=total, title="Welcome")
 
 
 @home.route('/search', methods=['GET', 'POST'])
 def search():
-<<<<<<< HEAD
     total= checksession()
     # Getting the GET form data, False if there is nothing there so it doesn't crash
-=======
-    total = checksession()
->>>>>>> 4f6963ada769a8429bcc164c306dc001cc33fa54
     tag = request.args.get("s", False)
     # formatting data to put it in a like query
     search = "%{}%".format(tag)
@@ -66,6 +58,7 @@ def product(id):
     comment = Comment.query.filter_by(user_id=current_user.id).first()
     sum = 0
     count = 0
+    # Get the average rating for a product
     for comment in product.comments:
         sum += comment.rating
         count += 1
@@ -73,6 +66,7 @@ def product(id):
         rating = round(sum/count, 1)
     else:
         rating = 0
+    # The add comment form for the connected user
     form = CommentForm()
     if form.validate_on_submit():
         if Comment.query.filter_by(user_id=current_user.id).filter_by(product_id=id).first():

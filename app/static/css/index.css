@@ -94,8 +94,8 @@
     width: 100%;
     justify-content: center;
     font-weight: bold;
-    font-size: 1em;
-    margin-bottom: 5%;
+    font-size: 0.9em;
+    text-align: center;
 }
 
 .elementPrice {

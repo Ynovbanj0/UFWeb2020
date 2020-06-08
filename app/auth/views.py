@@ -211,13 +211,13 @@ class HTML2PDF(FPDF, HTMLMixin):
 
 @auth.route('/pdf/<address>')
 def pdf(address):
-    purchase = Purchase.query.filter_by(id=current_user.id).order_by(Purchase.id.desc()).first()
+    purchase = Purchase.query.filter_by(user_id=current_user.id).order_by(Purchase.id.desc()).first()
     productStr = ""
-    for product in purchase.products :
-        productStr = productStr + " " + product.name
+    for code in purchase.codes :
+        productStr = productStr + "<tr><td width=\"50%\">" + code.product.name + "</td><td width=\"50%\">" + code.code + "</td></tr>"
     html = '''
-    <h1 >Your purchase</h1>
-    <div>'''+ productStr +'''</div>
+    <h1>Your purchase</h1>
+    <table><thead><tr><th width="50%"> Name </th><th width="50%"> Code </th></tr></thead><tbody>'''+ productStr +'''</tbody></table>
     <h1>Address</h1>
     <div>'''+ address +'''</div>
     <h1>Total</h1>

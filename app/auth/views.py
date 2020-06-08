@@ -13,12 +13,14 @@ import json
 
 
 def check_user(id):
+    # function that checks if user id is the current user id
     if id != current_user.id:
         abort(403)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    # classic register form then commit to DB
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data,
@@ -30,13 +32,13 @@ def register():
                     subscription=datetime.now())
         db.session.add(user)
         db.session.commit()
-        # flash('You have successfully registered! You may now login.')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form, title='Register')
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    # Classic login form with redirection if user is admin or not
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -55,6 +57,7 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    # Logout function thanks to Flaks Login
     logout_user()
     flash('You have successfully been logged out.')
     return redirect(url_for('auth.login'))
@@ -63,6 +66,8 @@ def logout():
 @auth.route('/profil', methods=['GET', 'POST'])
 @login_required
 def profil():
+    # We get the profil info to pre-fill the inputs
+    # Form is for modification of the infos, then store in DB if everything fits (not a same username and so on...)
     user = User.query.get_or_404(current_user.id)
     form_ed = EditForm(obj=user)
     if form_ed.validate_on_submit():
@@ -94,6 +99,7 @@ def profil():
 @auth.route('/address/add', methods=['GET', 'POST'])
 @login_required
 def add_address():
+    # This is a form to add an address to the current user
     form = AddressForm()
     if form.validate_on_submit():
         address = Address(address=form.address.data,
@@ -111,6 +117,7 @@ def add_address():
 @auth.route('/address/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_address(id):
+    # this is a form to update a current user's address
     address = Address.query.get_or_404(id)
     check_user(address.user_id)
     form = AddressForm(obj=address)
@@ -133,6 +140,7 @@ def edit_address(id):
 @auth.route('/address/delete/<int:id>')
 @login_required
 def delete_address(id):
+    # route to delete and address
     address = Address.query.get_or_404(id)
     check_user(address.user_id)
     db.session.delete(address)
@@ -144,6 +152,7 @@ def delete_address(id):
 @auth.route('/comment/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_comment(id):
+    # Route to edit a comment
     comment = Comment.query.get_or_404(id)
     check_user(address.user_id)
     form = CommentForm(obj=comment)
@@ -162,6 +171,7 @@ def edit_comment(id):
 @auth.route('/comment/delete/<int:id>')
 @login_required
 def delete_comment(id):
+    # route to delete a Comment
     comment = Comment.query.get_or_404(id)
     check_user(address.user_id)
     db.session.delete(comment)
@@ -173,10 +183,12 @@ def delete_comment(id):
 @auth.route('/purchase')
 @login_required
 def purchase():
+    # Route to add a purchase in DB
     purchase = Purchase(price=int(session['total']) / 100,
                         date=datetime.now(),
                         user_id=current_user.id)
     db.session.add(purchase)
+    # This modifies the stock value of a product in DB
     for id in session['productsId']:
         purchase.codes.append(Code.query.filter_by(
             product_id=id).filter_by(purchase_id=None).first())
@@ -186,6 +198,7 @@ def purchase():
     # Send mail to User with purchase
     # message = Message('You\'r purchase(s) at No Play No Play !', sender='latartefrancaise@gmail.com', recipients=[current_user.email])  
     # mail.send(message) 
+    # Once the purchase is done we set the session variables back to 0
     session['productsId'] = []
     session['nbItem'] = 0
     session['total'] = 0    

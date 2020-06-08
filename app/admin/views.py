@@ -17,6 +17,7 @@ def check_admin():
 @admin.route('/dashboard')
 @login_required
 def admin_dashboard():
+    # Gets the info from site to render graphs in admin mode
     check_admin()
     dic = {'Bhutan':0,'Democratic Republic of the Congo':0,'Liechtenstein':0,'Maldives':0,'Sudan':0,'Zimbabwe':0,'Mauritania':0,'Mozambique':0,'Nigeria':0,'Swaziland':0,'Tanzania':0,'Iraq':0,'Guyana':0,'Namibia':0,'Senegal':0,'Turkmenistan':0,'Afghanistan':0,'Andorra':0,'Fiji':0,'Gabon':0,'Uzbekistan':0,'Cameroon':0,'Cuba':0,'Faroe Islands':0,'El Salvador':0,'Caribbean':0,'Ethiopia':0,'Mongolia':0,'Puerto Rico':0,'Samoa':0,'Myanmar':0,'Nicaragua':0,'Seychelles':0,'Tajikistan':0,'Dominican Republic':0,'Guinea':0,'Barbados':0,'CI':0,'Laos':0,'Libya':0,'Panama':0,'Bahrain':0,'Benin':0,'Ghana':0,'Haiti':0,'Montenegro':0,'Somalia':0,'Syria':0,'Ecuador':0,'Honduras':0,'Madagascar':0,'Papua New Guinea':0,'Tunisia':0,'Angola':0,'Botswana':0,'Cyprus':0,'Algeria':0,'Bahamas':0,'New Caledonia':0,'Uganda':0,'Yemen':0,'Zambia':0,'Antarctica':0,'Paraguay':0,'Jamaica':0,'Palestine':0,'Bolivia':0,'Bosnia and Herzegovina':0,'Vietnam':0,'Kenya':0,'Luxembourg':0,'Niger':0,'Kuwait':0,'Hawaii':0,'Scotland':0,'Cambodia':0,'Uruguay':0,'Kyrgyzstan':0,'Saudi Arabia':0,'Indonesia':0,'Azerbaijan':0,'United Arab Emirates':0,'Mauritius':0,'Morocco':0,'Albania':0,'South Korea':0,'Kazakhstan':0,'Macedonia':0,'Venezuela':0,'Taiwan':0,'Qatar':0,'Jordan':0,'Iceland':0,'Guatemala':0,'Costa Rica':0,'Hong Kong':0,'San Marino':0,'Colombia':0,'Moldova':0,'Armenia':0,'Malta':0,'Nepal':0,'Lebanon':0,'Malaysia':0,'Serbia':0,'Peru':0,'Trinidad and Tobago':0,'Lithuania':0,'Estonia':0,'Georgia':0,'Iran':0,'Chile':0,'Latvia':0,'Thailand':0,'Egypt':0,'Slovenia':0,'Mexico':0,'Belarus':0,'Slovakia':0,'Sri Lanka':0,'Croatia':0,'Philippines':0,'Bangladesh':0,'Turkey':0,'Romania':0,'Italy':0,'South Africa':0,'Hungary':0,'Pakistan':0,'Portugal':0,'Ukraine':0,'Greece':0,'Oman':0,'Argentina':0,'Singapore':0,'Bulgaria':0,'Japan':0,'Czech Republic':0,'Ireland':0,'China':0,'Finland':0,'Brazil':0,'Norway':0,'Austria':0,'Denmark':0,'Belgium':0,'New Zealand':0,'Spain':0,'Switzerland':0,'Russia':0,'Poland':0,'Israel':0,'Sweden':0,'Netherlands':0,'France':0,'Australia':0,'Canada':0,'India':0,'Germany':0,'United Kingdom':0,'United States':0,'Brunei':0}
     for user in User.query.all():
@@ -62,6 +63,7 @@ def admin_dashboard():
 @login_required
 def list_product():
     check_admin()
+    # Product list for admin
     products = Product.query.all()
     return render_template('admin/product/products.html',
                            products=products, title="Products")
@@ -71,6 +73,7 @@ def list_product():
 @login_required
 def add_product():
     check_admin()
+    # Adds product to DB
     form = ProductForm()
     if form.validate_on_submit():
         product = Product(name=form.name.data,
@@ -91,6 +94,7 @@ def add_product():
 @login_required
 def edit_product(id):
     check_admin()
+    # Edits product
     product = Product.query.get_or_404(id)
     form = ProductForm(obj=product)
     if form.validate_on_submit():
@@ -130,6 +134,7 @@ def edit_product(id):
 @admin.route('/product/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_product(id):
+    # Deletes products
     check_admin()
     product = Product.query.get_or_404(id)
     db.session.delete(product)
@@ -141,6 +146,7 @@ def delete_product(id):
 @admin.route('/purchase')
 @login_required
 def list_purchase():
+    # Gets all purchases and render them
     check_admin()
     purchases = Purchase.query.all()
     return render_template('admin/purchase/purchases.html',
@@ -149,6 +155,7 @@ def list_purchase():
 @admin.route('/code')
 @login_required
 def list_code():
+    # Gets and render all codes
     check_admin()
     codes = Code.query.all()
     return render_template('admin/codes/codes.html',
@@ -158,6 +165,7 @@ def list_code():
 @admin.route('/code/add', methods=['GET', 'POST'])
 @login_required
 def add_code():
+    # Adds a Code to DB
     check_admin()
     form = Codeform()
     if form.validate_on_submit():
@@ -174,6 +182,7 @@ def add_code():
 @admin.route('/code/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_code(id):
+    # Deletes a code from DB
     check_admin()
     code = Code.query.get_or_404(id)
     if not code.purchase_id:
@@ -187,6 +196,7 @@ def delete_code(id):
 @admin.route('/category')
 @login_required
 def list_category():
+    # Gets and renders all categories
     check_admin()
     categories = Category.query.all()
     return render_template('admin/category/categories.html',
@@ -196,6 +206,7 @@ def list_category():
 @admin.route('/category/add', methods=['GET', 'POST'])
 @login_required
 def add_category():
+    # Adds a category
     check_admin()
     form = CategoryForm()
     if form.validate_on_submit():
@@ -210,6 +221,7 @@ def add_category():
 @admin.route('/category/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_category(id):
+    # edits category
     check_admin()
     category = Category.query.get_or_404(id)
     form = CategoryForm(obj=category)
@@ -226,6 +238,7 @@ def edit_category(id):
 @admin.route('/category/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_category(id):
+    # Delete category
     check_admin()
     category = Category.query.get_or_404(id)
     db.session.delete(category)
@@ -237,6 +250,7 @@ def delete_category(id):
 @admin.route('/user')
 @login_required
 def list_user():
+    # Get all users
     check_admin()
     users = User.query.all()
     return render_template('admin/user/users.html',
@@ -246,6 +260,7 @@ def list_user():
 @admin.route('/user/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_user(id):
+    # edits User
     check_admin()
     user = User.query.get_or_404(id)
     form = EditForm(obj=user)
@@ -280,6 +295,7 @@ def edit_user(id):
 @admin.route('/user/delete/<int:id>', methods=['GET', 'POST'])
 @login_required
 def delete_user(id):
+    # Delete User
     check_admin()
     user = User.query.get_or_404(id)
     db.session.delete(user)

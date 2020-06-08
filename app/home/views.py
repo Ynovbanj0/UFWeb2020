@@ -192,6 +192,6 @@ def deleteFromCard(id):
 def yumyum():
     form = AddressForm()
     if form.validate_on_submit():
-        return redirect(url_for('auth.purchase', address=form.address.data.address))
+        return redirect(url_for('auth.purchase', address=form.address.data.id))
     # The yumyum template
     return render_template('/home/yumyum.html', form=form, title="No Pay ?")

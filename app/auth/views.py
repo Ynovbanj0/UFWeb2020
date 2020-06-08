@@ -181,7 +181,7 @@ def delete_comment(id):
     return redirect(url_for('auth.profil'))
 
 
-@auth.route('/purchase/<address>')
+@auth.route('/purchase/<int:address>')
 @login_required
 def purchase(address):
     # Route to add a purchase in DB
@@ -209,20 +209,37 @@ def purchase(address):
 class HTML2PDF(FPDF, HTMLMixin):
     pass
 
-@auth.route('/pdf/<address>')
+@auth.route('/pdf/<int:address>')
 def pdf(address):
     purchase = Purchase.query.filter_by(user_id=current_user.id).order_by(Purchase.id.desc()).first()
-    productStr = '<table border="0" align="center" width="50%"><thead><tr><th width="70%">Product</th><th width="30%">Code</th></tr></thead><tbody>'
+    address_user = Address.query.filter_by(id=address).first()
+    productStr = ""
     for code in purchase.codes :
-        productStr += '<tr><td>' + code.product.name + '</td><td>' + code.code + '</td></tr>'
-    productStr += '</tbody></table>'
+        productStr = productStr + "<tr><td width=\"50%\">" + code.product.name + "</td><td width=\"50%\">" + code.code + "</td></tr>"
     html = '''
-    <h1 >Your purchase</h1>
-    <div>'''+ productStr +'''</div>
+    <h1 align="center">Np²</h1>
+    <br><br>
+    <br><br>
+    <p>Purchase :''' + str(purchase.date) + '''</p>
+    <br><br>
+    <hr>
+    <h1>Your purchase</h1>
+    <table><thead><tr><th width="50%"> Name </th><th width="50%"> Code </th></tr></thead><tbody>'''+ productStr +'''</tbody></table>
+    <br>
+    <hr>
     <h1>Address</h1>
-    <div>'''+ address +'''</div>
+    <br>
+    <div>'''+ current_user.first_name + ' ' + current_user.last_name + '''</div>
+    <br>
+    <br>
+    <div>'''+ address_user.address + ', ' + address_user.city + ', ' + address_user.postal + ', ' + address_user.country + '''</div>
+    <br><br>
+    <hr>
     <h1>Total</h1>
-    <div>'''+ str(purchase.price) +'''$</div>
+    <br>
+    <div>'''+ str(purchase.price) +''' $</div>
+    <br><br>
+    <hr>
     </body>'''
     pdf = HTML2PDF()
     pdf.add_page()

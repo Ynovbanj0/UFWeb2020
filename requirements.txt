@@ -21,3 +21,4 @@ Werkzeug==0.11.11
 WTForms==2.1
 email_validator==1.1.1
 flask-mail==0.9.1
+fpdf==1.7.2

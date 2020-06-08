@@ -211,10 +211,18 @@ class HTML2PDF(FPDF, HTMLMixin):
 
 @auth.route('/pdf/<address>')
 def pdf(address):
-    html = '''<h1 align="center">'''+address+'''</h1>
-            <p>This is regular text</p>
-            <p>You can also <b>bold</b>, <i>italicize</i> or <u>underline</u>
-            '''
+    purchase = Purchase.query.filter_by(id=current_user.id).order_by(Purchase.id.desc()).first()
+    productStr = ""
+    for product in purchase.products :
+        productStr = productStr + " " + product.name
+    html = '''
+    <h1 >Your purchase</h1>
+    <div>'''+ productStr +'''</div>
+    <h1>Address</h1>
+    <div>'''+ address +'''</div>
+    <h1>Total</h1>
+    <div>'''+ str(purchase.price) +'''$</div>
+    </body>'''
     pdf = HTML2PDF()
     pdf.add_page()
     pdf.write_html(html)

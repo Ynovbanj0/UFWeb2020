@@ -7,7 +7,7 @@ footer {}
 .container {
     margin-bottom: 150px;
     margin-top: 150px;
-    height: fit-content;
+    height: 100vh;
 }
 
 .gamesContainer {

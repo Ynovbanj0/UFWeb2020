@@ -100,12 +100,12 @@ def list_category():
                            categories=categories, total=total, title="Categories")
 
 
-@home.route('/category/<name>')
-def category(name):
+@home.route('/category/<name>/<int:page>')
+def category(name, page):
     total = checksession()
-    category = Category.query.filter_by(name=name).first().name
+    category = Category.query.filter_by(name=name).first()
     return render_template('home/category/category.html',
-                           category=category, total=total, title=category)
+                           category=category, total=total, page=page*10, title=category)
 
 
 @home.route('/addToCard/<int:id>')

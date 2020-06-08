@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}"> {% endblock %} {% block shop %} {% include "shopCard.html" %} {% endblock %}{% block body %}
 <div class="container">
     <div class="gamesContainer">
-        {% for product in category.products %}
+        {% for product in category.products[page-10:page] %}
         <div class="nGelement">
             <a href="{{ url_for('home.product', id=product.id) }}">
                 <div class="elementImg" style="background-image: url({{ product.image }});">

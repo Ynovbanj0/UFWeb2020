@@ -1,16 +1,14 @@
 from flask import abort, render_template, session, redirect, url_for, request
 from flask_login import current_user, login_required
-from sqlalchemy.sql.expression import func
 from datetime import datetime
 from decimal import Decimal
 
 from . import home
 from .. import db
-from .forms import CommentForm
+from .forms import CommentForm, AddressForm
 from ..models import *
 
 import json
-
 
 def checksession():
     # Function tchecking if session variable is set or sets it to 0
@@ -180,7 +178,10 @@ def deleteFromCard(id):
     return "json.loads(message)"
 
 
-@home.route('/gimmeYourBankAccount')
+@home.route('/gimmeYourBankAccount', methods=['GET', 'POST'])
 @login_required
 def yumyum():
-    return render_template('/home/yumyum.html', title="No Pay ?")
+    form = AddressForm()
+    if form.validate_on_submit():
+        return redirect(url_for('auth.purchase', address=form.address.data.address))
+    return render_template('/home/yumyum.html', form=form, title="No Pay ?")

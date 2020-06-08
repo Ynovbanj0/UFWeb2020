@@ -2,6 +2,7 @@ from flask import flash, abort, redirect, render_template, url_for, session
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_mail import Message
 
+from fpdf import FPDF, HTMLMixin
 from . import auth
 from .forms import LoginForm, RegistrationForm, AddressForm, EditForm, CommentForm
 from .. import db
@@ -180,9 +181,9 @@ def delete_comment(id):
     return redirect(url_for('auth.profil'))
 
 
-@auth.route('/purchase')
+@auth.route('/purchase/<address>')
 @login_required
-def purchase():
+def purchase(address):
     # Route to add a purchase in DB
     purchase = Purchase(price=int(session['total']) / 100,
                         date=datetime.now(),
@@ -202,4 +203,20 @@ def purchase():
     session['productsId'] = []
     session['nbItem'] = 0
     session['total'] = 0    
-    return render_template('auth/lastStep.html', title="Thank You")
+    return render_template('auth/lastStep.html', title="Thank You", address=address)
+
+
+class HTML2PDF(FPDF, HTMLMixin):
+    pass
+
+@auth.route('/pdf/<address>')
+def pdf(address):
+    html = '''<h1 align="center">'''+address+'''</h1>
+            <p>This is regular text</p>
+            <p>You can also <b>bold</b>, <i>italicize</i> or <u>underline</u>
+            '''
+    pdf = HTML2PDF()
+    pdf.add_page()
+    pdf.write_html(html)
+    pdf.output('html2pdf.pdf')
+    return redirect(url_for('home.homepage'))

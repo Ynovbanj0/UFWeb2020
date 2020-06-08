@@ -108,8 +108,10 @@ def category(name, page):
     # gets all of the products in the category
     total = checksession()
     category = Category.query.filter_by(name=name).first()
+    nextpage = page+1
+    precpage = page-1
     return render_template('home/category/category.html',
-                           category=category, total=total, page=page*10, title=category)
+                           category=category, total=total, page=page*10, nextpage=nextpage, precpage=precpage, name=name, title=category)
 
 
 @home.route('/addToCard/<int:id>')

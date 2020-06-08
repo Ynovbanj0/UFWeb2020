@@ -2,7 +2,9 @@ body {
     height: fit-content;
 }
 
-footer {}
+footer {
+    position: initial!important;
+}
 
 .container {
     margin-bottom: 150px;
@@ -113,37 +115,6 @@ footer {}
 
 .sd {
     background-image: url(../img/add.png);
-}
-
-.pages {
-    display: flex;
-    width: 50%;
-    margin: auto;
-    height: 50px;
-    padding-top: 20px;
-}
-
-.none {
-    height: 100%;
-    width: 50%;
-}
-
-.prec {
-    height: 100%;
-    width: 50%;
-    background: url(../img/back.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.next {
-    height: 100%;
-    width: 50%;
-    background: url(../img/next.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
 }
 
 @media screen and (max-width: 1200px) {

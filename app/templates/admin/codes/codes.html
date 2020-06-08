@@ -1,12 +1,14 @@
-{% import "bootstrap/utils.html" as utils %} {% extends "base.html" %}{% block title %}Admin Codes{% endblock %}
-{% block links %}
+{% import "bootstrap/utils.html" as utils %} {% extends "base.html" %}{% block title %}Admin Codes{% endblock %} {% block links %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/adminLists.css') }}"> {% endblock %} {% block body %}
 <div class="content-section">
     {{ utils.flashed_messages() }}
     <section class="main">
-        {% include  "leftside.html" %}
+        {% include "leftside.html" %}
         <section class="rightSide">
             <div class="center">
+                <div class="addDiv">
+                    <a class="addOne" href="{{ url_for('admin.add_code') }}">Add</a>
+                </div>
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
@@ -31,9 +33,6 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-            <div class="addDiv">
-                <a class="addOne" href="{{ url_for('admin.add_code') }}">Add</a>
             </div>
         </section>
     </section>

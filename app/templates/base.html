@@ -57,7 +57,7 @@
                     {% endif %}
                 </ul>
                 <div class="navSearch">
-                    <form class="formSearch" method="GET" action="search">
+                    <form class="formSearch" method="GET" action="{{ url_for('home.search') }}">
                         <input class="form-control form-control-lg inputSearch" type="text" aria-label="Search" name="s">
                         <button class="btn btn-outline-success btnSearch" type="submit">
                         <div class="searchIcon"></div>

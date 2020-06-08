@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block links %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}"> {% endblock %} {% block shop %} {% include "shopCard.html" %} {% endblock %}{% block body %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}"> {% endblock %} {% block shop %} {% include "shopCard.html" %} {% endblock %}{% block body %}
 <div class="container">
     <div class="gamesContainer">
         {% for product in searchProd %}

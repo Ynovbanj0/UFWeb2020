@@ -63,6 +63,8 @@ def product(id):
     else:
         rating = 0
     # The add comment form for the connected user
+    # FlaskForm tchecks if data is required and correct within the inputs
+    # Then we push data into database
     form = CommentForm()
     if form.validate_on_submit():
         if Comment.query.filter_by(user_id=current_user.id).filter_by(product_id=id).first():
@@ -92,6 +94,7 @@ def product(id):
 
 @home.route('/categories')
 def list_category():
+    # gets and renders all categories
     total = checksession()
     categories = Category.query.all()
     return render_template('home/category/categories.html',
@@ -100,14 +103,18 @@ def list_category():
 
 @home.route('/category/<name>/<int:page>')
 def category(name, page):
+    # gets all of the products in the category
     total = checksession()
     category = Category.query.filter_by(name=name).first()
+    nextpage = page+1
+    precpage = page-1
     return render_template('home/category/category.html',
-                           category=category, total=total, page=page*10, title=category)
+                           category=category, total=total, page=page*10, nextpage=nextpage, precpage=precpage, name=name, title=category)
 
 
 @home.route('/addToCard/<int:id>')
 def addToCard(id):
+    # Adds the id of a product and his price to session variables
     product = Product.query.filter_by(id=id).first()
     productId = [product.id]
     productPrice = int(product.price * 100)
@@ -133,6 +140,7 @@ def addToCard(id):
 @home.route('/comment/delete/<int:id_com>/<int:id_prod>', methods=['GET', 'POST'])
 @login_required
 def delete_comment(id_com, id_prod):
+    # Gets the comment and delete it
     if not current_user.is_admin:
         abort(403)
     comment = Comment.query.get_or_404(id_com)
@@ -144,6 +152,7 @@ def delete_comment(id_com, id_prod):
 @home.route('/card')
 @login_required
 def card():
+    # gets back the variables in session to send them to view to render the shop card
     card = []
     total = checksession()
     index = 0
@@ -184,4 +193,5 @@ def yumyum():
     form = AddressForm()
     if form.validate_on_submit():
         return redirect(url_for('auth.purchase', address=form.address.data.address))
+    # The yumyum template
     return render_template('/home/yumyum.html', form=form, title="No Pay ?")

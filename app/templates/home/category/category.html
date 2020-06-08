@@ -25,6 +25,14 @@
         </div>
         {% endfor %}
     </div>
+    <div class="pages">
+        {% if page == 10 %}
+        <a class="none"></a>
+        {% else %}
+        <a class="prec" href="{{ url_for('home.category', name=name, page=precpage) }}"></a>
+        {% endif %}
+        <a class="next" href="{{ url_for('home.category', name=name, page=nextpage) }}"></a>
+    </div>
 </div>
 
 {% endblock %} {% block script %}

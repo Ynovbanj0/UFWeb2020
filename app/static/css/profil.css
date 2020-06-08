@@ -17,6 +17,13 @@ body {
 div>h3 {
     background-color: white;
     padding: 10px;
+    background-color: white;
+    padding: 10px;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .addAddress {
@@ -269,12 +276,21 @@ h2 {
     background-color: white;
 }
 
+div>ul {
+    list-style: none;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 1200px) {
     .inputPerso {
         width: 50%;
     }
     .rightSide>div {
         width: 60%;
+        margin: auto;
     }
 }
 
@@ -290,6 +306,11 @@ h2 {
     }
     .rightSide>div {
         width: 75%;
+        margin: auto;
+    }
+    div>h3 {
+        width: 75%;
+        margin-bottom: 30px;
     }
 }
 
